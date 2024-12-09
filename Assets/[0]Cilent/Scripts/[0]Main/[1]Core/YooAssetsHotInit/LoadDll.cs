@@ -59,7 +59,7 @@ public class LoadDll : MonoBehaviour
     #endregion
     string GetCDNVersion()
     {
-        return $"https://a.unity.cn/client_api/v1/buckets/263c73d3-e07d-4534-8d6e-9d3a2e48ac02/release_by_badge/{tagetBadge}/entry_by_path/content/?path={GetPlatformURL()}version.txt";
+        return $"https://a.unity.cn/client_api/v1/buckets/d19a7a8c-7b50-47fc-86bf-40297902e6f0/release_by_badge/{tagetBadge}/entry_by_path/content/?path={GetPlatformURL()}version.txt";
     }
     private string GetPlatformURL()
     {
@@ -105,7 +105,7 @@ public class LoadDll : MonoBehaviour
                 tagetBadge = badge.ToString();
             }
             DefaultHostServer = FallbackHostServer =
-            $"https://a.unity.cn/client_api/v1/buckets/263c73d3-e07d-4534-8d6e-9d3a2e48ac02/release_by_badge/{tagetBadge}/entry_by_path/content/?path={GetPlatformURL()}{await Get_CDN_URL(CdnVersion)}";
+            $"https://a.unity.cn/client_api/v1/buckets/d19a7a8c-7b50-47fc-86bf-40297902e6f0/release_by_badge/{tagetBadge}/entry_by_path/content/?path={GetPlatformURL()}{await Get_CDN_URL(CdnVersion)}";
             PlayerPrefs.SetString("DefaultHostServer", DefaultHostServer);
         }
 
