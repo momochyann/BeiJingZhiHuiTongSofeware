@@ -15,7 +15,7 @@ public class GameStartAfterLoad : MonoBehaviour
     {
         Debug.Log("GameHotedInit4");
         await WaitLoadAnimation(this.GetCancellationTokenOnDestroy());
-        Debug.Log("加载数据完成111");
+        Debug.Log("加载数据完成22");
         await UniTask.Delay(3000);
         // var HotUI = await LoadYooAssetsTool.LoadAsset<GameObject>("LoadNewGameVesion");
         // Instantiate(HotUI, FindObjectOfType<Canvas>().transform);
