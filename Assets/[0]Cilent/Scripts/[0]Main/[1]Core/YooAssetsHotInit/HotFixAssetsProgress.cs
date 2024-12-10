@@ -47,7 +47,7 @@ public class HotFixAssetsProgress : MonoBehaviour
         AddDynamicLoadingAnimation(DOTween.To(_value =>
             {
                 progressImage.fillAmount = _value;
-            }, _lastSetProgress, targetProgress, 0.2f).SetEase(Ease.Linear));
+            }, _lastSetProgress, targetProgress, 0.5f).SetEase(Ease.Linear));
         _lastSetProgress = targetProgress;
 
     }
