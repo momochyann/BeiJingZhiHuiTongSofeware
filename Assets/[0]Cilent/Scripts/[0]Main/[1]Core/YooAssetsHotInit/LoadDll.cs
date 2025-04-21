@@ -38,7 +38,7 @@ public class LoadDll : MonoBehaviour
     private string FallbackHostServer;
     #endregion
     public UnityAction<long, long> OnHotFixAssetsProgress;
-    public UnityAction<string,long> OnHotFixPackageDownload;
+    public UnityAction<string, long> OnHotFixPackageDownload;
     #region 获取远端CDN资源更新的完整路径
     private async UniTask<string> Get_CDN_URL(string fileURL)
     {
@@ -110,6 +110,8 @@ public class LoadDll : MonoBehaviour
         }
 
         YooAssets.Initialize();
+        await LoadLocalPackage("LocalDefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline);
+        await LoadLocalPackage("LocalRawFilePackage", EDefaultBuildPipeline.RawFileBuildPipeline);
         await DownLoadYooAssets("DefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline, isLocal);
         await DownLoadYooAssets("RawFilePackage", EDefaultBuildPipeline.RawFileBuildPipeline, isLocal);
         StartGame().Forget();
@@ -118,6 +120,25 @@ public class LoadDll : MonoBehaviour
     }
     // 资源包更新
     #region yooasset
+    private async UniTask LoadLocalPackage(string PackageName, EDefaultBuildPipeline eDefaultBuildPipeline)
+    {
+        var package = YooAssets.CreatePackage(PackageName);
+        YooAssets.SetDefaultPackage(package);
+        if (PlayMode != EPlayMode.EditorSimulateMode)
+        {
+            var initParametersOfflinePlayMode = new OfflinePlayModeParameters();
+            //initParametersOfflinePlayMode.RootFolder = "Assets/StreamingAssets/";
+            await package.InitializeAsync(initParametersOfflinePlayMode);
+        }
+        else
+        {
+            var initParametersEditorSimulateMode = new EditorSimulateModeParameters();
+            initParametersEditorSimulateMode.SimulateManifestFilePath =
+            EditorSimulateModeHelper.SimulateBuild(eDefaultBuildPipeline, PackageName);
+            await package.InitializeAsync(initParametersEditorSimulateMode);
+        }
+    }
+
 
     private async UniTask DownLoadYooAssets(string PackageName, EDefaultBuildPipeline eDefaultBuildPipeline, bool isLoacl)
     {
@@ -196,11 +217,11 @@ public class LoadDll : MonoBehaviour
         if (downloader.TotalDownloadCount == 0)
         {
             Debug.Log("没有资源更新，直接进入游戏加载环节");
-            OnHotFixPackageDownload?.Invoke(PackageName,0);
+            OnHotFixPackageDownload?.Invoke(PackageName, 0);
             // StartGame().Forget();
             return;
         }
-        OnHotFixPackageDownload?.Invoke(PackageName,downloader.TotalDownloadBytes);
+        OnHotFixPackageDownload?.Invoke(PackageName, downloader.TotalDownloadBytes);
         //需要下载的文件总数和总大小
         int totalDownloadCount = downloader.TotalDownloadCount;
         long totalDownloadBytes = downloader.TotalDownloadBytes;
@@ -296,14 +317,14 @@ public class LoadDll : MonoBehaviour
     {
         Debug.Log("StartGame");
 #if !UNITY_EDITOR
-      	byte[] dllBytes = await LoadYooAssetsTool.LoadRawFile_DP(HotDllName);
+      	byte[] dllBytes = await LoadYooAssetsTool.LoadRawFile_DP(HotDllName,false);
         System.Reflection.Assembly.Load(dllBytes);                      //加载热更新dll
 #endif
         Debug.Log("StartGame");
         var go = await LoadYooAssetsTool.LoadAsset<GameObject>(HotPrefabName);
         Instantiate(go);
     }
-    
+
     private class RemoteServices : IRemoteServices      //请求网址容器
     {
         private readonly string _defaultHostServer;
