@@ -15,9 +15,9 @@ public interface IPersonnelCrisisEventMessageBase : ICan2List
 }
 public enum PersonalCrisisEventMessageFlag
 {
-    Green,
+    Red,
     Blue,
-    Red
+    Green
 }
 public interface IPersonalPersonnelCrisisEventMessage : IPersonnelCrisisEventMessageBase
 {
@@ -73,7 +73,7 @@ public class PersonalPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<
     protected override void OnInit()
     {
         base.OnInit();
-      
+
     }
 }
 

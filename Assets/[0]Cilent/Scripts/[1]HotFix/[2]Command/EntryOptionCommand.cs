@@ -39,21 +39,21 @@ public class DeleteEntryCommand : AbstractCommand
 }
 public class EditEntryCommand : AbstractCommand
 {
-    public EditEntryCommand(IEntry oldEntry, IEntry newEntry, string entryModelName)
+    public EditEntryCommand(ICan2List oldValue, ICan2List newValue, string entryModelName)
     {
-        this.oldEntry = oldEntry;
-        this.newEntry = newEntry;
+        this.oldValue = oldValue;
+        this.newValue = newValue;
         this.entryModelName = entryModelName;
     }
-    IEntry oldEntry;
-    IEntry newEntry;
+    ICan2List oldValue;
+    ICan2List newValue;
     string entryModelName;
     protected override void OnExecute()
     {
         var model = this.GetListModelByName(entryModelName);
         if (model != null)
         {
-            model.EditItem(oldEntry.can2ListValue, newEntry.can2ListValue);
+            model.EditItem(oldValue, newValue);
             Debug.Log("编辑" + entryModelName);
         }
     }
@@ -61,19 +61,19 @@ public class EditEntryCommand : AbstractCommand
 
 public class AddEntryCommand : AbstractCommand
 {
-    public AddEntryCommand(IEntry entry, string entryModelName)
+    public AddEntryCommand(ICan2List entry, string entryModelName)
     {
         this.entry = entry;
         this.entryModelName = entryModelName;
     }
-    IEntry entry;
+    ICan2List entry;
     string entryModelName;
     protected override void OnExecute()
     {
         var model = this.GetListModelByName(entryModelName);
         if (model != null)
         {
-            model.AddItem(entry.can2ListValue);
+            model.AddItem(entry);
             Debug.Log("添加" + entryModelName);
         }
         else

@@ -40,6 +40,7 @@ public interface IListModel : IModel
     /// </summary>
     void ClearItems();
     bool EditItem(ICan2List oldItem, ICan2List newItem);
+    int GetIndex(ICan2List item);
     // /// <summary>
     // /// 获取所有项
     // /// </summary>
@@ -112,7 +113,10 @@ public abstract class CrisisIncidentBaseModel<T> : AbstractModel, ICanGetSystem,
     {
         return dataList;
     }
-
+    public int GetIndex(T item)
+    {
+        return dataList.IndexOf(item);
+    }
     /// <summary>
     /// 添加一个ICan2List项到列表
     /// </summary>
@@ -157,14 +161,20 @@ public abstract class CrisisIncidentBaseModel<T> : AbstractModel, ICanGetSystem,
             return false;
         }
     }
+    int IListModel.GetIndex(ICan2List item)
+    {
+        if (item is T typedItem)
+        {
+            return GetIndex(typedItem);
+        }
+        else
+        {
+            Debug.LogError($"类型不匹配: 期望 {typeof(T).Name}，实际 {item.GetType().Name}");
+            return -1;
+        }
+    }
 
-    // /// <summary>
-    // /// 获取所有项作为ICan2List列表
-    // /// </summary>
-    // List<ICan2List> IListModel.GetAllItems()
-    // {
-    //     return dataList.Cast<ICan2List>().ToList();
-    // }
+ 
 }
 public abstract class CrisisIncidentFileBaseModel<T> : CrisisIncidentBaseModel<T> where T : ICan2List
 {

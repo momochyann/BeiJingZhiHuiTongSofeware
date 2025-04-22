@@ -30,6 +30,7 @@ public static class YooAssetsEditorInitializer
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "HotFixScene")
             {
                 Debug.Log("进入播放模式，初始化YooAssets");
+                EditorSceneManager.SaveOpenScenes();
                 PlayerPrefs.SetString("OriginalScenePath", UnityEngine.SceneManagement.SceneManager.GetActiveScene().path);
                 var tempScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
                 EditorSceneManager.OpenScene(tempScene.path);

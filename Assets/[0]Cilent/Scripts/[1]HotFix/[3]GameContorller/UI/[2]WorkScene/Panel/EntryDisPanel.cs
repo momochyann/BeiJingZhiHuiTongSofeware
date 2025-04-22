@@ -57,7 +57,7 @@ public class EntryDisPanel : MonoBehaviour, IController
     private void OnModelChange(Can2ListModelChangeEvent _event)
     {
         Debug.Log("修改数据并显示");
-        UpdateLastPagePromptBox();
+        UpdatePagePromptBox(RefreshTiming.other);
         DisPage();
     }
 
