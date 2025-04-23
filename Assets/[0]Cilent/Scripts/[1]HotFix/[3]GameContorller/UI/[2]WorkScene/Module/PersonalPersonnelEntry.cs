@@ -10,6 +10,7 @@ public interface IEntry
     public bool IsChoose { get; set; }
     public ICan2List can2ListValue { get; set; }
     public int GetIndex();
+    public string GetEntrySelectName();
 }
 public class PersonalPersonnelEntry : MonoBehaviour, IController, IEntry
 {
@@ -54,6 +55,10 @@ public class PersonalPersonnelEntry : MonoBehaviour, IController, IEntry
     public int GetIndex()
     {
         return this.GetModel<PersonalPersonnelCrisisEventMessageModel>().GetIndex(EntryRawValue);
+    }
+    public string GetEntrySelectName()
+    {
+        return nameText.text;
     }
     public IArchitecture GetArchitecture()
     {

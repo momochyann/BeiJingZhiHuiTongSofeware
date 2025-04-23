@@ -67,6 +67,16 @@ public class P_AddPerson : PopPanelBase
             Debug.LogError("性别或状态选择不能为空");
             return false;
         }
+        if (!System.DateTime.TryParseExact(
+            出生日期输入框.text,
+            "yyyy-MM-dd",
+            System.Globalization.CultureInfo.InvariantCulture,
+            System.Globalization.DateTimeStyles.None,
+            out _))
+        {
+            Debug.LogError("出生日期格式不正确或日期无效，请使用YYYY-MM-DD格式输入有效日期");
+            return false;
+        }
         return true;
     }
     async UniTaskVoid 添加应激事件属性()
