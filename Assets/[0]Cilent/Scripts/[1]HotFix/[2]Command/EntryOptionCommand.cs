@@ -14,12 +14,12 @@ public class EntryOptionCommand : AbstractCommand
 
 public class DeleteEntryCommand : AbstractCommand
 {
-    public DeleteEntryCommand(IEntry entry, string entryModelName)
+    public DeleteEntryCommand(ICan2List deleteValue, string entryModelName)
     {
-        this.entry = entry;
+        this.deleteValue = deleteValue;
         this.entryModelName = entryModelName;
     }
-    IEntry entry;
+    ICan2List deleteValue;
     string entryModelName;
 
     protected override void OnExecute()
@@ -27,7 +27,7 @@ public class DeleteEntryCommand : AbstractCommand
         var model = this.GetListModelByName(entryModelName);
         if (model != null)
         {
-            model.RemoveItem(entry.can2ListValue);
+            model.RemoveItem(deleteValue);
             Debug.Log("删除" + entryModelName);
         }
         else

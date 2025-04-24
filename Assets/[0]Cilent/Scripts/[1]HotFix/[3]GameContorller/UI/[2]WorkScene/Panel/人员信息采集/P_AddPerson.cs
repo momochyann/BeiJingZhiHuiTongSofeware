@@ -9,8 +9,11 @@ using System.Linq;
 public class P_AddPerson : PopPanelBase
 {
     // Start is called before the first frame update
+    [必填InputField("姓名不能为空")]
     InputField 姓名输入框;
+    [必填InputField("部门不能为空")]
     InputField 部门输入框;
+    [必填InputField("出生日期不能为空")]
     InputField 出生日期输入框;
     ToggleColumn 性别选择;
     ToggleColumn 状态选择;
@@ -32,7 +35,7 @@ public class P_AddPerson : PopPanelBase
 
     void 保存数据按钮监听()
     {
-        if (!校验输入情况())
+        if (!验证输入情况())
         {
             return;
         }
@@ -55,13 +58,14 @@ public class P_AddPerson : PopPanelBase
         }
         ClosePanel();
     }
-    bool 校验输入情况()
+
+    protected override bool 验证输入情况()
     {
-        if (姓名输入框.text == "" || 部门输入框.text == "" || 出生日期输入框.text == "")
+        if (!base.验证输入情况())
         {
-            Debug.LogError("输入框不能为空");
             return false;
         }
+
         if (性别选择.currentIndex == -1 || 状态选择.currentIndex == -1)
         {
             Debug.LogError("性别或状态选择不能为空");

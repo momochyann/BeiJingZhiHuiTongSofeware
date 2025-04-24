@@ -55,19 +55,19 @@ public class EntryEditorButton : MonoBehaviour, IController
     }
     void 删除条目(string entryModelName)
     {
-        EntryDisPanel entryDisPanel = FindObjectOfType<EntryDisPanel>();
+        EntryDisPanelNew entryDisPanel = FindObjectOfType<EntryDisPanelNew>();
         IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
         foreach (IEntry entry in entries)
         {
             if (entry.IsChoose)
             {
-                this.SendCommand(new DeleteEntryCommand(entry, entryModelName));
+                this.SendCommand(new DeleteEntryCommand(entry.can2ListValue, entryModelName));
             }
         }
     }
     async UniTaskVoid 编辑条目(string 添加条目界面名称)
     {
-        EntryDisPanel entryDisPanel = FindObjectOfType<EntryDisPanel>();
+        EntryDisPanelNew entryDisPanel = FindObjectOfType<EntryDisPanelNew>();
         IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
         foreach (IEntry entry in entries)
         {

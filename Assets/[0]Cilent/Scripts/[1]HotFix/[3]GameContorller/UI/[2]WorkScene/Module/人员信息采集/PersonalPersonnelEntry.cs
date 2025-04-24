@@ -5,12 +5,9 @@ using UnityEngine.UI;
 using QFramework;
 public interface IEntry
 {
-    public int GetListCount();
     public void DisEntry(int index);
     public bool IsChoose { get; set; }
     public ICan2List can2ListValue { get; set; }
-    public int GetIndex();
-    public string GetEntrySelectName();
 }
 public class PersonalPersonnelEntry : MonoBehaviour, IController, IEntry
 {
@@ -52,21 +49,9 @@ public class PersonalPersonnelEntry : MonoBehaviour, IController, IEntry
         }
         flag.color = message.personalCrisisEventMessageFlag == PersonalCrisisEventMessageFlag.Green ? Color.green : message.personalCrisisEventMessageFlag == PersonalCrisisEventMessageFlag.Blue ? Color.blue : Color.red;
     }
-    public int GetIndex()
-    {
-        return this.GetModel<PersonalPersonnelCrisisEventMessageModel>().GetIndex(EntryRawValue);
-    }
-    public string GetEntrySelectName()
-    {
-        return nameText.text;
-    }
     public IArchitecture GetArchitecture()
     {
         return HotFixTemplateArchitecture.Interface;
     }
 
-    public int GetListCount()
-    {
-        return this.GetModel<PersonalPersonnelCrisisEventMessageModel>().personalPersonnelCrisisEventMessages.Count;
-    }
 }
