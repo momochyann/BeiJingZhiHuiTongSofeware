@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 public class ToggleColumn : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -16,6 +16,7 @@ public class ToggleColumn : MonoBehaviour
             toggleList[value].isOn = true;
         }
     }
+    public UnityEvent<int> OnToggleChange;
     List<Toggle> toggleList = new List<Toggle>();
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class ToggleColumn : MonoBehaviour
                 {
                     toggleList.Where(t => t != toggle && t.isOn).ToList().ForEach(t => t.isOn = false);
                     currentIndex = toggleList.IndexOf(toggle);
+                    OnToggleChange?.Invoke(currentIndex);
                 }
             });
         });

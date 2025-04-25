@@ -219,7 +219,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
                         UpdateMiddlePagePromptBoxTheLastThree();
                     }
                     else if (refreshTiming == RefreshTiming.other)
-                    {
+                    {   
                         UpdateMiddlePagePromptBox(0);
                     }
                 }

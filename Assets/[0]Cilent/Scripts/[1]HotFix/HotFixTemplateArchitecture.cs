@@ -12,7 +12,7 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterUtility(new Storage());
         RegisterModel(new PersonalPersonnelCrisisEventMessageModel());
         RegisterModel(new YooAssetPfbModel());
-
+        RegisterModel(new GroupCrisisIncidentModel());
 
     }
 

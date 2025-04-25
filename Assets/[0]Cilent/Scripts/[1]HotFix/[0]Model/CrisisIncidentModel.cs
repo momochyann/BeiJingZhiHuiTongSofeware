@@ -20,18 +20,15 @@ public class GroupCrisisIncidentType
     public string CrisisIncidentTypeName;
     public string CrisisIncidentTypeDescription;
 }
-public interface IAffectedLevel : IModel
+public interface IAffectedLevel
 {
     Dictionary<int, string> affectedLevel { get; set; }
 }
 
-public class AffectedLevel : AbstractModel, IAffectedLevel
+public class AffectedLevel : IAffectedLevel
 {
     public Dictionary<int, string> affectedLevel { get; set; }
-    protected override void OnInit()
-    {
-        affectedLevel = new Dictionary<int, string>();
-    }
+
 }
 
 public interface IGroupCrisisIncident : ICan2List
@@ -67,7 +64,7 @@ public class GroupCrisisIncidentModel : CrisisIncidentBaseModel<GroupCrisisIncid
     }
     protected override void OnInit()
     {
-        LoadData();
+         base.OnInit();
     }
 }
 

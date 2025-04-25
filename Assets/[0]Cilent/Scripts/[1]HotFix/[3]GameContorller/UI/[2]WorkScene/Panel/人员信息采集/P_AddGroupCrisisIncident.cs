@@ -62,8 +62,9 @@ public class P_AddGroupCrisisIncident : PopPanelBase
         var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("增加事件面板2");
         弹出页面.GetComponent<CanvasGroup>().DOFade(0, 0.3f).OnComplete(() =>
         {
-            Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<P_AddGroupCrisisIncident_2>().设置数据并打开面板(new GroupCrisisIncident());
-            ClosePanel();
+            Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<P_AddGroupCrisisIncident_2>().设置数据并打开面板(groupCrisisIncident);
+            // await UniTask.Delay(100);
+            Destroy(gameObject);
         });
 
 
