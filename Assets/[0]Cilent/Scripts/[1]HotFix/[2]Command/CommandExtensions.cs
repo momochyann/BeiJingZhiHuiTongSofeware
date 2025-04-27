@@ -13,4 +13,15 @@ public static class CommandExtensions
         var model = command.GetSystem<GetCan2ListModelByStringSystem>().GetModel<IListModel>(modelName);
         return model;
     }
+    public static IListModel GetListModelByName(this AbstractCommand<List<int>> command, string modelName)
+    {
+        var model = command.GetSystem<GetCan2ListModelByStringSystem>().GetModel<IListModel>(modelName);
+        return model;
+    }
+    public static IListModel GetListModelByName(this IController controller, string modelName)
+    {
+        var model = controller.GetSystem<GetCan2ListModelByStringSystem>().GetModel<IListModel>(modelName);
+        return model;
+    }
+  
 }

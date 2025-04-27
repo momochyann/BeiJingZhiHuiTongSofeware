@@ -15,9 +15,9 @@ public interface IPersonnelCrisisEventMessageBase : ICan2List
 }
 public enum PersonalCrisisEventMessageFlag
 {
-    Green,
+    Red,
     Blue,
-    Red
+    Green
 }
 public interface IPersonalPersonnelCrisisEventMessage : IPersonnelCrisisEventMessageBase
 {
@@ -73,7 +73,18 @@ public class PersonalPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<
     protected override void OnInit()
     {
         base.OnInit();
-      
+    }
+    protected override List<int> OnSearchByName(string keyword)
+    {
+        List<int> indexList = new List<int>();
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            if (dataList[i].name.Contains(keyword))
+            {
+                indexList.Add(i);
+            }
+        }
+        return indexList;
     }
 }
 

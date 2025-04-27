@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
 using System;
+using System.Linq;
 
 public class Can2ListModelChangeEvent
 {
@@ -39,12 +40,26 @@ public interface IListModel : IModel
     /// 清空列表
     /// </summary>
     void ClearItems();
+    /// <summary>
+    /// 编辑一个项
+    /// </summary>
     bool EditItem(ICan2List oldItem, ICan2List newItem);
-    // /// <summary>
-    // /// 获取所有项
-    // /// </summary>
-    // /// <returns>列表中的所有项</returns>
-    // List<ICan2List> GetAllItems();
+    /// <summary>
+    /// 获取一个项的索引
+    /// </summary>
+    int GetIndex(ICan2List item);
+    /// <summary>
+    /// 获取所有项
+    /// </summary>
+    /// <returns>列表中的所有项</returns>
+    List<ICan2List> GetAllItems();
+
+    /// <summary>
+    /// 根据关键字搜索
+    /// </summary>
+    /// <param name="keyword">关键字</param>
+    /// <returns>搜索到的项的索引列表</returns>
+    List<int> SearchByName(string keyword);
 }
 [Serializable]
 public abstract class CrisisIncidentBaseModel<T> : AbstractModel, ICanGetSystem, IListModel where T : ICan2List
@@ -112,7 +127,10 @@ public abstract class CrisisIncidentBaseModel<T> : AbstractModel, ICanGetSystem,
     {
         return dataList;
     }
-
+    public int GetIndex(T item)
+    {
+        return dataList.IndexOf(item);
+    }
     /// <summary>
     /// 添加一个ICan2List项到列表
     /// </summary>
@@ -157,14 +175,34 @@ public abstract class CrisisIncidentBaseModel<T> : AbstractModel, ICanGetSystem,
             return false;
         }
     }
+    int IListModel.GetIndex(ICan2List item)
+    {
+        if (item is T typedItem)
+        {
+            return GetIndex(typedItem);
+        }
+        else
+        {
+            Debug.LogError($"类型不匹配: 期望 {typeof(T).Name}，实际 {item.GetType().Name}");
+            return -1;
+        }
+    }
+    /// <summary>
+    /// 获取所有项作为ICan2List列表
+    /// </summary>
+    List<ICan2List> IListModel.GetAllItems()
+    {
+        return dataList.Cast<ICan2List>().ToList();
+    }
 
-    // /// <summary>
-    // /// 获取所有项作为ICan2List列表
-    // /// </summary>
-    // List<ICan2List> IListModel.GetAllItems()
-    // {
-    //     return dataList.Cast<ICan2List>().ToList();
-    // }
+    List<int> IListModel.SearchByName(string keyword)
+    {
+        return OnSearchByName(keyword);
+    }
+    protected virtual List<int> OnSearchByName(string keyword)
+    {
+        return new List<int>();
+    }
 }
 public abstract class CrisisIncidentFileBaseModel<T> : CrisisIncidentBaseModel<T> where T : ICan2List
 {

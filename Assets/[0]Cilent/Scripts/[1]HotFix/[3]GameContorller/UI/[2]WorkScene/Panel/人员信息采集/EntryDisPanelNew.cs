@@ -15,11 +15,12 @@ enum RefreshTiming
     other,
 }
 
-public class EntryDisPanel : MonoBehaviour, IController
+public class EntryDisPanelNew : MonoBehaviour, IController
 {
     // Start is called before the first frame update
-    const int pageSize = 10;
-    private int pageIndex = 0;
+    [SerializeField]
+    int pageSize = 10;
+    private int currentPageIndex = 0;
     List<int> pageLeftList = new List<int>();
     bool isLastPageBoxDis = false;
 
@@ -32,7 +33,10 @@ public class EntryDisPanel : MonoBehaviour, IController
     GameObject entryPfb;
     GameObject pagePromptBoxPfb;
     int pageCount => GetPageCount();
-    int entryCount;
+    List<int> 当前展示条目序号列表 = new List<int>();
+    int entryCount => 当前展示条目序号列表.Count;
+    IListModel Model实例;
+    [SerializeField] string Model名称;
     void Start()
     {
         InitAsync().Forget();
@@ -43,7 +47,7 @@ public class EntryDisPanel : MonoBehaviour, IController
         pagePromptBoxPfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("PagePromptBox");
         BeforePageButton.onClick.AddListener(OnBeforePageButtonClick);
         NextPageButton.onClick.AddListener(OnNextPageButtonClick);
-        entryCount = entryPfb.GetComponent<IEntry>().GetListCount();
+        Model实例 = this.GetSystem<GetCan2ListModelByStringSystem>().GetModel<IListModel>(Model名称);
         this.RegisterEvent<Can2ListModelChangeEvent>(OnModelChange);
         pageLeftList = new List<int>();
         for (int i = 1; i < 5; i++)
@@ -51,47 +55,83 @@ public class EntryDisPanel : MonoBehaviour, IController
             pageLeftList.Add(i);
         }
         await UniTask.Delay(100);
-        OnPageIndexButtonClick(1);
+
+        当前展示条目序号列表 = 更新展示条目序号列表(false);
+        currentPageIndex = 1;
+        UpdatePagePromptBox(RefreshTiming.other);
+        展示对应页面数据(currentPageIndex);
+    }
+    public void 更新搜索页面(bool 是否为搜查列表)
+    {
+        当前展示条目序号列表 = 更新展示条目序号列表(是否为搜查列表);
+        pageLeftList = new List<int>();
+        for (int i = 1; i < 5; i++)
+        {
+            pageLeftList.Add(i);
+        }
+        currentPageIndex = 1;
+        UpdatePagePromptBox(RefreshTiming.other);
+        展示对应页面数据(currentPageIndex);
+    }
+    List<int> 更新展示条目序号列表(bool 是否为搜查列表)
+    {
+        List<int> 展示条目序号列表 = new List<int>();
+        if (是否为搜查列表)
+        {
+            展示条目序号列表 = this.GetSystem<SearchEntrySystem>().GetShowEntryIndexList();
+        }
+        else
+        {
+            var 展示数据列表 = Model实例.GetAllItems();
+            for (int i = 0; i < 展示数据列表.Count; i++)
+            {
+                展示条目序号列表.Add(i);
+            }
+        }
+        return 展示条目序号列表;
+    }
+
+    void 展示对应页面数据(int 页面索引)
+    {
+        for (int i = entryBox.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(entryBox.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = (页面索引 - 1) * pageSize; i < 页面索引 * pageSize; i++)
+        {
+            if (i >= entryCount)
+                return;
+            var entry = Instantiate(entryPfb, entryBox.transform);
+            entry.GetComponent<IEntry>().DisEntry(当前展示条目序号列表[i]);
+        }
     }
 
     private void OnModelChange(Can2ListModelChangeEvent _event)
     {
         Debug.Log("修改数据并显示");
-        UpdateLastPagePromptBox();
-        DisPage();
+        当前展示条目序号列表 = 更新展示条目序号列表(false);
+        UpdatePagePromptBox(RefreshTiming.other);
+        展示对应页面数据(currentPageIndex);
     }
 
     private void OnNextPageButtonClick()
     {
         Debug.Log("OnNextPageButtonClick");
-        if (pageIndex < pageCount)
+        if (currentPageIndex < pageCount)
         {
-            OnPageIndexButtonClick(pageIndex + 1);
+            OnPageIndexButtonClick(currentPageIndex + 1);
         }
     }
 
     private void OnBeforePageButtonClick()
     {
         Debug.Log("OnBeforePageButtonClick");
-        if (pageIndex > 1)
-            OnPageIndexButtonClick(pageIndex - 1);
+        if (currentPageIndex > 1)
+            OnPageIndexButtonClick(currentPageIndex - 1);
     }
 
-    void DisPage()
-    {
-        entryCount = entryPfb.GetComponent<IEntry>().GetListCount();
-        for (int i = entryBox.transform.childCount - 1; i >= 0; i--)
-        {
-            Destroy(entryBox.transform.GetChild(i).gameObject);
-        }
-        for (int i = (pageIndex - 1) * pageSize; i < pageIndex * pageSize; i++)
-        {
-            if (i >= entryCount)
-                return;
-            var entry = Instantiate(entryPfb, entryBox.transform);
-            entry.GetComponent<IEntry>().DisEntry(i);
-        }
-    }
+
 
     int GetPageCount()
     {
@@ -120,14 +160,18 @@ public class EntryDisPanel : MonoBehaviour, IController
                 }
                 else if (refreshTiming == RefreshTiming.OnSpecifiedPageIndex) // 
                 {
-                    if (pageIndex < pageCount - 5)
+                    if (currentPageIndex < pageCount - 5)
                     {
                         isLastPageBoxDis = false;
-                        var pageLeftListStartIndex = pageIndex - 2;
+                        var pageLeftListStartIndex = currentPageIndex - 2;
+                        if (pageLeftListStartIndex < 1)
+                        {
+                            pageLeftListStartIndex = 1;
+                        }
                         for (int i = 0; i < 4; i++)
                         {
                             pageLeftList[i] = pageLeftListStartIndex + i;
-                            pageDisBox.transform.GetChild(i + 1).GetComponent<PagePromptBox>().SetPageIndex(pageLeftList[i], pageLeftList[i] == pageIndex);
+                            pageDisBox.transform.GetChild(i + 1).GetComponent<PagePromptBox>().SetPageIndex(pageLeftList[i], pageLeftList[i] == currentPageIndex);
                         }
                         UpdateMiddlePagePromptBoxTheLastThree();
                     }
@@ -143,7 +187,7 @@ public class EntryDisPanel : MonoBehaviour, IController
             }
             else if (isLastPageBoxDis == false) // 页码大于7  且显示中间目录
             {
-                if (pageIndex >= pageCount - 4)
+                if (currentPageIndex >= pageCount - 4)
                 {
                     isLastPageBoxDis = true;
                     UpdateLastPagePromptBox();
@@ -152,7 +196,7 @@ public class EntryDisPanel : MonoBehaviour, IController
                 {
                     if (refreshTiming == RefreshTiming.OnClickpageLeftListStart) // 
                     {
-                        var changeValue = pageIndex == 1 ? 0 : -1;
+                        var changeValue = currentPageIndex == 1 ? 0 : -1;
                         UpdateMiddlePagePromptBox(changeValue);
                     }
                     else if (refreshTiming == RefreshTiming.OnClickpageLeftListLast)
@@ -161,7 +205,8 @@ public class EntryDisPanel : MonoBehaviour, IController
                     }
                     else if (refreshTiming == RefreshTiming.OnSpecifiedPageIndex)
                     {
-                        var pageLeftListStartIndex = pageIndex - 2;
+                        var pageLeftListStartIndex = currentPageIndex - 2;
+
                         if (pageLeftListStartIndex < 1)
                         {
                             pageLeftListStartIndex = 1;
@@ -169,12 +214,12 @@ public class EntryDisPanel : MonoBehaviour, IController
                         for (int i = 0; i < 4; i++)
                         {
                             pageLeftList[i] = pageLeftListStartIndex + i;
-                            pageDisBox.transform.GetChild(i + 1).GetComponent<PagePromptBox>().SetPageIndex(pageLeftList[i], pageLeftList[i] == pageIndex);
+                            pageDisBox.transform.GetChild(i + 1).GetComponent<PagePromptBox>().SetPageIndex(pageLeftList[i], pageLeftList[i] == currentPageIndex);
                         }
                         UpdateMiddlePagePromptBoxTheLastThree();
                     }
                     else if (refreshTiming == RefreshTiming.other)
-                    {
+                    {   
                         UpdateMiddlePagePromptBox(0);
                     }
                 }
@@ -186,7 +231,7 @@ public class EntryDisPanel : MonoBehaviour, IController
         for (int i = 0; i < 4; i++)
         {
             pageLeftList[i] = pageLeftList[i] + changeValue;
-            pageDisBox.transform.GetChild(i + 1).GetComponent<PagePromptBox>().SetPageIndex(pageLeftList[i], pageLeftList[i] == pageIndex);
+            pageDisBox.transform.GetChild(i + 1).GetComponent<PagePromptBox>().SetPageIndex(pageLeftList[i], pageLeftList[i] == currentPageIndex);
         }
         UpdateMiddlePagePromptBoxTheLastThree();
     }
@@ -200,7 +245,7 @@ public class EntryDisPanel : MonoBehaviour, IController
     {
         for (int i = 0; i < 7; i++)
         {
-            pageDisBox.transform.GetChild(7 - i).GetComponent<PagePromptBox>().SetPageIndex(pageCount - i, pageCount - i == pageIndex);
+            pageDisBox.transform.GetChild(7 - i).GetComponent<PagePromptBox>().SetPageIndex(pageCount - i, pageCount - i == currentPageIndex);
         }
         pageLeftList[0] = pageCount - 6;
         pageLeftList[1] = pageCount - 5;
@@ -224,9 +269,9 @@ public class EntryDisPanel : MonoBehaviour, IController
 
     private void OnPageIndexButtonClick(int _pageIndex)
     {
-        if (_pageIndex == this.pageIndex)
+        if (_pageIndex == this.currentPageIndex)
             return;
-        this.pageIndex = _pageIndex;
+        this.currentPageIndex = _pageIndex;
         if (_pageIndex == pageLeftList[0])
         {
             UpdatePagePromptBox(RefreshTiming.OnClickpageLeftListStart);
@@ -239,23 +284,24 @@ public class EntryDisPanel : MonoBehaviour, IController
         {
             UpdatePagePromptBox(RefreshTiming.other);
         }
-        DisPage();
+
+        展示对应页面数据(currentPageIndex);
     }
 
     public void OnSpecifiedPageConfirmButtonClick(int _pageIndex)
     {
-        if (_pageIndex == this.pageIndex || _pageIndex > pageCount || _pageIndex < 1)
+        if (_pageIndex == this.currentPageIndex || _pageIndex > pageCount || _pageIndex < 1)
             return;
-        this.pageIndex = _pageIndex;
+        this.currentPageIndex = _pageIndex;
         UpdatePagePromptBox(RefreshTiming.OnSpecifiedPageIndex);
-        DisPage();
+        展示对应页面数据(currentPageIndex);
     }
     void CreatePagePromptBox(int _pageIndex)
     {
         var pagePromptBoxObj = Instantiate(pagePromptBoxPfb, pageDisBox.transform);
         pagePromptBoxObj.transform.SetSiblingIndex(pageDisBox.transform.childCount - 2);
         var pagePromptBox = pagePromptBoxObj.GetComponent<PagePromptBox>();
-        pagePromptBox.SetPageIndex(_pageIndex, _pageIndex == this.pageIndex);
+        pagePromptBox.SetPageIndex(_pageIndex, _pageIndex == this.currentPageIndex);
         pagePromptBox.OnPageIndexButtonClickEvent.AddListener(OnPageIndexButtonClick);
     }
 

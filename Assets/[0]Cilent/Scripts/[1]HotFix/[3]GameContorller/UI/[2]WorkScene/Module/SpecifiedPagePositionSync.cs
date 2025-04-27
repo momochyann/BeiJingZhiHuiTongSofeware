@@ -10,8 +10,7 @@ public class SpecifiedPagePositionSync : MonoBehaviour
     [SerializeField]
     Transform PagePromptBoxLast;
     private Transform myTransform;
-    [SerializeField]
-    EntryDisPanel entryDisPanel;
+    EntryDisPanelNew entryDisPanel;
     [SerializeField]
     InputField PageInputField;
     [SerializeField]
@@ -22,6 +21,7 @@ public class SpecifiedPagePositionSync : MonoBehaviour
 
     void Start()
     {
+        entryDisPanel = GetComponentInParent<EntryDisPanelNew>();
         SpecifiedPageConfirmButton.onClick.AddListener(OnSpecifiedPageConfirmButtonClick);
         myTransform = this.transform;
         // 计算左边缘的X轴偏移量（使用左下角点）

@@ -44,6 +44,8 @@ public class PagePromptBox : MonoBehaviour
     }
     void OnDestroy()
     {
+        pageIndexText.DOKill();
+        pageIndexBackgroundImage.DOKill();
         OnPageIndexButtonClickEvent?.RemoveAllListeners();
     }
 }

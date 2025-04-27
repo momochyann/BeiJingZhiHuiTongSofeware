@@ -5,12 +5,11 @@ using UnityEngine.UI;
 using QFramework;
 public interface IEntry
 {
-    public int GetListCount();
     public void DisEntry(int index);
-    public bool IsChoose{get;set;}
-    public ICan2List can2ListValue{get;set;}
+    public bool IsChoose { get; set; }
+    public ICan2List can2ListValue { get; set; }
 }
-public class PersonalPersonnelEntry : MonoBehaviour, IController,IEntry
+public class PersonalPersonnelEntry : MonoBehaviour, IController, IEntry
 {
     [SerializeField]
     Text nameText;
@@ -29,11 +28,12 @@ public class PersonalPersonnelEntry : MonoBehaviour, IController,IEntry
     public bool IsChoose { get => chooseToggle.isOn; set => chooseToggle.isOn = value; }
     public ICan2List can2ListValue { get => _can2List; set => _can2List = value; }
     ICan2List _can2List;
+    PersonalPersonnelCrisisEventMessage EntryRawValue;
     public void DisEntry(int index)
     {
-
         var model = this.GetModel<PersonalPersonnelCrisisEventMessageModel>();
         var message = model.personalPersonnelCrisisEventMessages[index];
+        EntryRawValue = message;
         _can2List = message;
         nameText.text = message.name;
         genderText.text = message.gender;
@@ -49,14 +49,9 @@ public class PersonalPersonnelEntry : MonoBehaviour, IController,IEntry
         }
         flag.color = message.personalCrisisEventMessageFlag == PersonalCrisisEventMessageFlag.Green ? Color.green : message.personalCrisisEventMessageFlag == PersonalCrisisEventMessageFlag.Blue ? Color.blue : Color.red;
     }
-
     public IArchitecture GetArchitecture()
     {
         return HotFixTemplateArchitecture.Interface;
     }
 
-    public int GetListCount()
-    {
-       return this.GetModel<PersonalPersonnelCrisisEventMessageModel>().personalPersonnelCrisisEventMessages.Count;
-    }
 }

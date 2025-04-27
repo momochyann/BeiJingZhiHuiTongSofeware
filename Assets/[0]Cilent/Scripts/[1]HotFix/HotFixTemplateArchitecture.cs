@@ -8,10 +8,11 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
     protected override void Init()
     {
         RegisterSystem(new GetCan2ListModelByStringSystem());
+        RegisterSystem(new SearchEntrySystem());
         RegisterUtility(new Storage());
         RegisterModel(new PersonalPersonnelCrisisEventMessageModel());
         RegisterModel(new YooAssetPfbModel());
-
+        RegisterModel(new GroupCrisisIncidentModel());
 
     }
 
