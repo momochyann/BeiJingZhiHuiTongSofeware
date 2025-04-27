@@ -22,12 +22,12 @@ public class GroupCrisisIncidentType
 }
 public interface IAffectedLevel
 {
-    Dictionary<int, string> affectedLevel { get; set; }
+    Dictionary<string, string> affectedLevel { get; set; }
 }
 
 public class AffectedLevel : IAffectedLevel
 {
-    public Dictionary<int, string> affectedLevel { get; set; }
+    public Dictionary<string, string> affectedLevel { get; set; }
 
 }
 
@@ -65,6 +65,18 @@ public class GroupCrisisIncidentModel : CrisisIncidentBaseModel<GroupCrisisIncid
     protected override void OnInit()
     {
          base.OnInit();
+    }
+        protected override List<int> OnSearchByName(string keyword)
+    {
+        List<int> indexList = new List<int>();
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            if (dataList[i].incidentName.Contains(keyword))
+            {
+                indexList.Add(i);
+            }
+        }
+        return indexList;
     }
 }
 

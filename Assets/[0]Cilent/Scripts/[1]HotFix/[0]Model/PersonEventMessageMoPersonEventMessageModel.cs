@@ -88,7 +88,7 @@ public class PersonalPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<
     }
 }
 
-[Serializable]
+
 public class GroupPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<GroupPersonnelCrisisEventMessage>
 {
     public List<GroupPersonnelCrisisEventMessage> groupPersonnelCrisisEventMessages => dataList;
@@ -98,7 +98,19 @@ public class GroupPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<Gro
     }
     protected override void OnInit()
     {
-        LoadData();
+        base.OnInit();
+    }
+    protected override List<int> OnSearchByName(string keyword)
+    {
+        List<int> indexList = new List<int>();
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            if (dataList[i].name.Contains(keyword))
+            {
+                indexList.Add(i);
+            }
+        }
+        return indexList;
     }
 }
 
