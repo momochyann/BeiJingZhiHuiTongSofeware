@@ -27,7 +27,7 @@ public interface IPersonalPersonnelCrisisEventMessage : IPersonnelCrisisEventMes
 
 public interface IGroupPersonnelCrisisEventMessage : IPersonnelCrisisEventMessageBase
 {
-    GroupCrisisIncidentModel groupCrisisIncidentModel { get; set; }
+    GroupCrisisIncident groupCrisisIncident { get; set; }
     string EventContactTime { get; set; }
     string EventContactProcess { get; set; }
     int affectedLevelIndex { get; set; }
@@ -43,7 +43,7 @@ public class GroupPersonnelCrisisEventMessage : IGroupPersonnelCrisisEventMessag
     public string category { get; set; }
     public string dateOfBirth { get; set; }
     public string Description { get; set; }
-    public GroupCrisisIncidentModel groupCrisisIncidentModel { get; set; }
+    public GroupCrisisIncident groupCrisisIncident { get; set; }
     public string EventContactTime { get; set; }
     public string EventContactProcess { get; set; }
     public int affectedLevelIndex { get; set; }

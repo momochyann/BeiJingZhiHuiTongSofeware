@@ -34,6 +34,11 @@ public class PerSonGroupSelect : MonoBehaviour, IController
         var model = this.GetModel<YooAssetPfbModel>();
         团体界面预制体 = await model.LoadPfb(团体界面名称);
         个人界面预制体 = await model.LoadPfb(个人界面名称);
+        if (FindObjectOfType<EntryDisPanelNew>() != null)
+        {
+            var 显示界面 = FindObjectOfType<EntryDisPanelNew>().gameObject;
+            当前界面 = 显示界面.name == "个人信息管理" ? 显示界面 : 显示界面.transform.parent.gameObject;
+        }
     }
 
     void 切换动画(string 界面名称)

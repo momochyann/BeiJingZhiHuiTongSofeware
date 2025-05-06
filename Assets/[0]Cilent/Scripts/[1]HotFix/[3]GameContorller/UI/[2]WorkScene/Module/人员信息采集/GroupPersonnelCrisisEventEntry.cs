@@ -32,8 +32,8 @@ public class GroupPersonnelCrisisEventEntry : MonoBehaviour, IController, IEntry
 
     [SerializeField]
     Toggle chooseToggle;
-   
-    public bool IsChoose { get => chooseToggle.isOn; set => chooseToggle.isOn = value; }
+    string[] 级别名称 = new string[] { "一级受害者", "二级受害者", "三级受害者", "四级受害者", "五级受害者" };
+    public bool IsChoose { get => chooseToggle != null ? chooseToggle.isOn : false; set => chooseToggle.isOn = value; }
     public ICan2List can2ListValue { get => _can2List; set => _can2List = value; }
     ICan2List _can2List;
     GroupPersonnelCrisisEventMessage EntryRawValue;
@@ -49,9 +49,9 @@ public class GroupPersonnelCrisisEventEntry : MonoBehaviour, IController, IEntry
         dateOfBirthText.text = message.dateOfBirth;
         crisisEventDescriptionText.text = message.Description;
         crisisEventTimeText.text = message.EventContactTime;
-        affectedLevelText.text = message.affectedLevelIndex.ToString();
+        affectedLevelText.text = 级别名称[message.affectedLevelIndex];
         focusOfTheWorkText.text = message.focusOfTheWork;
-       
+        crisisEventNameText.text = message.groupCrisisIncident.incidentName;
     }
     public IArchitecture GetArchitecture()
     {

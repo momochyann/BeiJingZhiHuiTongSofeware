@@ -37,10 +37,7 @@ public class GroupCrisisIncidentPerSonSelect : MonoBehaviour, IController
             return;
         动画底线.DOMoveX(团体危机显示按钮.transform.position.x, 0.3f);
         动画底线.DOScale(new Vector3(1f, 1, 1f), 0.3f);
-        团体危机显示按钮.GetComponentInChildren<Text>().DOColor(选中颜色, 0.3f);
-        团体危机显示按钮.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
-        团体危机人员显示按钮.GetComponentInChildren<Text>().DOColor(Color.black, 0.3f);
-        团体危机人员显示按钮.GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
+        团体危机显示按钮.GetComponentInChildren<Text>().DOColor(选中颜色, 0.3f); 
 
         是否为事件显示面板 = true;
         Destroy(transform.parent.GetComponentInChildren<EntryDisPanelNew>().gameObject);

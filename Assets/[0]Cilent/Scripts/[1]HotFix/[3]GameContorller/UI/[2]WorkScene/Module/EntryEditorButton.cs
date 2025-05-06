@@ -71,15 +71,17 @@ public class EntryEditorButton : MonoBehaviour, IController
         IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
         foreach (IEntry entry in entries)
         {
+            Debug.Log("entry.IsChoose: " + entry.IsChoose + ", 物体名称: " + ((MonoBehaviour)entry).gameObject.name);
+            
             if (entry.IsChoose)
             {
                 var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb(添加条目界面名称);
                 var 编辑条目界面 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<PopPanelBase>();
                 编辑条目界面.编辑条目(entry.can2ListValue);
+                
                 return;
             }
         }
-
     }
     public IArchitecture GetArchitecture()
     {

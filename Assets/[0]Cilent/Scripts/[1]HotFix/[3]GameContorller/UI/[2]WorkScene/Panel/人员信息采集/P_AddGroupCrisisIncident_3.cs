@@ -5,7 +5,9 @@ using QFramework;
 using DG.Tweening;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
-using System;
+
+
+
 public class P_AddGroupCrisisIncident_3 : PopPanelBase
 {
     // Start is called before the first frame update
@@ -25,25 +27,25 @@ public class P_AddGroupCrisisIncident_3 : PopPanelBase
     }
     private void Start()
     {
-        
+
     }
     public void 设置数据并打开面板(GroupCrisisIncident groupCrisisIncident)
     {
         this.groupCrisisIncident = groupCrisisIncident;
         OpenPanel();
-        
+
     }
     protected override void OpenPanel()
     {
         弹出页面.GetComponent<CanvasGroup>().DOFade(1, 0.3f).From(0).SetEase(Ease.OutSine);
         关闭按钮.onClick.AddListener(ClosePanel);
         初始化面板().Forget();
-        
+
     }
     async UniTaskVoid 初始化面板()
     {
         级别设置栏 = await this.GetModel<YooAssetPfbModel>().LoadPfb("级别设置栏");
-      
+
         弹出页面.transform.Find("增加级别按钮").GetComponent<Button>().onClick.AddListener(增加级别按钮监听);
         弹出页面.transform.Find("删除级别按钮").GetComponent<Button>().onClick.AddListener(删除级别按钮监听);
         弹出页面.transform.Find("上一步按钮").GetComponent<Button>().onClick.AddListener(上一步按钮监听);
