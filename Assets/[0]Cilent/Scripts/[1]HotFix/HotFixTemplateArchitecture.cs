@@ -14,6 +14,8 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterModel(new YooAssetPfbModel());
         RegisterModel(new GroupCrisisIncidentModel());
         RegisterModel(new GroupPersonnelCrisisEventMessageModel());
+        RegisterModel(new ObjectiveAssessmentModel());
+        RegisterUtility(new ExcelReader());
     }
 
 }

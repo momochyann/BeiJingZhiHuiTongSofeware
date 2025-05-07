@@ -149,6 +149,19 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+    - GroupName: RawFiles
+      GroupDesc: "\u539F\u59CB\u6570\u636E"
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/[0]Cilent/RawFile
+        CollectorGUID: 4b2aa3b9238d5be4a82fb3912dbfde6f
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
   - PackageName: LocalDefaultPackage
     PackageDesc: "\u672C\u5730\u8D44\u6E90\u5305"
     EnableAddressable: 1

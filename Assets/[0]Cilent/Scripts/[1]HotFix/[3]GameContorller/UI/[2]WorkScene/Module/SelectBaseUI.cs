@@ -61,6 +61,7 @@ public class SelectBaseUI : MonoBehaviour, IController
 
     async protected virtual UniTaskVoid Animation(int index)
     {
+        await UniTask.Yield();
         button1.GetComponentInChildren<Text>().DOColor(index == 1 ? Color.white : Color.gray, 0.3f);
         button2.GetComponentInChildren<Text>().DOColor(index == 2 ? Color.white : Color.gray, 0.3f);
 

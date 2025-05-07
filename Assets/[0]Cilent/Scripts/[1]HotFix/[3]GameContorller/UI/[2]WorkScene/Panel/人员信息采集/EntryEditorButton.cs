@@ -16,6 +16,7 @@ public class EntryEditorButton : MonoBehaviour, IController
 {
     // Start is called before the first frame update
     // 在Inspector中显示提示信息
+
     [Header("基本设置")]
     [SerializeField] private EntryEditorButtonType buttonType;
 

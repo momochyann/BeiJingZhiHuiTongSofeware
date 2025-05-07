@@ -7,6 +7,12 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
+public enum 提示移动方向
+{
+    经,
+    纬
+}
 [Serializable]
 public class 切换栏目
 {
@@ -19,6 +25,8 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
     public List<切换栏目> 栏目列表;
     public Image selectImageBack;
     public GameObject 父节点;
+    public 提示移动方向 移动方向 = 提示移动方向.经;
+    [HideInInspector] public UnityAction<int> 触发动画;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +53,16 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
             if (item.button == button)
             {
                 选中栏目 = item;
-            }
-            var 查至面板 = 父节点.transform.Find(item.panelName + "(Clone)");
-            if (查至面板 != null)
+            }               
+            var 查至面板1 = 父节点.transform.Find(item.panelName + "(Clone)");
+            var 查至面板2 = 父节点.transform.Find(item.panelName);
+            if (查至面板1 != null)
             {
-                已显示面板.Add(查至面板.gameObject);
+                已显示面板.Add(查至面板1.gameObject);
+            }
+            if (查至面板2 != null)
+            {
+                已显示面板.Add(查至面板2.gameObject);
             }
         }
         if (已显示面板.Count > 0)
@@ -70,13 +83,18 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
     }
     async protected virtual UniTaskVoid Animation(int index)
     {
-        selectImageBack.transform.DOMoveY(栏目列表[index].button.transform.position.y, 0.3f);
+        await UniTask.Yield();
+        if (移动方向 == 提示移动方向.纬)
+        {
+            selectImageBack.transform.DOMoveX(栏目列表[index].button.transform.position.x, 0.3f);
+        }
+        else if (移动方向 == 提示移动方向.经)
+        {
+            selectImageBack.transform.DOMoveY(栏目列表[index].button.transform.position.y, 0.3f);
+        }
+        触发动画?.Invoke(index);
     }
     // Update is called once per frame
-    void Update()
-    {
-
-    }
     public IArchitecture GetArchitecture()
     {
         return HotFixTemplateArchitecture.Interface;
