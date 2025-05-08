@@ -11,9 +11,11 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
     // Start is called before the first frame update
     [SerializeField] ScrollRect 事件面板滚动条;
     [SerializeField] LayoutGroup 个体事件面板布局;
-    [SerializeField] ToggleColumn 事件类型选择;
+    [SerializeField] ToggleColumn 事件类型选项;
     [SerializeField] GameObject 公共危机事件面板;
     [SerializeField] GameObject 个体事件面板;
+    ToggleColumn 公共事件选项;
+    ToggleColumn 个体事件选项;
     GameObject 团体事件选项预制体;
     public GroupCrisisIncident groupCrisisIncident;
     GroupCrisisIncidentOptionConfig groupCrisisIncidentOptionConfig;
@@ -42,10 +44,10 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
     {
         团体事件选项预制体 = await this.GetModel<YooAssetPfbModel>().LoadPfb("团体事件选项");
         groupCrisisIncidentOptionConfig = await this.GetModel<YooAssetPfbModel>().LoadConfig<GroupCrisisIncidentOptionConfig>("GroupCrisisIncidentOptionConfig");
-        事件类型选择.currentIndex = 1;
+        事件类型选项.currentIndex = 1;
         初始化公共事件面板();
         初始化个体事件面板();
-        事件类型选择.OnToggleChange.AddListener(OnToggleChange);
+        事件类型选项.OnToggleChange.AddListener(OnToggleChange);
         弹出页面.transform.Find("下一步按钮").GetComponent<Button>().onClick.AddListener(下一步按钮监听);
         弹出页面.transform.Find("上一步按钮").GetComponent<Button>().onClick.AddListener(上一步按钮监听);
     }
@@ -72,11 +74,23 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
     async UniTaskVoid 下一步按钮监听async()
     {
         var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("增加事件面板3");
+        GroupCrisisIncidentType groupCrisisIncidentType = new GroupCrisisIncidentType();
+        if (事件类型选项.currentIndex == 0)
+        {
+              groupCrisisIncidentType.CrisisIncidentTypeName = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型名称").GetComponent<Text>().text;
+              groupCrisisIncidentType.CrisisIncidentTypeDescription = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型描述").GetComponent<Text>().text;
+        }
+        else
+        {
+            groupCrisisIncidentType.CrisisIncidentTypeName = 个体事件选项.transform.GetChild(个体事件选项.currentIndex).transform.Find("类型名称").GetComponent<Text>().text;
+            groupCrisisIncidentType.CrisisIncidentTypeDescription = 个体事件选项.transform.GetChild(个体事件选项.currentIndex).transform.Find("类型描述").GetComponent<Text>().text;
+        }
+        groupCrisisIncident.groupCrisisIncidentType = groupCrisisIncidentType;
         弹出页面.GetComponent<CanvasGroup>().DOFade(0, 0.3f).OnComplete(() =>
        {
-           Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<P_AddGroupCrisisIncident_2>().设置数据并打开面板(new GroupCrisisIncident());
-           ClosePanel();
-       });
+           Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<P_AddGroupCrisisIncident_3>().设置数据并打开面板(groupCrisisIncident);
+           Destroy(gameObject);
+       }).SetEase(Ease.InSine);
     }
     private void OnToggleChange(int index)
     {
@@ -101,7 +115,7 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
             团体事件选项.transform.Find("类型名称").GetComponent<Text>().text = item.CrisisIncidentTypeName;
             团体事件选项.transform.Find("类型描述").GetComponent<Text>().text = item.CrisisIncidentTypeDescription;
         }
-        个体事件面板布局.gameObject.AddComponent<ToggleColumn>();
+        个体事件选项 = 个体事件面板布局.gameObject.AddComponent<ToggleColumn>();
         // Canvas.ForceUpdateCanvases();
         // 事件面板滚动条.velocity = Vector2.zero;
         // 事件面板滚动条.normalizedPosition = new Vector2(0, 1); // 滚动到顶部
@@ -115,10 +129,10 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
             团体事件选项.transform.Find("类型名称").GetComponent<Text>().text = item.CrisisIncidentTypeName;
             团体事件选项.transform.Find("类型描述").GetComponent<Text>().text = item.CrisisIncidentTypeDescription;
         }
-        公共危机事件面板.gameObject.AddComponent<ToggleColumn>();
+        公共事件选项 = 公共危机事件面板.gameObject.AddComponent<ToggleColumn>();
+    
         公共危机事件面板.SetActive(false);
     }
-
 
     // Update is called once per frame
     void Update()
