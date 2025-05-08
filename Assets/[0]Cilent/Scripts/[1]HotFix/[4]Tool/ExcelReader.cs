@@ -187,22 +187,21 @@ public class ExcelReader : IUtility
                                 }
                             }
 
-                            // 读取答题号
+                            // 直接创建答题号列表，按字母顺序填入
                             List<string> 答题号列表 = new List<string>();
-                            if (标题行索引 + 1 < 量表答题卡表.Rows.Count)
+                            int 答题号数量 = 答题号结束列 - 答题号开始列 + 1;
+
+                            // 确保答题号数量合理
+                            答题号数量 = Math.Max(1, Math.Min(答题号数量, 26)); // 最少1个，最多26个（A-Z）
+
+                            // 按字母顺序创建答题号
+                            for (int i = 0; i < 答题号数量; i++)
                             {
-                                DataRow 答题号行 = 量表答题卡表.Rows[标题行索引 + 1];
-                                for (int i = 答题号开始列; i <= 答题号结束列; i++)
-                                {
-                                    if (i < 答题号行.ItemArray.Length && !string.IsNullOrEmpty(答题号行[i].ToString()))
-                                    {
-                                        答题号列表.Add(答题号行[i].ToString());
-                                    }
-                                }
+                                char 答题号字母 = (char)('A' + i);
+                                答题号列表.Add(答题号字母.ToString());
                             }
 
-                            Debug.Log($"找到答题号: {string.Join(", ", 答题号列表)}");
-                            Debug.Log($"答题选项开始列: {答题选项开始列}, 计分分值开始列: {计分分值开始列}");
+                       
 
                             // 从标题行之后开始读取题目数据
                             for (int rowIndex = 标题行索引 + 1; rowIndex < 量表答题卡表.Rows.Count; rowIndex++)
@@ -220,44 +219,38 @@ public class ExcelReader : IUtility
                                         分值 = new List<string>()
                                     };
 
-                                    // 添加答题号
-                                    foreach (string 答题号 in 答题号列表)
+                                    // 添加答题号、选项和分值
+                                    for (int i = 0; i < 答题号列表.Count; i++)
                                     {
-                                        新题目.答题号.Add(答题号);
-                                    }
-
-                                    // 添加选项
-                                    if (答题选项开始列 >= 0)
-                                    {
-                                        int 选项数量 = 答题号列表.Count;
-                                        for (int i = 0; i < 选项数量; i++)
+                                        // 检查选项是否有实际数据
+                                        int 选项列索引 = 答题选项开始列 + i;
+                                        bool 有选项数据 = false;
+                                        
+                                        if (选项列索引 < row.ItemArray.Length)
                                         {
-                                            int 列索引 = 答题选项开始列 + i;
-                                            if (列索引 < row.ItemArray.Length && !string.IsNullOrEmpty(row[列索引].ToString()))
-                                            {
-                                                新题目.选项.Add(row[列索引].ToString());
-                                            }
-                                            else
-                                            {
-                                                新题目.选项.Add("");
-                                            }
+                                            string 选项内容 = row[选项列索引].ToString().Trim(); // 去除前后空格
+                                            有选项数据 = !string.IsNullOrEmpty(选项内容);
                                         }
-                                    }
-
-                                    // 添加分值
-                                    if (计分分值开始列 >= 0)
-                                    {
-                                        int 分值数量 = 答题号列表.Count;
-                                        for (int i = 0; i < 分值数量; i++)
+                                        
+                                        // 只有当选项有实际数据时，才添加答题号、选项和分值
+                                        if (有选项数据)
                                         {
-                                            int 列索引 = 计分分值开始列 + i;
-                                            if (列索引 < row.ItemArray.Length && !string.IsNullOrEmpty(row[列索引].ToString()))
+                                            
+                                            // 添加答题号
+                                            新题目.答题号.Add(答题号列表[i]);
+                                            
+                                            // 添加选项
+                                            新题目.选项.Add(row[选项列索引].ToString().Trim());
+                                            
+                                            // 添加分值
+                                            int 分值列索引 = 计分分值开始列 + i;
+                                            if (分值列索引 < row.ItemArray.Length && !string.IsNullOrEmpty(row[分值列索引].ToString().Trim()))
                                             {
-                                                新题目.分值.Add(row[列索引].ToString());
+                                                新题目.分值.Add(row[分值列索引].ToString().Trim());
                                             }
                                             else
                                             {
-                                                新题目.分值.Add("0");
+                                                新题目.分值.Add("0"); // 默认分值
                                             }
                                         }
                                     }
@@ -275,22 +268,22 @@ public class ExcelReader : IUtility
             }
 
             // 打印读取结果，便于调试
-            Debug.Log($"成功读取量表: {assessment.量表名称}");
-            Debug.Log($"题目数量: {assessment.题目列表.Count}");
-            // if (assessment.题目列表.Count > 0)
+            // Debug.Log($"成功读取量表: {assessment.量表名称}");
+            // Debug.Log($"题目数量: {assessment.题目列表.Count}");
+            // // if (assessment.题目列表.Count > 0)
+            // // {
+            // //     Debug.Log($"第一题: {assessment.题目列表[0].题目名称}");
+            // //     Debug.Log($"答题号: {string.Join(", ", assessment.题目列表[0].答题号)}");
+            // //     Debug.Log($"选项: {string.Join(", ", assessment.题目列表[0].选项)}");
+            // //     Debug.Log($"分值: {string.Join(", ", assessment.题目列表[0].分值)}");
+            // // }
+            // foreach (var item in assessment.题目列表)
             // {
-            //     Debug.Log($"第一题: {assessment.题目列表[0].题目名称}");
-            //     Debug.Log($"答题号: {string.Join(", ", assessment.题目列表[0].答题号)}");
-            //     Debug.Log($"选项: {string.Join(", ", assessment.题目列表[0].选项)}");
-            //     Debug.Log($"分值: {string.Join(", ", assessment.题目列表[0].分值)}");
+            //     Debug.Log($"题目名称: {item.题目名称}");
+            //     Debug.Log($"答题号: {string.Join(", ", item.答题号)} {item.答题号.Count}");
+            //     Debug.Log($"选项: {string.Join(", ", item.选项)} {item.选项.Count}");
+            //     Debug.Log($"分值: {string.Join(", ", item.分值)} {item.分值.Count}");
             // }
-            foreach (var item in assessment.题目列表)
-            {
-                Debug.Log($"题目名称: {item.题目名称}");
-                Debug.Log($"答题号: {string.Join(", ", item.答题号)}");
-                Debug.Log($"选项: {string.Join(", ", item.选项)}");
-                Debug.Log($"分值: {string.Join(", ", item.分值)}");
-            }
         }
         catch (Exception e)
         {
@@ -298,5 +291,128 @@ public class ExcelReader : IUtility
         }
 
         return assessment;
+    }
+
+    /// <summary>
+    /// 获取StreamingAssets目录下所有的xlsx文件
+    /// </summary>
+    /// <returns>xlsx文件名列表（不含扩展名）</returns>
+    async public UniTask<List<string>> GetAllExcelFilesAsync()
+    {
+        List<string> excelFiles = new List<string>();
+        
+        try
+        {
+            // 在安卓平台上使用UnityWebRequest
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                // 尝试读取文件清单（如果存在）
+                List<string> manifestFiles = await ReadFileManifestAsync();
+                if (manifestFiles.Count > 0)
+                {
+                    return manifestFiles;
+                }
+                
+                // 如果没有清单文件，尝试列出目录（注意：在Android上可能无法直接列出目录）
+                Debug.LogWarning("在Android平台上无法直接列出StreamingAssets目录，请使用文件清单方式");
+            }
+            else // 在其他平台上直接读取目录
+            {
+                string[] files = Directory.GetFiles(Application.streamingAssetsPath, "*.xlsx");
+                foreach (string file in files)
+                {
+                    // 提取文件名（不含路径和扩展名）
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    excelFiles.Add(fileName);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"获取Excel文件列表时发生错误: {e.Message}\n{e.StackTrace}");
+        }
+        
+        return excelFiles;
+    }
+    
+    /// <summary>
+    /// 读取文件清单
+    /// </summary>
+    /// <param name="manifestFileName">清单文件名，默认为ExcelManifest.txt</param>
+    /// <returns>xlsx文件名列表（不含扩展名）</returns>
+    async public UniTask<List<string>> ReadFileManifestAsync(string manifestFileName = "ExcelManifest.txt")
+    {
+        List<string> fileList = new List<string>();
+        
+        try
+        {
+            string manifestPath = Path.Combine(Application.streamingAssetsPath, manifestFileName);
+            
+            // 在安卓平台上使用UnityWebRequest
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                string uri = "file://" + manifestPath;
+                using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+                {
+                    await webRequest.SendWebRequest();
+                    
+                    if (webRequest.result != UnityWebRequest.Result.Success)
+                    {
+                        Debug.LogWarning($"无法加载清单文件: {webRequest.error}");
+                        return fileList;
+                    }
+                    
+                    string content = webRequest.downloadHandler.text;
+                    string[] lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    
+                    foreach (string line in lines)
+                    {
+                        string trimmedLine = line.Trim();
+                        if (!string.IsNullOrEmpty(trimmedLine))
+                        {
+                            // 如果文件名包含扩展名，则移除
+                            string fileName = trimmedLine;
+                            if (fileName.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase))
+                            {
+                                fileName = fileName.Substring(0, fileName.Length - 5);
+                            }
+                            fileList.Add(fileName);
+                        }
+                    }
+                }
+            }
+            else // 在其他平台上直接读取文件
+            {
+                if (File.Exists(manifestPath))
+                {
+                    string[] lines = await File.ReadAllLinesAsync(manifestPath);
+                    
+                    foreach (string line in lines)
+                    {
+                        string trimmedLine = line.Trim();
+                        if (!string.IsNullOrEmpty(trimmedLine))
+                        {
+                            // 如果文件名包含扩展名，则移除
+                            string fileName = trimmedLine;
+                            if (fileName.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase))
+                            {
+                                fileName = fileName.Substring(0, fileName.Length - 5);
+                            }
+                            fileList.Add(fileName);
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"清单文件不存在: {manifestPath}");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"读取文件清单时发生错误: {e.Message}\n{e.StackTrace}");
+        }
+        
+        return fileList;
     }
 }

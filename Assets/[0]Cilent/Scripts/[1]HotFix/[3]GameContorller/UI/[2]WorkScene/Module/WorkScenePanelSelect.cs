@@ -53,9 +53,15 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
             if (item.button == button)
             {
                 选中栏目 = item;
-            }               
+            } 
+            if (string.IsNullOrEmpty(item.panelName))
+            {
+                continue;
+            }
             var 查至面板1 = 父节点.transform.Find(item.panelName + "(Clone)");
             var 查至面板2 = 父节点.transform.Find(item.panelName);
+            Debug.Log("查至面板1: " + 查至面板1);
+            Debug.Log("查至面板2: " + 查至面板2);
             if (查至面板1 != null)
             {
                 已显示面板.Add(查至面板1.gameObject);

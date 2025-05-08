@@ -1954,7 +1954,7 @@ GameObject:
   - component: {fileID: 1733756806112711972}
   - component: {fileID: 3886245659643041733}
   - component: {fileID: 3482273703297731808}
-  - component: {fileID: 8587957422214328217}
+  - component: {fileID: 4394323592955180436}
   m_Layer: 5
   m_Name: "\u5220\u9664\u6309\u94AE"
   m_TagString: Untagged
@@ -2094,7 +2094,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8587957422214328217
+--- !u!114 &4394323592955180436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2103,12 +2103,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5746719232892076018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec82471f965ba1f41af87ccb53e7de25, type: 3}
+  m_Script: {fileID: 11500000, guid: 309abc61c86534640858c69d76fbf074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 0
   entryModelName: GroupCrisisIncidentModel
-  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": 
+  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!1 &6065128004446060882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,7 +2277,7 @@ GameObject:
   - component: {fileID: 5407054544984069509}
   - component: {fileID: 2564153170688465038}
   - component: {fileID: 3325751054567525194}
-  - component: {fileID: 2622974961492907646}
+  - component: {fileID: 5329260339112138506}
   m_Layer: 5
   m_Name: "\u6DFB\u52A0\u6309\u94AE"
   m_TagString: Untagged
@@ -2417,7 +2417,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2622974961492907646
+--- !u!114 &5329260339112138506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2426,11 +2426,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6198199369911602105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec82471f965ba1f41af87ccb53e7de25, type: 3}
+  m_Script: {fileID: 11500000, guid: 309abc61c86534640858c69d76fbf074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 2
-  entryModelName: 
+  entryModelName: GroupCrisisIncidentModel
   "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!1 &6214970865494909290
 GameObject:
@@ -3261,8 +3261,8 @@ GameObject:
   - component: {fileID: 422380412437669401}
   - component: {fileID: 6455235609955927997}
   - component: {fileID: 7032509899313300154}
-  - component: {fileID: 3335094167571629538}
   - component: {fileID: 890716296776814563}
+  - component: {fileID: 152647610360762081}
   m_Layer: 5
   m_Name: "\u7F16\u8F91\u6309\u94AE"
   m_TagString: Untagged
@@ -3358,21 +3358,6 @@ MonoBehaviour:
   Color1: {r: 0.13651115, g: 0.41694328, b: 0.87169814, a: 1}
   Color2: {r: 0.37254903, g: 0.7568628, b: 0.9725491, a: 1}
   Angle: -90
---- !u!114 &3335094167571629538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7813753376476464826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec82471f965ba1f41af87ccb53e7de25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonType: 1
-  entryModelName: 
-  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!114 &890716296776814563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3417,6 +3402,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &152647610360762081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813753376476464826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309abc61c86534640858c69d76fbf074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
+  entryModelName: GroupCrisisIncidentModel
+  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!1 &7968540259469200065
 GameObject:
   m_ObjectHideFlags: 0

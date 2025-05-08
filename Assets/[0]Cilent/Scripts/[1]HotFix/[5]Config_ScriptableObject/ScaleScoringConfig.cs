@@ -5,7 +5,7 @@ using System;
 [CreateAssetMenu(fileName = "ScaleScoringConfig", menuName = "IncidentConfig/ScaleScoringConfig")]
 public class ScaleScoringConfig : ScriptableObject
 {
-    public List<记分规则> 记分规则;
+    public List<记分规则> 记分规则列表;
 }
 
 

@@ -40,16 +40,31 @@ public class ObjectiveAssessmentModel : CrisisIncidentBaseModel<ObjectiveAssessm
     async UniTaskVoid LoadObjectiveAssessmentData()
     {
         var excelReader = this.GetUtility<ExcelReader>();
-
-        var objectiveAssessment = await excelReader.ReadObjectiveAssessmentDataAsync("（EQ)情商测试量表+答题卡");
-        if (objectiveAssessment != null)
+        var excelFiles = await excelReader.ReadFileManifestAsync();
+        ScaleScoringConfig scaleScoringConfig = await LoadYooAssetsTool.LoadAsset<ScaleScoringConfig>("ScaleScoringConfig");
+        Debug.Log("excelFiles.Count: " + excelFiles.Count);
+        foreach (var fileName in excelFiles)
         {
-            objectiveAssessments.Add(objectiveAssessment);
-            Debug.Log("objectiveAssessment.量表名称: " + objectiveAssessment.量表简介);
-        }
-        else
-        {
-            Debug.Log("objectiveAssessment.量表名称为空");
+            var assessment = await excelReader.ReadObjectiveAssessmentDataAsync(fileName);
+            if (assessment != null)
+            {
+                var 记分规则 = scaleScoringConfig.记分规则列表.Find(x => x.量表名称 == assessment.量表名称);
+                if (记分规则 != null)
+                {
+                    assessment.记分规则 = 记分规则;
+                    objectiveAssessments.Add(assessment);
+                    Debug.Log("objectiveAssessment.量表名称: " + assessment.量表名称 + " " + assessment.量表简介);
+                    Debug.Log("assessment.记分规则: " + assessment.记分规则.量表名称);
+                }
+                else
+                {
+                    Debug.Log("objectiveAssessment.量表名称" + assessment.量表名称 + "记分规则为空");
+                }
+            }
+            else
+            {
+                Debug.Log("objectiveAssessment.量表名称为空");
+            }
         }
     }
 }

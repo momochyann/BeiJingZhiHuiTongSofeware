@@ -327,8 +327,8 @@ GameObject:
   - component: {fileID: 2471569265726787091}
   - component: {fileID: 4611157220094579522}
   - component: {fileID: 5694380570469733520}
-  - component: {fileID: 2410965321250488896}
   - component: {fileID: 7571107055499966694}
+  - component: {fileID: 3848984763831845861}
   m_Layer: 5
   m_Name: "\u7F16\u8F91\u6309\u94AE"
   m_TagString: Untagged
@@ -424,21 +424,6 @@ MonoBehaviour:
   Color1: {r: 0.13651115, g: 0.41694328, b: 0.87169814, a: 1}
   Color2: {r: 0.37254903, g: 0.7568628, b: 0.9725491, a: 1}
   Angle: -90
---- !u!114 &2410965321250488896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661177635033285038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec82471f965ba1f41af87ccb53e7de25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonType: 1
-  entryModelName: 
-  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!114 &7571107055499966694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,6 +468,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3848984763831845861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661177635033285038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309abc61c86534640858c69d76fbf074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
+  entryModelName: GroupCrisisIncidentModel
+  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!1 &887255424256133513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,7 +2625,7 @@ GameObject:
   - component: {fileID: 1274049481149600466}
   - component: {fileID: 8796318085123781009}
   - component: {fileID: 7512833076487096824}
-  - component: {fileID: 3479771334530381622}
+  - component: {fileID: 2810183134883331593}
   m_Layer: 5
   m_Name: "\u5220\u9664\u6309\u94AE"
   m_TagString: Untagged
@@ -2765,7 +2765,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3479771334530381622
+--- !u!114 &2810183134883331593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2774,12 +2774,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7587207276917408646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec82471f965ba1f41af87ccb53e7de25, type: 3}
+  m_Script: {fileID: 11500000, guid: 309abc61c86534640858c69d76fbf074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 0
   entryModelName: GroupCrisisIncidentModel
-  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": 
+  "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!1 &7599571411467354992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,7 +3177,7 @@ GameObject:
   - component: {fileID: 3254956802025569026}
   - component: {fileID: 824262011057437417}
   - component: {fileID: 6979305184722743204}
-  - component: {fileID: 7162500394850272414}
+  - component: {fileID: 3336691668364325448}
   m_Layer: 5
   m_Name: "\u6DFB\u52A0\u6309\u94AE"
   m_TagString: Untagged
@@ -3317,7 +3317,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7162500394850272414
+--- !u!114 &3336691668364325448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3326,11 +3326,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7998980426829781576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec82471f965ba1f41af87ccb53e7de25, type: 3}
+  m_Script: {fileID: 11500000, guid: 309abc61c86534640858c69d76fbf074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 2
-  entryModelName: 
+  entryModelName: GroupCrisisIncidentModel
   "\u6DFB\u52A0\u6761\u76EE\u754C\u9762\u540D\u79F0": "\u589E\u52A0\u4E8B\u4EF6\u9762\u677F"
 --- !u!1 &8003397830008875226
 GameObject:
