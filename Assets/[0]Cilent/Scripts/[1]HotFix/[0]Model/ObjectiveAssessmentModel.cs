@@ -27,6 +27,7 @@ public class ObjectiveAssessmentModel : CrisisIncidentBaseModel<ObjectiveAssessm
     protected override void OnInit()
     {
         base.OnInit();
+        //    this.ClearItems();
         LoadObjectiveAssessmentData().Forget();
     }
     public List<ObjectiveAssessment> GetObjectiveAssessments()
@@ -45,9 +46,14 @@ public class ObjectiveAssessmentModel : CrisisIncidentBaseModel<ObjectiveAssessm
         Debug.Log("excelFiles.Count: " + excelFiles.Count);
         foreach (var fileName in excelFiles)
         {
+            if (objectiveAssessments.Find(x => x.量表名称 == fileName) != null)
+            {
+                continue;
+            }
             var assessment = await excelReader.ReadObjectiveAssessmentDataAsync(fileName);
             if (assessment != null)
             {
+
                 var 记分规则 = scaleScoringConfig.记分规则列表.Find(x => x.量表名称 == assessment.量表名称);
                 if (记分规则 != null)
                 {
@@ -65,6 +71,10 @@ public class ObjectiveAssessmentModel : CrisisIncidentBaseModel<ObjectiveAssessm
             {
                 Debug.Log("objectiveAssessment.量表名称为空");
             }
+        }
+        foreach (var assessment in objectiveAssessments)
+        {
+            Debug.Log("objectiveAssessment.量表名称: " + assessment.量表名称 + " " + assessment.量表简介);
         }
     }
 }
