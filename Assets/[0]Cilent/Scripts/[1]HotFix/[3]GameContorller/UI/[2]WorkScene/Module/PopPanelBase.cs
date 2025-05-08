@@ -33,9 +33,9 @@ public class PopPanelBase : MonoBehaviour, IController
         弹出页面 = transform.Find("弹出页面").gameObject;
         关闭按钮 = 弹出页面.transform.Find("关闭按钮").GetComponent<Button>();
     }
-    void Start()
+     void Start()
     {
-
+        OpenPanel();
     }
     public virtual void 编辑条目(ICan2List ICan2List)
     {
@@ -76,6 +76,7 @@ public class PopPanelBase : MonoBehaviour, IController
     // Update is called once per frame
     public void ClosePanel()
     {
+        Debug.Log("ClosePanel");
         if (isClose) return;
         isClose = true;
         弹出页面.transform.DOScale(0, 0.1f).From(1);

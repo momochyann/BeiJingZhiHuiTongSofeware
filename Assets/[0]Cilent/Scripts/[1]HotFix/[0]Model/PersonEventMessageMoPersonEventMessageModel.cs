@@ -27,7 +27,7 @@ public interface IPersonalPersonnelCrisisEventMessage : IPersonnelCrisisEventMes
 
 public interface IGroupPersonnelCrisisEventMessage : IPersonnelCrisisEventMessageBase
 {
-    GroupCrisisIncidentModel groupCrisisIncidentModel { get; set; }
+    GroupCrisisIncident groupCrisisIncident { get; set; }
     string EventContactTime { get; set; }
     string EventContactProcess { get; set; }
     int affectedLevelIndex { get; set; }
@@ -43,7 +43,7 @@ public class GroupPersonnelCrisisEventMessage : IGroupPersonnelCrisisEventMessag
     public string category { get; set; }
     public string dateOfBirth { get; set; }
     public string Description { get; set; }
-    public GroupCrisisIncidentModel groupCrisisIncidentModel { get; set; }
+    public GroupCrisisIncident groupCrisisIncident { get; set; }
     public string EventContactTime { get; set; }
     public string EventContactProcess { get; set; }
     public int affectedLevelIndex { get; set; }
@@ -88,7 +88,7 @@ public class PersonalPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<
     }
 }
 
-[Serializable]
+
 public class GroupPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<GroupPersonnelCrisisEventMessage>
 {
     public List<GroupPersonnelCrisisEventMessage> groupPersonnelCrisisEventMessages => dataList;
@@ -98,7 +98,19 @@ public class GroupPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<Gro
     }
     protected override void OnInit()
     {
-        LoadData();
+        base.OnInit();
+    }
+    protected override List<int> OnSearchByName(string keyword)
+    {
+        List<int> indexList = new List<int>();
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            if (dataList[i].name.Contains(keyword))
+            {
+                indexList.Add(i);
+            }
+        }
+        return indexList;
     }
 }
 

@@ -65,7 +65,7 @@ public class P_AddGroupCrisisIncident : PopPanelBase
             Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<P_AddGroupCrisisIncident_2>().设置数据并打开面板(groupCrisisIncident);
             // await UniTask.Delay(100);
             Destroy(gameObject);
-        });
+        }).SetEase(Ease.InSine);
 
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
+
 public interface IEntry
 {
     public void DisEntry(int index);

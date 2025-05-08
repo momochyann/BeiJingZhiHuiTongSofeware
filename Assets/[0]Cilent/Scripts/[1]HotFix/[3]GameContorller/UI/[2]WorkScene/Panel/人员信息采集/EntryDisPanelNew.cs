@@ -48,7 +48,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
         BeforePageButton.onClick.AddListener(OnBeforePageButtonClick);
         NextPageButton.onClick.AddListener(OnNextPageButtonClick);
         Model实例 = this.GetSystem<GetCan2ListModelByStringSystem>().GetModel<IListModel>(Model名称);
-        this.RegisterEvent<Can2ListModelChangeEvent>(OnModelChange);
+        this.RegisterEvent<Can2ListModelChangeEvent>(OnModelChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         pageLeftList = new List<int>();
         for (int i = 1; i < 5; i++)
         {
@@ -75,6 +75,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
     }
     List<int> 更新展示条目序号列表(bool 是否为搜查列表)
     {
+        Debug.Log("更新展示条目序号列表");
         List<int> 展示条目序号列表 = new List<int>();
         if (是否为搜查列表)
         {
@@ -97,7 +98,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
         {
             Destroy(entryBox.transform.GetChild(i).gameObject);
         }
-
+        Debug.Log("展示对应页面数据"+entryCount);
         for (int i = (页面索引 - 1) * pageSize; i < 页面索引 * pageSize; i++)
         {
             if (i >= entryCount)
