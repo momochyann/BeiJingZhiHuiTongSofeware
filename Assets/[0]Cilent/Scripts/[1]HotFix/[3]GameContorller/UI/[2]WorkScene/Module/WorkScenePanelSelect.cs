@@ -93,6 +93,17 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
         if (移动方向 == 提示移动方向.纬)
         {
             selectImageBack.transform.DOMoveX(栏目列表[index].button.transform.position.x, 0.3f);
+            for (int i = 0; i < 栏目列表.Count; i++)
+            {
+                if (i == index)
+                {
+                    栏目列表[i].button.GetComponentInChildren<Text>().DOColor(Color.white, 0.3f);
+                }
+                else
+                {
+                    栏目列表[i].button.GetComponentInChildren<Text>().DOColor(Color.black, 0.3f);
+                }
+            }
         }
         else if (移动方向 == 提示移动方向.经)
         {

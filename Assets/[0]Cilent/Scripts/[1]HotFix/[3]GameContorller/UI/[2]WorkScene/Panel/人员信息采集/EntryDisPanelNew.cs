@@ -52,7 +52,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
         pageLeftList = new List<int>();
         for (int i = 1; i < 5; i++)
         {
-            pageLeftList.Add(i);
+            pageLeftList.Add(i);   
         }
         await UniTask.Delay(100);
 

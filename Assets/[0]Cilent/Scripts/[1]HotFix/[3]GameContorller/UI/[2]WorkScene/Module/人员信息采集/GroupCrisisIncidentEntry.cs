@@ -43,13 +43,14 @@ public class GroupCrisisIncidentEntry : MonoBehaviour, IController, IEntry
         placeText.text = EntryRawValue.occurrencePlace;
         descriptionText.text = EntryRawValue.incidentDescription;
         LoadImage(EntryRawValue.incidentImageURL).Forget();
-        typeText.text = EntryRawValue.groupCrisisIncidentType.CrisisIncidentTypeDescription;
+        if (EntryRawValue.groupCrisisIncidentType != null)
+            typeText.text = EntryRawValue.groupCrisisIncidentType.CrisisIncidentTypeDescription;
         //  affectedLevelText.text = EntryRawValue.affectedLevel.affectedLevel.TryGetValue("一级受害者:", out var value) ? value : "";
         affectedLevelText.text = "级别";
     }
     async UniTaskVoid LoadImage(string imageURL)
     {
-        if (string.IsNullOrEmpty(imageURL))            return;
+        if (string.IsNullOrEmpty(imageURL)) return;
         var sprite = await this.GetModel<YooAssetPfbModel>().LoadConfig<Sprite>(imageURL);
         image.sprite = sprite;
     }

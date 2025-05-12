@@ -24,6 +24,7 @@ public class ObjectiveAssessment : ICan2List
 public class ObjectiveAssessmentModel : CrisisIncidentBaseModel<ObjectiveAssessment>
 {
     public List<ObjectiveAssessment> objectiveAssessments => dataList;
+    
     protected override void OnInit()
     {
         base.OnInit();

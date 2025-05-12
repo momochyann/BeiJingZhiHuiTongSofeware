@@ -9,13 +9,16 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
     {
         RegisterSystem(new GetCan2ListModelByStringSystem());
         RegisterSystem(new SearchEntrySystem());
+         RegisterSystem(new ObjectiveSelectSystem());
         RegisterUtility(new Storage());
         RegisterModel(new PersonalPersonnelCrisisEventMessageModel());
         RegisterModel(new YooAssetPfbModel());
         RegisterModel(new GroupCrisisIncidentModel());
         RegisterModel(new GroupPersonnelCrisisEventMessageModel());
         RegisterModel(new ObjectiveAssessmentModel());
+        RegisterModel(new ObjectiveAssessmentArchiveModel());
         RegisterUtility(new ExcelReader());
+       
     }
 
 }

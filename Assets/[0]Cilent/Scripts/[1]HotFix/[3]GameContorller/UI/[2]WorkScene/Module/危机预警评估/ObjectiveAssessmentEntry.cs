@@ -31,6 +31,12 @@ public class ObjectiveAssessmentEntry : MonoBehaviour, IController, IEntry
     {
         EntryInit(index);
         量表名称.text = EntryRawValue.量表名称;
+        if(EntryRawValue.题目列表 == null)
+        {
+            this.SendCommand<DeleteEntryCommand>(new DeleteEntryCommand(_can2List,"ObjectiveAssessmentModel"));
+            Destroy(gameObject);
+            return;                                                                                                                                                                   
+        }
         问题数量.text = EntryRawValue.题目列表.Count.ToString();
         建议时间.text = "10";
         // nameText.text = EntryRawValue.incidentName;

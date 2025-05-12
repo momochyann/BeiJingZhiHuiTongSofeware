@@ -1,0 +1,114 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using QFramework;
+using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
+public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
+{
+    // Start is called before the first frame update
+    [SerializeField]
+    Button 开始评估按钮;
+    [SerializeField]
+    Text 已选择人员;
+    [SerializeField]
+    Text 已选择量表;
+    [SerializeField]
+    Text 主干预老师;
+    [SerializeField]
+    Button 人员确定按钮;
+    [SerializeField]
+    Button 量表确定按钮;
+    ObjectiveAssessment 当前量表;
+    EntryDisPanelNew[] entryDisPanels;
+    PersonalPersonnelCrisisEventMessage 当前人员;
+    void Start()
+    {
+        开始评估按钮.onClick.AddListener(开始评估按钮监听);
+        人员确定按钮.onClick.AddListener(人员确定按钮监听);
+        量表确定按钮.onClick.AddListener(量表确定按钮监听);
+
+        已选择人员.text = "未选择";
+        已选择量表.text = "未选择";
+        Init().Forget();
+    }
+    async UniTaskVoid Init()
+    {
+        await UniTask.Delay(10);
+        entryDisPanels = FindObjectsOfType<EntryDisPanelNew>();
+        Debug.Log("entryDisPanel.count: " + entryDisPanels.Length);
+
+    }
+    void 开始评估按钮监听()
+    {
+        if (当前人员 == null || 当前量表 == null)
+        {
+            return;
+        }
+        开始评估().Forget();
+
+    }
+
+    async UniTaskVoid 开始评估()
+    {
+        var model = this.GetModel<YooAssetPfbModel>();
+        var pfb = await model.LoadPfb("3-4-2-1_客观评估页面");
+        var objectiveAssessmentStartPanel = Instantiate(pfb, transform.parent.parent);
+        this.GetSystem<ObjectiveSelectSystem>().当前人员 = 当前人员;
+        this.GetSystem<ObjectiveSelectSystem>().当前量表 = 当前量表;
+        this.GetSystem<ObjectiveSelectSystem>().当前题序 = 0;
+        this.GetSystem<ObjectiveSelectSystem>().当前量表得分 = new List<int>();
+        
+        Destroy(gameObject.transform.parent.gameObject);
+    }
+    void 人员确定按钮监听()
+    {
+
+        foreach (EntryDisPanelNew entryDisPanel in entryDisPanels)
+        {
+            Debug.Log("entryDisPanel.gameObject.name: " + entryDisPanel.gameObject.name);
+
+            if (entryDisPanel.gameObject.name != "危机评估选择面板")
+            {
+                continue;
+            }
+            IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
+            foreach (IEntry entry in entries)
+            {
+                if (entry.IsChoose)
+                {
+                    PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
+                    已选择人员.text = personalPersonnelCrisisEventMessage.name;
+                    当前人员 = personalPersonnelCrisisEventMessage;
+                    return;
+                }
+            }
+        }
+    }
+    void 量表确定按钮监听()
+    {
+        foreach (EntryDisPanelNew entryDisPanel in entryDisPanels)
+        {
+            if (entryDisPanel.gameObject.name != "个人信息管理面板")
+            {
+                continue;
+            }
+            IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
+            foreach (IEntry entry in entries)
+            {
+                if (entry.IsChoose)
+                {
+                    ObjectiveAssessment objectiveAssessment = entry.can2ListValue as ObjectiveAssessment;
+                    已选择量表.text = objectiveAssessment.量表名称;
+                    当前量表 = objectiveAssessment;
+                    return;
+                }
+            }
+        }
+    }
+
+    public IArchitecture GetArchitecture()
+    {
+        return HotFixTemplateArchitecture.Interface;
+    }
+}
