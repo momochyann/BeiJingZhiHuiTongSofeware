@@ -43,11 +43,14 @@ public class EntryDisPanelNew : MonoBehaviour, IController
     }
     async UniTaskVoid InitAsync()
     {
+        var cancellationToken = this.GetCancellationTokenOnDestroy();
+        Debug.Log("gameObject:"+gameObject.name);
         entryPfb = await this.GetModel<YooAssetPfbModel>().LoadPfb(pfbName);
         pagePromptBoxPfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("PagePromptBox");
         BeforePageButton.onClick.AddListener(OnBeforePageButtonClick);
         NextPageButton.onClick.AddListener(OnNextPageButtonClick);
         Model实例 = this.GetSystem<GetCan2ListModelByStringSystem>().GetModel<IListModel>(Model名称);
+        await UniTask.Delay(100,cancellationToken:cancellationToken);
         this.RegisterEvent<Can2ListModelChangeEvent>(OnModelChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         pageLeftList = new List<int>();
         for (int i = 1; i < 5; i++)

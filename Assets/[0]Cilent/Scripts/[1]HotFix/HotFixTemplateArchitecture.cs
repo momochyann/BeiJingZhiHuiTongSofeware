@@ -17,6 +17,7 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterModel(new GroupPersonnelCrisisEventMessageModel());
         RegisterModel(new ObjectiveAssessmentModel());
         RegisterModel(new ObjectiveAssessmentArchiveModel());
+        RegisterModel(new SubjectiveAssessmentArchiveModel());
         RegisterUtility(new ExcelReader());
        
     }

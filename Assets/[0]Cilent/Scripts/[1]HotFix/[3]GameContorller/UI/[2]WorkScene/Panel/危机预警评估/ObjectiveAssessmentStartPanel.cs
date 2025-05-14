@@ -92,7 +92,7 @@ public class ObjectiveAssessmentStartPanel : MonoBehaviour, IController
         {
             if (评估选项布局.transform.GetChild(i).GetComponent<ProceduralImage>().BorderWidth == 0)
             {
-
+                Debug.Log("当前题序:" + 当前题序 + "当前量表:" + 当前量表.题目列表[当前题序].分值.Count);
                 得分系统.当前量表得分.Add(int.Parse(当前量表.题目列表[当前题序].分值[i]));
                 是否回答 = true;
             }
@@ -111,6 +111,7 @@ public class ObjectiveAssessmentStartPanel : MonoBehaviour, IController
                 客观评估存档.gender = 得分系统.当前人员.gender;
                 客观评估存档.category = 得分系统.当前人员.category;
                 客观评估存档.Interveners = 得分系统.当前干预人员;
+                客观评估存档.scaleName = 当前量表.量表名称;
                 // 客观评估存档.description = 得分系统.当前人员.description;
                 客观评估存档.isCreateReport = false;
                 客观评估存档.FormIntroduction = 当前量表.量表简介;
@@ -153,6 +154,7 @@ public class ObjectiveAssessmentStartPanel : MonoBehaviour, IController
                         break;
                     }
                 }
+                客观评估存档.createDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 this.SendCommand<AddEntryCommand>(new AddEntryCommand(客观评估存档, "ObjectiveAssessmentArchiveModel"));
                 //TODO: 显示结果
             }

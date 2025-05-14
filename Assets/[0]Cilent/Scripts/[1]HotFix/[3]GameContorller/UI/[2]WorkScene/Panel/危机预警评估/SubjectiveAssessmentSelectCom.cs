@@ -20,6 +20,7 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
     [SerializeField] private float 下方空白区域 = 10;
     void Start()
     {
+
         调级面板 = FindObjectOfType<SubjectiveAssessmentArchiveStartPanel3>().调级面板;
         AsyncInit().Forget();
         
@@ -33,7 +34,7 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
         等级滑动条pfb = await model.LoadPfb(等级滑动条PfbName);
         检查并设置已有选项的Toggle状态();
         toggleList.ForEach(toggle =>
-      {
+        {
 
           等级列表.Add(0);
           toggle.onValueChanged.AddListener(isOn =>
@@ -48,7 +49,7 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
                   清除调节选项(toggle);
               }
           });
-      });
+        });
     }
     void 检查并设置已有选项的Toggle状态()
     {
@@ -184,8 +185,8 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
         // 如果当前子物体数量小于等于初始数量，不进行刷新
         if (当前子物体数量 <= 初始子物体数量)
         {
-            return;
-        }
+            return; 
+        }    
         
         // 延迟一帧执行，确保Grid Layout Group有时间计算布局
         StartCoroutine(延迟刷新布局(滚动到底部));

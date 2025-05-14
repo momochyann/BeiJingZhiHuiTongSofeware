@@ -61,6 +61,7 @@ public class SubjectiveAssessmentArchive : ISubjectiveAssessmentArchive
     public string Interveners { get; set; }
     public string description { get; set; }
     public bool isCreateReport { get; set; }
+    public string createDate { get; set; }
     /// <summary>
     ///应激事件描述
     /// </summary>
@@ -116,11 +117,13 @@ public class ObjectiveAssessmentArchive : IObjectiveAssessmentArchive
     public string name { get; set; }
     public string gender { get; set; }
     public string category { get; set; }
+    public string scaleName { get; set; }
     public string Interveners { get; set; }
     public string description { get; set; }
     public bool isCreateReport { get; set; }
     public string FormIntroduction { get; set; }
     public string ScoreSituation { get; set; }
+    public string createDate { get; set; }
 }
 
 
@@ -154,9 +157,9 @@ public class ObjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<Objective
     // }
 }
 
-public class SubjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<ObjectiveAssessmentArchive>
+public class SubjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<SubjectiveAssessmentArchive>
 {
-    public List<ObjectiveAssessmentArchive> objectiveAssessmentArchives => dataList;
+    public List<SubjectiveAssessmentArchive> subjectiveAssessmentArchives => dataList;
     protected override string GetStorageKey()
     {
         return "ObjectiveAssessmentArchive";
@@ -164,9 +167,9 @@ public class SubjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<Objectiv
     protected override void OnInit()
     {
         base.OnInit();
-        foreach (var item in objectiveAssessmentArchives)
+        foreach (var item in subjectiveAssessmentArchives)
         {
-            Debug.Log("item.name: " + item.ScoreSituation);
+            // Debug.Log("item.name: " + item.ScoreSituation);
         }
     }
     // protected override List<int> OnSearchByName(string keyword)

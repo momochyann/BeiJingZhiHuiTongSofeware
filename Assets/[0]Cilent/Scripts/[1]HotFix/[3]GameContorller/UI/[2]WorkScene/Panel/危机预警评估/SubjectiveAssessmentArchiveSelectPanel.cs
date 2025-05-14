@@ -53,6 +53,12 @@ public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
         this.GetSystem<ObjectiveSelectSystem>().当前人员 = 当前人员;
         var subjectiveAssessmentArchive = new SubjectiveAssessmentArchive();
         this.GetSystem<ObjectiveSelectSystem>().当前主观评估 = subjectiveAssessmentArchive;
+        subjectiveAssessmentArchive.name = 当前人员.name;
+        subjectiveAssessmentArchive.gender = 当前人员.gender;
+        subjectiveAssessmentArchive.category = 当前人员.category;
+   
+        
+
         Destroy(gameObject.transform.parent.gameObject);
     }
     // Update is called once per frame

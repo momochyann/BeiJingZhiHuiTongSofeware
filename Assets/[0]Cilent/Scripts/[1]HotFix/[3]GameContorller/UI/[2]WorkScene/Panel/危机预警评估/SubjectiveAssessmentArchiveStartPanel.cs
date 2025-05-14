@@ -32,7 +32,7 @@ public class SubjectiveAssessmentArchiveStartPanel : MonoBehaviour, IController
     {
         var model = this.GetModel<YooAssetPfbModel>();
         var pfb = await model.LoadPfb("3-4-1-1-1评估页面2");
-        var subjectiveAssessmentStartPanel2 = Instantiate(pfb, transform.parent.parent);
+        var subjectiveAssessmentStartPanel2 = Instantiate(pfb, transform.parent);
         var 录入系统 = this.GetSystem<ObjectiveSelectSystem>();
         录入系统.当前主观评估.stressEventDescription = 描述输入框.text;
         录入系统.当前主观评估.personnelStateEvaluation = new PersonnelState();
