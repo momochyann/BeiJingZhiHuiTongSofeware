@@ -9,8 +9,9 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
     {
         RegisterSystem(new GetCan2ListModelByStringSystem());
         RegisterSystem(new SearchEntrySystem());
-         RegisterSystem(new ObjectiveSelectSystem());
-        RegisterUtility(new Storage());
+        RegisterSystem(new ObjectiveSelectSystem());
+        RegisterSystem(new InterventionSystem());
+
         RegisterModel(new PersonalPersonnelCrisisEventMessageModel());
         RegisterModel(new YooAssetPfbModel());
         RegisterModel(new GroupCrisisIncidentModel());
@@ -18,8 +19,11 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterModel(new ObjectiveAssessmentModel());
         RegisterModel(new ObjectiveAssessmentArchiveModel());
         RegisterModel(new SubjectiveAssessmentArchiveModel());
+        RegisterModel(new IndividualInterventionArchiveModel());
+
+        RegisterUtility(new Storage());
         RegisterUtility(new ExcelReader());
-       
+
     }
 
 }

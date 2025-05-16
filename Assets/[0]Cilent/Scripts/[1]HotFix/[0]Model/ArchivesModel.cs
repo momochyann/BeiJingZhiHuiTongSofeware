@@ -27,7 +27,7 @@ public interface IArchivesBase : ICan2List
     string gender { get; set; }
     string category { get; set; }
     string Interveners { get; set; }
-    string description { get; set; }
+    string FangAnName { get; set; }
     bool isCreateReport { get; set; }
 }
 
@@ -59,7 +59,7 @@ public class SubjectiveAssessmentArchive : ISubjectiveAssessmentArchive
     public string gender { get; set; }
     public string category { get; set; }
     public string Interveners { get; set; }
-    public string description { get; set; }
+    public string FangAnName { get; set; }
     public bool isCreateReport { get; set; }
     public string createDate { get; set; }
     /// <summary>
@@ -84,12 +84,13 @@ public class IndividualInterventionArchive : IIndividualInterventionArchive
     public string gender { get; set; }
     public string category { get; set; }
     public string Interveners { get; set; }
-    public string description { get; set; }
+    public string FangAnName { get; set; }
     public bool isCreateReport { get; set; }
     public string startDate { get; set; }
     public string endDate { get; set; }
     public string interventionDescription { get; set; }
     public string ScoreSituation { get; set; }
+    public string createDate { get; set; }
 }
 
 public interface IGroupInterventionArchive : IArchivesBase
@@ -119,7 +120,7 @@ public class ObjectiveAssessmentArchive : IObjectiveAssessmentArchive
     public string category { get; set; }
     public string scaleName { get; set; }
     public string Interveners { get; set; }
-    public string description { get; set; }
+    public string FangAnName { get; set; }
     public bool isCreateReport { get; set; }
     public string FormIntroduction { get; set; }
     public string ScoreSituation { get; set; }
@@ -157,12 +158,41 @@ public class ObjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<Objective
     // }
 }
 
+public class IndividualInterventionArchiveModel : CrisisIncidentBaseModel<IndividualInterventionArchive>
+{
+    public List<IndividualInterventionArchive> individualInterventionArchives => dataList;
+    protected override string GetStorageKey()
+    {
+        return "IndividualInterventionArchive";
+    }
+    protected override void OnInit()
+    {
+        base.OnInit();
+        foreach (var item in individualInterventionArchives)
+        {
+            // Debug.Log("item.name: " + item.ScoreSituation);
+        }
+    }
+    // protected override List<int> OnSearchByName(string keyword)
+    // {
+    //     List<int> indexList = new List<int>();
+    //     for (int i = 0; i < dataList.Count; i++)
+    //     {
+    //         if (dataList[i].incidentName.Contains(keyword))
+    //         {
+    //             indexList.Add(i);
+    //         }
+    //     }
+    //     return indexList;
+    // }
+}
+
 public class SubjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<SubjectiveAssessmentArchive>
 {
     public List<SubjectiveAssessmentArchive> subjectiveAssessmentArchives => dataList;
     protected override string GetStorageKey()
     {
-        return "ObjectiveAssessmentArchive";
+        return "SubjectiveAssessmentArchive";
     }
     protected override void OnInit()
     {
