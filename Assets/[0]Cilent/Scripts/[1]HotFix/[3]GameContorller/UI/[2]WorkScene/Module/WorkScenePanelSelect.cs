@@ -82,6 +82,24 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
         {
             if (选中栏目.panelObj != null)
             {
+                if(移动方向 == 提示移动方向.经)
+                {
+                    // 查找名为"界面生成节点物体"的游戏对象
+                    GameObject 界面生成节点 = GameObject.Find("界面生成节点");
+                    if (界面生成节点 != null)
+                    {
+                        // 删除该节点下的所有子物体
+                        for (int i = 界面生成节点.transform.childCount - 1; i >= 0; i--)
+                        {
+                            Destroy(界面生成节点.transform.GetChild(i).gameObject);
+                        }
+                        Debug.Log("已清空界面生成节点物体下的所有子物体");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("未找到名为'界面生成节点物体'的游戏对象");
+                    }
+                }
                 Instantiate(选中栏目.panelObj, 父节点.transform);
             }
             Animation(栏目列表.IndexOf(选中栏目)).Forget();
@@ -108,6 +126,7 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
         else if (移动方向 == 提示移动方向.经)
         {
             selectImageBack.transform.DOMoveY(栏目列表[index].button.transform.position.y, 0.3f);
+
         }
         触发动画?.Invoke(index);
     }
