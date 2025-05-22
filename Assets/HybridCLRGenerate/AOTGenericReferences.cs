@@ -71,9 +71,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SubjectiveAssessmentSelectCom.<AsyncInit>d__9>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<LoadPanel>d__3>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载提示>d__4>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载确认提示>d__5>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<LoadPanel>d__4>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载提示>d__6>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载确认提示>d__7>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<跳转界面>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkScenePanelSelect.<Animation>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkScenePanelSelect.<Init>d__8>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<ButtonChangeScene.<加载面板>d__5>
@@ -108,9 +109,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SubjectiveAssessmentSelectCom.<AsyncInit>d__9>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<LoadPanel>d__3>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载提示>d__4>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载确认提示>d__5>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<LoadPanel>d__4>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载提示>d__6>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载确认提示>d__7>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<跳转界面>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkScenePanelSelect.<Animation>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkScenePanelSelect.<Init>d__8>
 	// Cysharp.Threading.Tasks.CompilerServices.IStateMachineRunnerPromise<object>
@@ -340,7 +342,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,EntryDisPanelNew.<InitAsync>d__19>(Cysharp.Threading.Tasks.UniTask.Awaiter&,EntryDisPanelNew.<InitAsync>d__19&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,ObjectiveAssessmentSelectPanel.<Init>d__10>(Cysharp.Threading.Tasks.UniTask.Awaiter&,ObjectiveAssessmentSelectPanel.<Init>d__10&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,SelectBaseUI.<Animation>d__13>(Cysharp.Threading.Tasks.UniTask.Awaiter&,SelectBaseUI.<Animation>d__13&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,WorkSceneManager.<LoadPanel>d__3>(Cysharp.Threading.Tasks.UniTask.Awaiter&,WorkSceneManager.<LoadPanel>d__3&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,WorkSceneManager.<LoadPanel>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter&,WorkSceneManager.<LoadPanel>d__4&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,ButtonChangeScene.<加载面板>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,ButtonChangeScene.<加载面板>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,EntryDisPanelNew.<InitAsync>d__19>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,EntryDisPanelNew.<InitAsync>d__19&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,EntryEditorButton.<添加条目按钮监听>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,EntryEditorButton.<添加条目按钮监听>d__6&)
@@ -371,8 +373,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SubjectiveAssessmentArchiveStartPanel.<下一步>d__7&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SubjectiveAssessmentSelectCom.<AsyncInit>d__9>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SubjectiveAssessmentSelectCom.<AsyncInit>d__9&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载提示>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载提示>d__4&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载确认提示>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载确认提示>d__5&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载提示>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载提示>d__6&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载确认提示>d__7>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载确认提示>d__7&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<跳转界面>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<跳转界面>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkScenePanelSelect.<Init>d__8>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkScenePanelSelect.<Init>d__8&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.YieldAwaitable.Awaiter,WorkScenePanelSelect.<Animation>d__11>(Cysharp.Threading.Tasks.YieldAwaitable.Awaiter&,WorkScenePanelSelect.<Animation>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<ButtonChangeScene.<加载面板>d__5>(ButtonChangeScene.<加载面板>d__5&)
@@ -410,11 +413,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9>(SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>(SubjectiveAssessmentArchiveStartPanel.<下一步>d__7&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SubjectiveAssessmentSelectCom.<AsyncInit>d__9>(SubjectiveAssessmentSelectCom.<AsyncInit>d__9&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<LoadPanel>d__3>(WorkSceneManager.<LoadPanel>d__3&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载提示>d__4>(WorkSceneManager.<加载提示>d__4&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载确认提示>d__5>(WorkSceneManager.<加载确认提示>d__5&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<LoadPanel>d__4>(WorkSceneManager.<LoadPanel>d__4&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载提示>d__6>(WorkSceneManager.<加载提示>d__6&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载确认提示>d__7>(WorkSceneManager.<加载确认提示>d__7&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<跳转界面>d__5>(WorkSceneManager.<跳转界面>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkScenePanelSelect.<Animation>d__11>(WorkScenePanelSelect.<Animation>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkScenePanelSelect.<Init>d__8>(WorkScenePanelSelect.<Init>d__8&)
+		// object DG.Tweening.TweenExtensions.Pause<object>(object)
+		// object DG.Tweening.TweenExtensions.Play<object>(object)
 		// DG.Tweening.Core.TweenerCore<UnityEngine.Vector3,UnityEngine.Vector3,DG.Tweening.Plugins.Options.VectorOptions> DG.Tweening.TweenSettingsExtensions.From<UnityEngine.Vector3,UnityEngine.Vector3,DG.Tweening.Plugins.Options.VectorOptions>(DG.Tweening.Core.TweenerCore<UnityEngine.Vector3,UnityEngine.Vector3,DG.Tweening.Plugins.Options.VectorOptions>,UnityEngine.Vector3,bool,bool)
 		// DG.Tweening.Core.TweenerCore<float,float,DG.Tweening.Plugins.Options.FloatOptions> DG.Tweening.TweenSettingsExtensions.From<float,float,DG.Tweening.Plugins.Options.FloatOptions>(DG.Tweening.Core.TweenerCore<float,float,DG.Tweening.Plugins.Options.FloatOptions>,float,bool,bool)
 		// object DG.Tweening.TweenSettingsExtensions.OnComplete<object>(object,DG.Tweening.TweenCallback)

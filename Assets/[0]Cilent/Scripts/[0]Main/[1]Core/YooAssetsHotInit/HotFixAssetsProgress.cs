@@ -36,7 +36,7 @@ public class HotFixAssetsProgress : MonoBehaviour
         AddDynamicLoadingAnimation(DOTween.To(_value =>
             {
                 progressImage.fillAmount = _value;
-            }, _lastSetProgress, progress, 0.3f).SetEase(Ease.Linear), tipText);
+            }, _lastSetProgress, progress, 0.01f).SetEase(Ease.Linear), tipText);
         _lastSetProgress = progress;
     }
 
@@ -47,7 +47,7 @@ public class HotFixAssetsProgress : MonoBehaviour
         AddDynamicLoadingAnimation(DOTween.To(_value =>
             {
                 progressImage.fillAmount = _value;
-            }, _lastSetProgress, targetProgress, 0.5f).SetEase(Ease.Linear));
+            }, _lastSetProgress, targetProgress, 0.01f).SetEase(Ease.Linear));
         _lastSetProgress = targetProgress;
 
     }
@@ -62,7 +62,7 @@ public class HotFixAssetsProgress : MonoBehaviour
             AddDynamicLoadingAnimation(DOTween.To(_value =>
             {
                 progressImage.fillAmount = _value;
-            }, 0, 0.1f, 0.1f).SetEase(Ease.Linear), tipText);
+            }, 0, 0.1f, 0.01f).SetEase(Ease.Linear), tipText);
         }
         else
         {
@@ -71,7 +71,7 @@ public class HotFixAssetsProgress : MonoBehaviour
             AddDynamicLoadingAnimation(DOTween.To(_value =>
             {
                 progressImage.fillAmount = _value;
-            }, 0, 1f, 0.5f).SetEase(Ease.Linear), tipText);
+            }, 0, 1f, 0.3f).SetEase(Ease.Linear), tipText);
         }
     }
     void AddDynamicLoadingAnimation(Tweener tweener, string tipText = null)
