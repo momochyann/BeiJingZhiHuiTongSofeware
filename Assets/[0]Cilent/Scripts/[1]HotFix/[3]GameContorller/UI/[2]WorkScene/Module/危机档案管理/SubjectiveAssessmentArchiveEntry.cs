@@ -88,6 +88,7 @@ public class SubjectiveAssessmentArchiveEntry : MonoBehaviour, IController, IEnt
                         查看按钮.interactable = true;
                         // 或者禁用按钮
                         生成按钮.interactable = false;
+                        WorkSceneManager.Instance.加载提示("生成成功").Forget();
                     }
                 });
                 if (按钮文本 != null)
@@ -104,6 +105,7 @@ public class SubjectiveAssessmentArchiveEntry : MonoBehaviour, IController, IEnt
                         按钮文本.color = new Color(0.7f, 0.7f, 0.7f);
                         // 或者禁用按钮
                         生成按钮.interactable = false;
+
                     }
                 }
             }
@@ -115,7 +117,7 @@ public class SubjectiveAssessmentArchiveEntry : MonoBehaviour, IController, IEnt
                 {
                     if (EntryRawValue.isCreateReport)
                     {
-                        Debug.Log("查看按钮被点击");
+                        查看按钮监听().Forget();
                     }
                 });
                 // 如果报告已生成，启用查看按钮；否则禁用
@@ -130,7 +132,14 @@ public class SubjectiveAssessmentArchiveEntry : MonoBehaviour, IController, IEnt
             Debug.LogWarning("EntryRawValue 为空，无法显示数据");
         }
     }
-
+    async UniTaskVoid 查看按钮监听()
+    {
+        var model = this.GetModel<YooAssetPfbModel>();
+        var pfb = await model.LoadPfb("主观评估档案查看");
+        GameObject 界面生成节点 = GameObject.Find("界面生成节点");
+        Instantiate(pfb, 界面生成节点.transform).GetComponent<SubjectiveAssessmentArchiveDisPanel>().OpenPanel(EntryRawValue);
+        Destroy(gameObject);
+    }
     public bool IsChoose { get => chooseToggle.isOn; set => chooseToggle.isOn = value; }
     public ICan2List can2ListValue { get => _can2List; set => _can2List = value; }
     ICan2List _can2List;

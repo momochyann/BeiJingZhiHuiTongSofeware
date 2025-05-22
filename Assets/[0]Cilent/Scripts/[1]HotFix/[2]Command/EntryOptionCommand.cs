@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using UnityEngine.Events;
 public class EntryOptionCommand : AbstractCommand
 {
     protected override void OnExecute()
@@ -55,6 +57,7 @@ public class EditEntryCommand : AbstractCommand
         {
             model.EditItem(oldValue, newValue);
             Debug.Log("编辑" + entryModelName);
+        //    WorkSceneManager.Instance.加载提示("编辑成功");
         }
     }
 }
@@ -75,10 +78,17 @@ public class AddEntryCommand : AbstractCommand
         {
             model.AddItem(entry);
             Debug.Log("添加" + entryModelName);
+            WorkSceneManager.Instance.加载提示("添加成功");
         }
         else
         {
             Debug.LogError("找不到" + entryModelName);
         }
     }
+    // async UniTaskVoid 确认面板(string 提示文本内容, UnityAction 确认回调, string 跳转面板名称 = "")
+    // {
+    //     var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("确认提示弹窗");
+    //     var 确认提示弹窗 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<P_TipPanel>();
+    //     确认提示弹窗.显示面板(提示文本内容, 跳转面板名称, 确认回调);
+    // }
 }

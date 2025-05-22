@@ -11,6 +11,7 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
     [SerializeField] Button 开始评估按钮;
     [SerializeField] Button 情绪放松按钮;
     [SerializeField] Text 已选择人员;
+    [SerializeField] Text 干预者;
     [SerializeField] Button 人员确定按钮;
     PersonalPersonnelCrisisEventMessage 当前人员;
     EntryDisPanelNew entryDisPanel;
@@ -19,6 +20,7 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
         开始评估按钮.onClick.AddListener(开始评估按钮监听);
         人员确定按钮.onClick.AddListener(人员确定按钮监听);
         情绪放松按钮.onClick.AddListener(情绪放松按钮监听);
+        干预者.text = this.GetSystem<WorkSceneSystem>().干预者;
     }
 
     private async void 情绪放松按钮监听()
@@ -52,6 +54,7 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
                 PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
                 已选择人员.text = personalPersonnelCrisisEventMessage.name;
                 当前人员 = personalPersonnelCrisisEventMessage;
+                WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
                 return;
             }
         }
@@ -65,6 +68,10 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
         this.GetSystem<InterventionSystem>().当前人员 = 当前人员;
         var individualInterventionArchive = new IndividualInterventionArchive();
         this.GetSystem<InterventionSystem>().当前干预档案 = individualInterventionArchive;
+        this.GetSystem<InterventionSystem>().当前干预档案.name = 当前人员.name;
+        // this.GetSystem<InterventionSystem>().当前干预档案.createDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        this.GetSystem<InterventionSystem>().当前干预档案.startDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+       // this.GetSystem<InterventionSystem>().当前干预档案.endDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         Destroy(gameObject.transform.gameObject);
     }
     // Update is called once per frame

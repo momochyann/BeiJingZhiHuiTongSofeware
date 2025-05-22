@@ -106,56 +106,9 @@ public class ObjectiveAssessmentStartPanel : MonoBehaviour, IController
             }
             else
             {
-                var 客观评估存档 = new ObjectiveAssessmentArchive();
-                客观评估存档.name = 得分系统.当前人员.name;
-                客观评估存档.gender = 得分系统.当前人员.gender;
-                客观评估存档.category = 得分系统.当前人员.category;
-                客观评估存档.Interveners = 得分系统.当前干预人员;
-                客观评估存档.scaleName = 当前量表.量表名称;
-                // 客观评估存档.description = 得分系统.当前人员.description;
-                客观评估存档.isCreateReport = false;
-                客观评估存档.FormIntroduction = 当前量表.量表简介;
-                int 得分 = 0;
-                foreach (var item in 得分系统.当前量表得分)
-                {
-                    得分 += item;
-                }
-                var 记分题目 = 当前量表.记分规则.报告[0].记分题目;
-                if (记分题目[0] == 0)
-                {
-                    if (记分题目.Count == 1)
-                    {
-                        for (int i = 0; i < 得分系统.当前量表得分.Count; i++)
-                        {
-                            得分 += 得分系统.当前量表得分[i];
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 记分题目[1]; i < 记分题目[2]; i++)
-                        {
-                            得分 += 得分系统.当前量表得分[i];
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (var item in 记分题目)
-                    {
-                        得分 = 得分系统.当前量表得分[item];
-                    }
-                }
-
-                for (int i = 0; i < 当前量表.记分规则.报告[0].结果类别.Count; i++)
-                {
-                    if (得分 >= 当前量表.记分规则.报告[0].结果类别[i].数始 && 得分 <= 当前量表.记分规则.报告[0].结果类别[i].数至)
-                    {
-                        客观评估存档.ScoreSituation = 当前量表.记分规则.报告[0].结果类别[i].结果文案;
-                        break;
-                    }
-                }
-                客观评估存档.createDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                this.SendCommand<AddEntryCommand>(new AddEntryCommand(客观评估存档, "ObjectiveAssessmentArchiveModel"));
+                WorkSceneManager.Instance.加载提示("答题完成").Forget();
+                记录并保存结果();
+                跳转面板();
                 //TODO: 显示结果
             }
         }
@@ -164,7 +117,68 @@ public class ObjectiveAssessmentStartPanel : MonoBehaviour, IController
             //TODO: 提示未回答
         }
     }
+    async void 跳转面板()
+    {
+        var 跳转面板pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("危机评估预警界面");
+        var 界面生成节点 = GameObject.Find("界面生成节点").transform;
+        var 跳转面板 = Instantiate(跳转面板pfb, 界面生成节点.transform);
+        Destroy(gameObject);
+        //TODO: 显示结果
+    }
+    void 记录并保存结果()
+    {
+        var 客观评估存档 = new ObjectiveAssessmentArchive();
+        客观评估存档.name = 得分系统.当前人员.name;
+        客观评估存档.gender = 得分系统.当前人员.gender;
+        客观评估存档.category = 得分系统.当前人员.category;
+        客观评估存档.Interveners = 得分系统.当前干预人员;
+        客观评估存档.scaleName = 当前量表.量表名称;
+        // 客观评估存档.description = 得分系统.当前人员.description;
+        客观评估存档.isCreateReport = false;
+        客观评估存档.FormIntroduction = 当前量表.量表简介;
+        int 得分 = 0;
+        foreach (var item in 得分系统.当前量表得分)
+        {
+            得分 += item;
+        }
+        var 记分题目 = 当前量表.记分规则.报告[0].记分题目;
+        if (记分题目[0] == 0)
+        {
+            if (记分题目.Count == 1)
+            {
+                for (int i = 0; i < 得分系统.当前量表得分.Count; i++)
+                {
+                    得分 += 得分系统.当前量表得分[i];
+                }
+            }
+            else
+            {
+                for (int i = 记分题目[1]; i < 记分题目[2]; i++)
+                {
+                    得分 += 得分系统.当前量表得分[i];
+                }
+            }
+        }
+        else
+        {
+            foreach (var item in 记分题目)
+            {
+                得分 = 得分系统.当前量表得分[item];
+            }
+        }
 
+        for (int i = 0; i < 当前量表.记分规则.报告[0].结果类别.Count; i++)
+        {
+            if (得分 >= 当前量表.记分规则.报告[0].结果类别[i].数始 && 得分 <= 当前量表.记分规则.报告[0].结果类别[i].数至)
+            {
+                客观评估存档.ScoreSituation = 当前量表.记分规则.报告[0].结果类别[i].结果文案;
+                break;
+            }
+        }
+        客观评估存档.createDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        this.SendCommand<AddEntryCommand>(new AddEntryCommand(客观评估存档, "ObjectiveAssessmentArchiveModel"));
+    }
     private void OnButtonClick()
     {
         var button = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();

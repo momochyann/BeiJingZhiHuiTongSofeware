@@ -36,7 +36,8 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
     }
     protected override void OpenPanel()
     {
-        弹出页面.GetComponent<CanvasGroup>().DOFade(1, 0.3f).From(0);
+        //  弹出页面.GetComponent<CanvasGroup>().DOFade(1, 0.3f).From(0);
+        弹出页面.GetComponent<CanvasGroup>().alpha = 1;
         关闭按钮.onClick.AddListener(ClosePanel);
         初始化面板().Forget();
     }
@@ -77,8 +78,8 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
         GroupCrisisIncidentType groupCrisisIncidentType = new GroupCrisisIncidentType();
         if (事件类型选项.currentIndex == 0)
         {
-              groupCrisisIncidentType.CrisisIncidentTypeName = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型名称").GetComponent<Text>().text;
-              groupCrisisIncidentType.CrisisIncidentTypeDescription = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型描述").GetComponent<Text>().text;
+            groupCrisisIncidentType.CrisisIncidentTypeName = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型名称").GetComponent<Text>().text;
+            groupCrisisIncidentType.CrisisIncidentTypeDescription = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型描述").GetComponent<Text>().text;
         }
         else
         {
@@ -130,7 +131,7 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
             团体事件选项.transform.Find("类型描述").GetComponent<Text>().text = item.CrisisIncidentTypeDescription;
         }
         公共事件选项 = 公共危机事件面板.gameObject.AddComponent<ToggleColumn>();
-    
+
         公共危机事件面板.SetActive(false);
     }
 

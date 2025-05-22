@@ -13,7 +13,7 @@ public class ObjectiveSelectSystem : AbstractSystem
     protected override void OnInit()
     {
         当前题序 = 0;
-        当前量表 = this.GetModel<ObjectiveAssessmentModel>().GetObjectiveAssessments()[0];
+     //   当前量表 = this.GetModel<ObjectiveAssessmentModel>().GetObjectiveAssessments()[0];
         当前量表得分 = new List<int>();
         当前主观评估 = new SubjectiveAssessmentArchive();
     }

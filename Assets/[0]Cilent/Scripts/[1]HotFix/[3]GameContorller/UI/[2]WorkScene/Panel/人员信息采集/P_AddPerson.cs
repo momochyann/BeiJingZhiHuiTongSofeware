@@ -68,7 +68,7 @@ public class P_AddPerson : PopPanelBase
 
         if (性别选择.currentIndex == -1 || 状态选择.currentIndex == -1)
         {
-            Debug.LogError("性别或状态选择不能为空");
+            WorkSceneManager.Instance.加载提示("性别或状态选择不能为空").Forget();
             return false;
         }
         if (!System.DateTime.TryParseExact(
@@ -78,7 +78,7 @@ public class P_AddPerson : PopPanelBase
             System.Globalization.DateTimeStyles.None,
             out _))
         {
-            Debug.LogError("出生日期格式不正确或日期无效，请使用YYYY-MM-DD格式输入有效日期");
+            WorkSceneManager.Instance.加载提示("出生日期格式不正确或日期无效，请使用YYYY-MM-DD格式输入有效日期").Forget();
             return false;
         }
         return true;

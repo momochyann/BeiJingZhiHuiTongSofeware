@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
-public class GameStartAfterLoad : MonoBehaviour
+using QFramework;
+public class GameStartAfterLoad : MonoBehaviour, IController
 {
     // Start is called before the first frame update
 
@@ -16,10 +17,25 @@ public class GameStartAfterLoad : MonoBehaviour
         Debug.Log("GameHotedInit4");
         await WaitLoadAnimation(this.GetCancellationTokenOnDestroy());
         Debug.Log("加载数据完成22");
-        await UniTask.Delay(3000);
+        // 初始化ExcelReader
+        ExcelReader excelReader = this.GetUtility<ExcelReader>();
+        excelReader.Init();
+        excelReader.EnsureExcelDirectoryExists();
+        // 如果需要，生成清单文件
+        excelReader.GenerateExcelManifest();
+        this.GetModel<PersonalPersonnelCrisisEventMessageModel>();
+        await this.GetModel<YooAssetPfbModel>().LoadPfb("人员信息采集界面");
+        await this.GetModel<YooAssetPfbModel>().LoadPfb("危机评估预警界面");
+        await this.GetModel<YooAssetPfbModel>().LoadPfb("危机干预实施选择界面");
+        await this.GetModel<YooAssetPfbModel>().LoadPfb("危机档案管理选择界面");
+        await this.GetModel<YooAssetPfbModel>().LoadPfb("干预资源库面板");
+        await this.GetModel<YooAssetPfbModel>().LoadPfb("系统设置管理界面");
+        await UniTask.Delay(1000);
+
+
         // var HotUI = await LoadYooAssetsTool.LoadAsset<GameObject>("LoadNewGameVesion");
         // Instantiate(HotUI, FindObjectOfType<Canvas>().transform);
-        LoadYooAssetsTool.LoadSceneAsync("GameStartScene").Forget();
+        LoadYooAssetsTool.LoadSceneAsync("StartLoginScene").Forget();
     }
     async UniTask WaitLoadAnimation(CancellationToken cancellationToken)
     {
@@ -28,5 +44,9 @@ public class GameStartAfterLoad : MonoBehaviour
         {
             await UniTask.Delay(100, cancellationToken: cancellationToken);
         }
+    }
+    public IArchitecture GetArchitecture()
+    {
+        return HotFixTemplateArchitecture.Interface;
     }
 }

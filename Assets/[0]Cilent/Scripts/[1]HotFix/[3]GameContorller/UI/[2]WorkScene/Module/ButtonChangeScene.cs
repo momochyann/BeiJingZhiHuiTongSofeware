@@ -33,7 +33,7 @@ public class ButtonChangeScene : MonoBehaviour, IController
         // 如果没有指定生成父物体，默认使用Canvas
         if (生成父物体 == null)
         {
-            生成父物体 = transform.parent.parent;
+            生成父物体 = GameObject.Find("界面生成节点").transform;
         }
     }
 
@@ -42,7 +42,7 @@ public class ButtonChangeScene : MonoBehaviour, IController
         Debug.Log("加载面板");
         if (string.IsNullOrEmpty(面板名称))
         {
-            Debug.LogError("面板名称不能为空，请在Inspector中设置面板名称");
+           
             return;
         }
 

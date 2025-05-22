@@ -31,40 +31,17 @@ public class ExcelReader : IUtility
 
         try
         {
-            // 构建完整的文件路径
-            string filePath = Path.Combine(Application.streamingAssetsPath, excelFileName + ".xlsx");
+            // 修改这里：使用persistentDataPath而不是streamingAssetsPath
+            string filePath = Path.Combine(Application.persistentDataPath, "ExcelData", excelFileName + ".xlsx");
 
-            // 读取文件（使用UnityWebRequest适用于安卓平台）
-            byte[] fileData;
-
-            // 在安卓平台上使用UnityWebRequest
-            if (Application.platform == RuntimePlatform.Android)
+            // 读取文件（不再需要UnityWebRequest，因为persistentDataPath是可直接访问的）
+            if (!File.Exists(filePath))
             {
-                string uri = "file://" + filePath;
-                using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
-                {
-                    await webRequest.SendWebRequest();
-
-                    if (webRequest.result != UnityWebRequest.Result.Success)
-                    {
-                        Debug.LogError($"无法加载Excel文件: {webRequest.error}");
-                        return assessment;
-                    }
-
-                    fileData = webRequest.downloadHandler.data;
-                }
-            }
-            else // 在其他平台上直接读取文件
-            {
-                if (!File.Exists(filePath))
-                {
-                    Debug.LogError($"Excel文件不存在: {filePath}");
-                    return assessment;
-                }
-
-                fileData = await File.ReadAllBytesAsync(filePath);
+                Debug.LogError($"Excel文件不存在: {filePath}");
+                return assessment;
             }
 
+            byte[] fileData = await File.ReadAllBytesAsync(filePath);
             var stream = new MemoryStream(fileData);
 
             using (stream)
@@ -294,7 +271,7 @@ public class ExcelReader : IUtility
     }
 
     /// <summary>
-    /// 获取StreamingAssets目录下所有的xlsx文件
+    /// 获取持久化数据目录下所有的xlsx文件
     /// </summary>
     /// <returns>xlsx文件名列表（不含扩展名）</returns>
     async public UniTask<List<string>> GetAllExcelFilesAsync()
@@ -303,28 +280,29 @@ public class ExcelReader : IUtility
         
         try
         {
-            // 在安卓平台上使用UnityWebRequest
-            if (Application.platform == RuntimePlatform.Android)
+            // 修改这里：使用persistentDataPath
+            string excelDir = Path.Combine(Application.persistentDataPath, "ExcelData");
+            
+            // 确保目录存在
+            if (!Directory.Exists(excelDir))
             {
-                // 尝试读取文件清单（如果存在）
-                List<string> manifestFiles = await ReadFileManifestAsync();
-                if (manifestFiles.Count > 0)
-                {
-                    return manifestFiles;
-                }
-                
-                // 如果没有清单文件，尝试列出目录（注意：在Android上可能无法直接列出目录）
-                Debug.LogWarning("在Android平台上无法直接列出StreamingAssets目录，请使用文件清单方式");
+                Directory.CreateDirectory(excelDir);
+                return excelFiles; // 如果目录不存在，返回空列表
             }
-            else // 在其他平台上直接读取目录
+            
+            // 直接读取目录（在Android上也可以直接访问persistentDataPath）
+            string[] files = Directory.GetFiles(excelDir, "*.xlsx");
+            foreach (string file in files)
             {
-                string[] files = Directory.GetFiles(Application.streamingAssetsPath, "*.xlsx");
-                foreach (string file in files)
-                {
-                    // 提取文件名（不含路径和扩展名）
-                    string fileName = Path.GetFileNameWithoutExtension(file);
-                    excelFiles.Add(fileName);
-                }
+                // 提取文件名（不含路径和扩展名）
+                string fileName = Path.GetFileNameWithoutExtension(file);
+                excelFiles.Add(fileName);
+            }
+            
+            // 如果没有找到文件，尝试读取清单
+            if (excelFiles.Count == 0)
+            {
+                excelFiles = await ReadFileManifestAsync();
             }
         }
         catch (Exception e)
@@ -346,66 +324,31 @@ public class ExcelReader : IUtility
         
         try
         {
-            string manifestPath = Path.Combine(Application.streamingAssetsPath, manifestFileName);
+            // 修改这里：使用persistentDataPath
+            string manifestPath = Path.Combine(Application.persistentDataPath, "ExcelData", manifestFileName);
             
-            // 在安卓平台上使用UnityWebRequest
-            if (Application.platform == RuntimePlatform.Android)
+            if (File.Exists(manifestPath))
             {
-                string uri = "file://" + manifestPath;
-                using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+                string[] lines = await File.ReadAllLinesAsync(manifestPath);
+                
+                foreach (string line in lines)
                 {
-                    await webRequest.SendWebRequest();
-                    
-                    if (webRequest.result != UnityWebRequest.Result.Success)
+                    string trimmedLine = line.Trim();
+                    if (!string.IsNullOrEmpty(trimmedLine))
                     {
-                        Debug.LogWarning($"无法加载清单文件: {webRequest.error}");
-                        return fileList;
-                    }
-                    
-                    string content = webRequest.downloadHandler.text;
-                    string[] lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                    
-                    foreach (string line in lines)
-                    {
-                        string trimmedLine = line.Trim();
-                        if (!string.IsNullOrEmpty(trimmedLine))
+                        // 如果文件名包含扩展名，则移除
+                        string fileName = trimmedLine;
+                        if (fileName.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase))
                         {
-                            // 如果文件名包含扩展名，则移除
-                            string fileName = trimmedLine;
-                            if (fileName.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase))
-                            {
-                                fileName = fileName.Substring(0, fileName.Length - 5);
-                            }
-                            fileList.Add(fileName);
+                            fileName = fileName.Substring(0, fileName.Length - 5);
                         }
+                        fileList.Add(fileName);
                     }
                 }
             }
-            else // 在其他平台上直接读取文件
+            else
             {
-                if (File.Exists(manifestPath))
-                {
-                    string[] lines = await File.ReadAllLinesAsync(manifestPath);
-                    
-                    foreach (string line in lines)
-                    {
-                        string trimmedLine = line.Trim();
-                        if (!string.IsNullOrEmpty(trimmedLine))
-                        {
-                            // 如果文件名包含扩展名，则移除
-                            string fileName = trimmedLine;
-                            if (fileName.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase))
-                            {
-                                fileName = fileName.Substring(0, fileName.Length - 5);
-                            }
-                            fileList.Add(fileName);
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning($"清单文件不存在: {manifestPath}");
-                }
+                Debug.LogWarning($"清单文件不存在: {manifestPath}");
             }
         }
         catch (Exception e)
@@ -414,5 +357,61 @@ public class ExcelReader : IUtility
         }
         
         return fileList;
+    }
+
+    /// <summary>
+    /// 生成Excel文件清单
+    /// </summary>
+    public void GenerateExcelManifest()
+    {
+        try
+        {
+            string excelDir = Path.Combine(Application.persistentDataPath, "ExcelData");
+            
+            // 确保目录存在
+            if (!Directory.Exists(excelDir))
+            {
+                Debug.LogWarning($"Excel目录不存在: {excelDir}");
+                return;
+            }
+            
+            // 获取所有Excel文件
+            string[] files = Directory.GetFiles(excelDir, "*.xlsx");
+            
+            // 创建清单文件
+            string manifestPath = Path.Combine(excelDir, "ExcelManifest.txt");
+            using (StreamWriter writer = new StreamWriter(manifestPath))
+            {
+                foreach (string file in files)
+                {
+                    // 只写入文件名（包含扩展名）
+                    writer.WriteLine(Path.GetFileName(file));
+                }
+            }
+            
+            Debug.Log($"Excel清单文件已生成: {manifestPath}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"生成Excel清单文件时发生错误: {e.Message}\n{e.StackTrace}");
+        }
+    }
+
+    /// <summary>
+    /// 确保Excel目录存在并初始化
+    /// </summary>
+    public void EnsureExcelDirectoryExists()
+    {
+        string excelDir = Path.Combine(Application.persistentDataPath, "ExcelData");
+        
+        // 确保目录存在
+        if (!Directory.Exists(excelDir))
+        {
+            Directory.CreateDirectory(excelDir);
+            Debug.Log($"已创建Excel目录: {excelDir}");
+        }
+        
+        // 输出目录路径，方便在设备上查找
+        Debug.Log($"Excel文件应放置在: {excelDir}");
     }
 }

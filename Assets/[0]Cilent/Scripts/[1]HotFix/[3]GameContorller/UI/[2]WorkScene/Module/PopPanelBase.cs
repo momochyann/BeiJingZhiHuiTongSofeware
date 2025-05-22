@@ -59,7 +59,7 @@ public class PopPanelBase : MonoBehaviour, IController
                 {
                     if (string.IsNullOrEmpty(inputField.text))
                     {
-                        Debug.LogError(特性.错误提示);
+                        验证失败处理(特性.错误提示);
                         return false;
                     }
                 }
@@ -67,6 +67,10 @@ public class PopPanelBase : MonoBehaviour, IController
         }
 
         return true;
+    }
+    protected virtual void 验证失败处理(string 错误提示)
+    {
+        WorkSceneManager.Instance.加载提示(错误提示).Forget();
     }
     protected virtual void OpenPanel()
     {

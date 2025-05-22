@@ -2,83 +2,127 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Text.RegularExpressions;
-
-public class LoginPanel : MonoBehaviour
+using UnityEngine.EventSystems;
+using QFramework;
+using Ricimi;
+public class LoginPanel : MonoBehaviour, IController
 {
     [Header("UI引用")]
-    [SerializeField] private Button _loginButton;
-    [SerializeField] private Button _forgetPasswordButton;
-    [SerializeField] private InputField _accountInputField;
-    [SerializeField] private InputField _passwordInputField;
-    [SerializeField] private Toggle _rememberPasswordToggle;
-    [SerializeField] private Text _errorMessageText;
-    
-    [Header("配置")]
-    [SerializeField] private float _loginCooldownTime = 1f;
-    
-    private bool _isLoggingIn = false;
+    [SerializeField] private Button loginButton;
+    [SerializeField] private Button forgetPasswordButton;
+    [SerializeField] private InputField accountInputField;
+    [SerializeField] private InputField passwordInputField;
+    [SerializeField] private Toggle rememberPasswordToggle;
+    [SerializeField] private Text errorMessageText;
+
+    private bool isLoggingIn = false;
     private const string ACCOUNT_PREFS_KEY = "SavedAccountName";
     private const string PASSWORD_PREFS_KEY = "SavedPassword";
     private const string REMEMBER_PREFS_KEY = "RememberPassword";
-    
-    // 本地账户数据 - 实际项目中可能会使用加密存储或其他安全方式
-    [System.Serializable]
-    private class UserAccount
-    {
-        public string username;
-        public string password;
-    }
-    
-    // 示例用户数据 - 实际项目中应该从配置文件或数据库加载
-    private UserAccount[] _localAccounts = new UserAccount[]
-    {
-        new UserAccount { username = "admin", password = "admin123" },
-        new UserAccount { username = "user", password = "user123" }
-    };
-    
+
     void Start()
     {
         InitializeUI();
         LoadSavedCredentials();
+
+        // 初始化时隐藏所有Gradient
+        ToggleAllGradients(accountInputField.gameObject, false);
+        ToggleAllGradients(passwordInputField.gameObject, false);
+        passwordInputField.contentType = InputField.ContentType.Password;
+        // 添加输入框焦点事件监听
+        SetupInputFieldFocusEvents();
+
     }
-    
+
     private void InitializeUI()
     {
-        _loginButton.onClick.AddListener(OnLoginButtonClick);
-        _forgetPasswordButton.onClick.AddListener(OnForgetPasswordButtonClick);
-        
+        loginButton.onClick.AddListener(OnLoginButtonClick);
+        forgetPasswordButton.onClick.AddListener(OnForgetPasswordButtonClick);
+
         // 添加输入验证
-        _accountInputField.onValueChanged.AddListener(OnAccountInputChanged);
-        _passwordInputField.onValueChanged.AddListener(OnPasswordInputChanged);
-        
+        accountInputField.onValueChanged.AddListener(_ => ValidateInput());
+        passwordInputField.onValueChanged.AddListener(_ => ValidateInput());
+
         // 初始状态
-        if (_errorMessageText != null)
-            _errorMessageText.gameObject.SetActive(false);
+        if (errorMessageText != null)
+            errorMessageText.gameObject.SetActive(false);
     }
-    
+
+    // 设置输入框焦点事件
+    private void SetupInputFieldFocusEvents()
+    {
+        // 使用Update方法检查焦点状态
+
+        StartCoroutine(CheckInputFieldFocus());
+    }
+
+    // 检查输入框焦点状态的协程
+    private IEnumerator CheckInputFieldFocus()
+    {
+        while (true)
+        {
+            // Debug.Log(accountInputField.isFocused);
+            // 检查账号输入框是否有焦点
+            if (accountInputField.isFocused)
+            {
+                ToggleAllGradients(accountInputField.gameObject, true);
+                ToggleAllGradients(passwordInputField.gameObject, false);
+            }
+            // 检查密码输入框是否有焦点
+            else if (passwordInputField.isFocused)
+            {
+                ToggleAllGradients(passwordInputField.gameObject, true);
+                ToggleAllGradients(accountInputField.gameObject, false);
+            }
+            // 如果两个输入框都没有焦点
+            else
+            {
+                ToggleAllGradients(accountInputField.gameObject, false);
+                ToggleAllGradients(passwordInputField.gameObject, false);
+            }
+
+            // 等待一小段时间再检查
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    // 切换物体及其子物体上的所有Gradient组件的显示状态
+    private void ToggleAllGradients(GameObject targetObject, bool isEnabled)
+    {
+        // Debug.Log("ToggleAllGradients: " + targetObject.name + " " + isEnabled);
+        // 获取目标物体上的所有Gradient组件
+        Ricimi.Gradient[] gradients = targetObject.GetComponents<Ricimi.Gradient>();
+        foreach (var gradient in gradients)
+        {
+            gradient.enabled = isEnabled;
+        }
+
+        // 获取子物体上的所有Gradient组件
+        Ricimi.Gradient[] childGradients = targetObject.GetComponentsInChildren<Ricimi.Gradient>(true);
+        foreach (var gradient in childGradients)
+        {
+            gradient.enabled = isEnabled;
+        }
+    }
+
     private void LoadSavedCredentials()
     {
         if (PlayerPrefs.HasKey(REMEMBER_PREFS_KEY) && PlayerPrefs.GetInt(REMEMBER_PREFS_KEY) == 1)
         {
-            _rememberPasswordToggle.isOn = true;
-            _accountInputField.text = PlayerPrefs.GetString(ACCOUNT_PREFS_KEY, "");
-            _passwordInputField.text = PlayerPrefs.GetString(PASSWORD_PREFS_KEY, "");
-        }
-        else
-        {
-            _rememberPasswordToggle.isOn = false;
-            _accountInputField.text = "";
-            _passwordInputField.text = "";
+            rememberPasswordToggle.isOn = true;
+            accountInputField.text = PlayerPrefs.GetString(ACCOUNT_PREFS_KEY, "");
+            passwordInputField.text = PlayerPrefs.GetString(PASSWORD_PREFS_KEY, "");
+            passwordInputField.ActivateInputField();
+              passwordInputField.ForceLabelUpdate();
         }
     }
-    
+
     private void SaveCredentials()
     {
-        if (_rememberPasswordToggle.isOn)
+        if (rememberPasswordToggle.isOn)
         {
-            PlayerPrefs.SetString(ACCOUNT_PREFS_KEY, _accountInputField.text);
-            PlayerPrefs.SetString(PASSWORD_PREFS_KEY, _passwordInputField.text);
+            PlayerPrefs.SetString(ACCOUNT_PREFS_KEY, accountInputField.text);
+            PlayerPrefs.SetString(PASSWORD_PREFS_KEY, passwordInputField.text);
             PlayerPrefs.SetInt(REMEMBER_PREFS_KEY, 1);
         }
         else
@@ -88,44 +132,34 @@ public class LoginPanel : MonoBehaviour
         }
         PlayerPrefs.Save();
     }
-    
-    private void OnAccountInputChanged(string value)
-    {
-        ValidateInput();
-    }
-    
-    private void OnPasswordInputChanged(string value)
-    {
-        ValidateInput();
-    }
-    
+
     private void ValidateInput()
     {
-        bool isValid = !string.IsNullOrEmpty(_accountInputField.text) && 
-                      !string.IsNullOrEmpty(_passwordInputField.text);
-        
-        _loginButton.interactable = isValid;
-        
-        if (_errorMessageText != null)
-            _errorMessageText.gameObject.SetActive(false);
+        bool isValid = !string.IsNullOrEmpty(accountInputField.text) &&
+                      !string.IsNullOrEmpty(passwordInputField.text);
+
+        loginButton.interactable = isValid;
+
+        if (errorMessageText != null)
+            errorMessageText.gameObject.SetActive(false);
     }
-    
+
     private void OnLoginButtonClick()
     {
-        if (_isLoggingIn)
+        if (isLoggingIn)
             return;
-        
-        _isLoggingIn = true;
-        _loginButton.interactable = false;
-        
+
+        isLoggingIn = true;
+        loginButton.interactable = false;
+
         try
         {
-            string account = _accountInputField.text;
-            string password = _passwordInputField.text;
-            
-            // 本地验证账号密码
-            bool loginSuccess = ValidateLocalLogin(account, password);
-            
+            string account = accountInputField.text;
+            string password = passwordInputField.text;
+
+            // 验证账号密码
+            bool loginSuccess = ValidateLogin(account, password);
+
             if (loginSuccess)
             {
                 SaveCredentials();
@@ -143,109 +177,93 @@ public class LoginPanel : MonoBehaviour
         }
         finally
         {
-            _loginButton.interactable = true;
+            loginButton.interactable = true;
             StartCoroutine(LoginCooldown());
         }
     }
-    
+
     private IEnumerator LoginCooldown()
     {
-        yield return new WaitForSeconds(_loginCooldownTime);
-        _isLoggingIn = false;
+        yield return new WaitForSeconds(1f);
+        isLoggingIn = false;
     }
-    
-    private bool ValidateLocalLogin(string account, string password)
+
+    private bool ValidateLogin(string account, string password)
     {
-        // 方法1: 使用预设的账号列表验证
-        foreach (var user in _localAccounts)
+        // 从IntervenersModel获取干预人员列表
+        var model = this.GetModel<IntervenersModel>();
+
+        // 如果模型中有数据，则遍历验证
+        if (model != null && model.intervenerList != null && model.intervenerList.Count > 0)
         {
-            if (user.username == account && user.password == password)
-                return true;
-        }
-        
-        // 方法2: 使用PlayerPrefs存储的注册账号验证
-        // 如果你的应用允许用户注册，可以使用这种方式
-        string savedPassword = PlayerPrefs.GetString($"User_{account}_Password", null);
-        if (!string.IsNullOrEmpty(savedPassword) && savedPassword == password)
-            return true;
-            
-        // 方法3: 开发阶段可以添加万能密码
-        #if UNITY_EDITOR
-        if (password == "dev123456")
-            return true;
-        #endif
-        
-        return false;
-    }
-    
-    private void ShowErrorMessage(string message)
-    {
-        if (_errorMessageText != null)
-        {
-            _errorMessageText.text = message;
-            _errorMessageText.gameObject.SetActive(true);
+            foreach (var intervener in model.intervenerList)
+            {
+                if (intervener.用户名 == account && intervener.密码 == password)
+                {
+                    this.GetSystem<WorkSceneSystem>().干预者 = intervener.name;
+                    return true;
+                }
+            }
         }
         else
         {
-            Debug.LogWarning(message);
+            // 如果没有数据，使用默认账号密码
+            if (account == "admin" && password == "123456")
+                return true;
+        }
+
+        return false;
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        if (errorMessageText != null)
+        {
+            errorMessageText.text = message;
+            errorMessageText.gameObject.SetActive(true);
         }
     }
-    
+
     private void OnLoginSuccess()
     {
-        Debug.Log($"登录成功: {_accountInputField.text}");
-        
+        Debug.Log($"登录成功: {accountInputField.text}");
+
         // 保存当前登录用户信息
-        PlayerPrefs.SetString("CurrentUser", _accountInputField.text);
+        PlayerPrefs.SetString("CurrentUser", accountInputField.text);
         PlayerPrefs.Save();
-        
-        // 这里应该跳转到游戏主界面或下一个场景
-        // SceneManager.LoadScene("MainMenu");
-        // 或者
-        // UIManager.Instance.ShowPanel<MainMenuPanel>();
-        // GameManager.Instance.OnUserLoggedIn(_accountInputField.text);
+        LoadYooAssetsTool.LoadSceneAsync("MainChooseScene");
+        // 这里添加登录成功后的逻辑，例如加载主场景
+        // SceneManager.LoadScene("MainScene");
     }
-    
+
     private void OnForgetPasswordButtonClick()
     {
         Debug.Log("打开忘记密码界面");
-        // 本地登录的忘记密码可以实现为重置密码功能
-        // UIManager.Instance.ShowPanel<ResetPasswordPanel>();
+        // 可以在这里添加忘记密码的逻辑
     }
-    
-    // 可选：添加注册新用户功能
-    public void OnRegisterButtonClick()
-    {
-        string newUsername = _accountInputField.text;
-        string newPassword = _passwordInputField.text;
-        
-        // 检查用户名是否已存在
-        if (PlayerPrefs.HasKey($"User_{newUsername}_Password"))
-        {
-            ShowErrorMessage("该用户名已被注册");
-            return;
-        }
-        
-        // 保存新用户
-        PlayerPrefs.SetString($"User_{newUsername}_Password", newPassword);
-        PlayerPrefs.Save();
-        
-        ShowErrorMessage("注册成功，请登录");
-    }
-    
+
     private void OnDestroy()
     {
-        // 清理事件监听，防止内存泄漏
-        if (_loginButton != null)
-            _loginButton.onClick.RemoveAllListeners();
-            
-        if (_forgetPasswordButton != null)
-            _forgetPasswordButton.onClick.RemoveAllListeners();
-            
-        if (_accountInputField != null)
-            _accountInputField.onValueChanged.RemoveAllListeners();
-            
-        if (_passwordInputField != null)
-            _passwordInputField.onValueChanged.RemoveAllListeners();
+        // 清理事件监听
+        if (loginButton != null)
+            loginButton.onClick.RemoveAllListeners();
+
+        if (forgetPasswordButton != null)
+            forgetPasswordButton.onClick.RemoveAllListeners();
+
+        if (accountInputField != null)
+        {
+            accountInputField.onValueChanged.RemoveAllListeners();
+        }
+
+        if (passwordInputField != null)
+        {
+            passwordInputField.onValueChanged.RemoveAllListeners();
+        }
+    }
+
+    public IArchitecture GetArchitecture()
+    {
+        return HotFixTemplateArchitecture.Interface;
     }
 }

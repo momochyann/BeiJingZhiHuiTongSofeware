@@ -42,7 +42,22 @@ public class ObjectiveAssessmentModel : CrisisIncidentBaseModel<ObjectiveAssessm
     async UniTaskVoid LoadObjectiveAssessmentData()
     {
         var excelReader = this.GetUtility<ExcelReader>();
-        var excelFiles = await excelReader.ReadFileManifestAsync();
+        
+        // 确保Excel目录存在
+        excelReader.EnsureExcelDirectoryExists();
+        
+        // 尝试生成清单文件
+        excelReader.GenerateExcelManifest();
+        
+        // 优先使用GetAllExcelFilesAsync而不是ReadFileManifestAsync
+        var excelFiles = await excelReader.GetAllExcelFilesAsync();
+        
+        // 如果没有找到文件，再尝试读取清单
+        if (excelFiles.Count == 0)
+        {
+            excelFiles = await excelReader.ReadFileManifestAsync();
+        }
+        
         ScaleScoringConfig scaleScoringConfig = await LoadYooAssetsTool.LoadAsset<ScaleScoringConfig>("ScaleScoringConfig");
         Debug.Log("excelFiles.Count: " + excelFiles.Count);
         foreach (var fileName in excelFiles)

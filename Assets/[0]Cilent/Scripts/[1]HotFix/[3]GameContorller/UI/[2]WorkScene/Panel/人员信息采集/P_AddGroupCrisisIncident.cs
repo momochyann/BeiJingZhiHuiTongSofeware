@@ -14,9 +14,9 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     InputField 事件名称框;
     [必填InputField("发生时间不能为空")]
     InputField 发生时间框;
-
+    [必填InputField("发生地点不能为空")]
     InputField 发生地点框;
-
+    [必填InputField("事件描述不能为空")]
     InputField 事件描述框;
     [SerializeField] Image 相关素材图片;
     Button 下一步按钮;

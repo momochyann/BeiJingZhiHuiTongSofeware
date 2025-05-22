@@ -37,7 +37,7 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
         await UniTask.Delay(10);
         entryDisPanels = FindObjectsOfType<EntryDisPanelNew>();
         Debug.Log("entryDisPanel.count: " + entryDisPanels.Length);
-
+        主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者;
     }
     void 开始评估按钮监听()
     {
@@ -80,6 +80,7 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
                     PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
                     已选择人员.text = personalPersonnelCrisisEventMessage.name;
                     当前人员 = personalPersonnelCrisisEventMessage;
+                    WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
                     return;
                 }
             }
@@ -101,6 +102,7 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
                     ObjectiveAssessment objectiveAssessment = entry.can2ListValue as ObjectiveAssessment;
                     已选择量表.text = objectiveAssessment.量表名称;
                     当前量表 = objectiveAssessment;
+                    WorkSceneManager.Instance.加载提示("量表选择成功").Forget();
                     return;
                 }
             }

@@ -13,9 +13,11 @@ public class P_AddGroupPersonMessage : PopPanelBase
     InputField 姓名输入框;
     [必填InputField("部门不能为空")]
     InputField 部门输入框;
-    [必填InputField("出生日期不能为空")]
+    [必填InputField("接触时间不能为空")]
     InputField 接触时间框;
+  
     InputField 备注输入框;
+    [必填InputField("事件描述不能为空")]
     InputField 事件描述输入框;
     ToggleColumn 性别选择;
     [SerializeField] Dropdown 团体事件选择下拉框;

@@ -9,6 +9,7 @@ public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
     // Start is called before the first frame update
     [SerializeField] Button 开始评估按钮;
     [SerializeField] Text 已选择人员;
+    [SerializeField] Text 主干预老师;
     [SerializeField] Button 人员确定按钮;
     PersonalPersonnelCrisisEventMessage 当前人员;
     EntryDisPanelNew entryDisPanel;
@@ -16,6 +17,7 @@ public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
     {
         开始评估按钮.onClick.AddListener(开始评估按钮监听);
         人员确定按钮.onClick.AddListener(人员确定按钮监听);
+        主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者;
     }
     void 开始评估按钮监听()
     {
@@ -40,6 +42,7 @@ public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
                 PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
                 已选择人员.text = personalPersonnelCrisisEventMessage.name;
                 当前人员 = personalPersonnelCrisisEventMessage;
+                WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
                 return;
             }
         }

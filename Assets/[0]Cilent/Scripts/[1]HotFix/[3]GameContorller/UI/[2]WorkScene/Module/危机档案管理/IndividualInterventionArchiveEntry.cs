@@ -93,6 +93,7 @@ public class IndividualInterventionArchiveEntry : MonoBehaviour, IController, IE
                         查看按钮.interactable = true;
                         // 或者禁用按钮
                         生成按钮.interactable = false;
+                        WorkSceneManager.Instance.加载提示("生成成功").Forget();
                     }
                 });
                 if (按钮文本 != null)
@@ -120,7 +121,7 @@ public class IndividualInterventionArchiveEntry : MonoBehaviour, IController, IE
                 {
                     if (EntryRawValue.isCreateReport)
                     {
-                        Debug.Log("查看按钮被点击");
+                        查看按钮监听().Forget();
                     }
                 });
                 // 如果报告已生成，启用查看按钮；否则禁用
@@ -134,8 +135,16 @@ public class IndividualInterventionArchiveEntry : MonoBehaviour, IController, IE
         {
             Debug.LogWarning("EntryRawValue 为空，无法显示数据");
         }
+        
     }
-
+    async UniTaskVoid 查看按钮监听()
+    {
+        var model = this.GetModel<YooAssetPfbModel>();
+        var pfb = await model.LoadPfb("个体干预查看");
+        GameObject 界面生成节点 = GameObject.Find("界面生成节点");
+        Instantiate(pfb, 界面生成节点.transform).GetComponent<IndividualInterventionDisPanel>().OpenPanel(EntryRawValue);
+        Destroy(gameObject);
+    }
     public bool IsChoose { get => chooseToggle.isOn; set => chooseToggle.isOn = value; }
     public ICan2List can2ListValue { get => _can2List; set => _can2List = value; }
     ICan2List _can2List;

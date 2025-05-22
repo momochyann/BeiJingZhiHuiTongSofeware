@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
+using NPOI.SS.Formula.Functions;
 public class SupplementaryMetadata : MonoBehaviour
 {
     //AOT载入Hot后第一时间进行元数据的补充
@@ -21,7 +22,10 @@ public class SupplementaryMetadata : MonoBehaviour
             "QFramework.Core.dll",
             "DOTween.dll",
             "UnityEngine.CoreModule.dll",
-            "UniTask.Linq.dll"
+            "UniTask.Linq.dll",
+            "EasySave3.dll",
+            "LitJson.dll",
+            "DOTween.Modules.dll",
         };
     private void Awake()
     {
@@ -38,8 +42,10 @@ public class SupplementaryMetadata : MonoBehaviour
         progress.PlaySupplementaryMetadataStartAnimation();
         foreach (var aotDllName in aotMetaAssemblyFiles)
         {
-            var dllBytes = await LoadYooAssetsTool.LoadRawFile_DP(aotDllName);
-            LoadImageErrorCode err = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, mode);
+            Debug.Log("LoadMetadataForAOTAssemblies: " + aotDllName);
+         //   var dllBytes = await LoadYooAssetsTool.LoadAsset<GameObject>(aotDllName,true);
+             var dllBytes = await LoadYooAssetsTool.LoadRawFile_DP(aotDllName,true);
+         //   LoadImageErrorCode err = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, mode);
             progress.PlaySupplementaryMetadataLoadingAnimation(++currentCount / (float)totalCount);
         }
         Debug.Log("LoadDLL");
