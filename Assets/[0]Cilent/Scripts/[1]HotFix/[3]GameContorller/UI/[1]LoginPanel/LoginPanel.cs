@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using QFramework;
-using Ricimi;
+
 public class LoginPanel : MonoBehaviour, IController
 {
     [Header("UI引用")]

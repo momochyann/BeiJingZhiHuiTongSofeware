@@ -1,13 +1,21 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Collections.Generic;
 
 public class RenameUI : EditorWindow
 {
-    private string targetFolder = "Assets/";
-    private string suffix = "_PC";
-    private bool includeSubfolders = true;
-    private bool isRemoveSuffix = false;
+    [System.Serializable]
+    public class FolderConfig
+    {
+        public string targetFolder = "Assets/";
+        public string suffix = "_PC";
+        public bool includeSubfolders = true;
+        public bool isRemoveSuffix = false;
+    }
+
+    private List<FolderConfig> folderConfigs = new List<FolderConfig>();
+    private Vector2 scrollPosition;
 
     public enum TestPlatform
     {
@@ -24,8 +32,40 @@ public class RenameUI : EditorWindow
 
     void OnEnable()
     {
-        // 加载保存的平台设置
+        LoadConfigs();
         currentPlatform = (TestPlatform)EditorPrefs.GetInt("TestPlatform", 0);
+    }
+
+    void OnDisable()
+    {
+        SaveConfigs();
+    }
+
+    void LoadConfigs()
+    {
+        string json = EditorPrefs.GetString("UIToolConfigs", "");
+        if (!string.IsNullOrEmpty(json))
+        {
+            folderConfigs = JsonUtility.FromJson<Wrapper>("{\"configs\":" + json + "}").configs;
+        }
+        
+        if (folderConfigs.Count == 0)
+        {
+            folderConfigs.Add(new FolderConfig());
+        }
+    }
+
+    void SaveConfigs()
+    {
+        string json = JsonUtility.ToJson(new Wrapper { configs = folderConfigs });
+        json = json.Substring(11, json.Length - 12); // 移除包装器
+        EditorPrefs.SetString("UIToolConfigs", json);
+    }
+
+    [System.Serializable]
+    private class Wrapper
+    {
+        public List<FolderConfig> configs;
     }
 
     void OnGUI()
@@ -40,92 +80,117 @@ public class RenameUI : EditorWindow
             EditorPrefs.SetInt("TestPlatform", (int)currentPlatform);
         }
 
-        // UI重命名部分
+        // 文件夹配置部分
         EditorGUILayout.Space(20);
         GUILayout.Label("UI预制体批量重命名工具", EditorStyles.boldLabel);
-        
-        targetFolder = EditorGUILayout.TextField("目标文件夹:", targetFolder);
-        if (GUILayout.Button("选择文件夹"))
+
+        // 开始滚动视图
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(position.height - 200));
+
+        for (int i = 0; i < folderConfigs.Count; i++)
         {
-            string folder = EditorUtility.OpenFolderPanel("选择预制体所在文件夹", "Assets", "");
-            if (!string.IsNullOrEmpty(folder))
+            EditorGUILayout.BeginVertical("box");
+            
+            var config = folderConfigs[i];
+            
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label($"文件夹配置 {i + 1}");
+            if (GUILayout.Button("删除配置", GUILayout.Width(80)))
             {
-                // 转换为相对路径
-                targetFolder = "Assets" + folder.Substring(Application.dataPath.Length);
+                folderConfigs.RemoveAt(i);
+                SaveConfigs();
+                break;
             }
-        }
-        
-        suffix = EditorGUILayout.TextField("后缀:", suffix);
-        includeSubfolders = EditorGUILayout.Toggle("包含子文件夹", includeSubfolders);
-        isRemoveSuffix = EditorGUILayout.Toggle("删除后缀", isRemoveSuffix);
+            EditorGUILayout.EndHorizontal();
 
-        if (GUILayout.Button(isRemoveSuffix ? "开始删除后缀" : "开始添加后缀"))
+            config.targetFolder = EditorGUILayout.TextField("目标文件夹:", config.targetFolder);
+            if (GUILayout.Button("选择文件夹"))
+            {
+                string folder = EditorUtility.OpenFolderPanel("选择预制体所在文件夹", "Assets", "");
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    config.targetFolder = "Assets" + folder.Substring(Application.dataPath.Length);
+                    SaveConfigs();
+                }
+            }
+            
+            config.suffix = EditorGUILayout.TextField("后缀:", config.suffix);
+            config.includeSubfolders = EditorGUILayout.Toggle("包含子文件夹", config.includeSubfolders);
+            config.isRemoveSuffix = EditorGUILayout.Toggle("删除后缀", config.isRemoveSuffix);
+
+            if (GUILayout.Button(config.isRemoveSuffix ? "开始删除后缀" : "开始添加后缀"))
+            {
+                RenamePrefabs(config);
+            }
+
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.Space(10);
+        }
+
+        EditorGUILayout.EndScrollView();
+
+        // 添加新配置按钮放在滚动视图外面
+        EditorGUILayout.Space(10);
+        if (GUILayout.Button("添加新配置", GUILayout.Height(30)))
         {
-            RenamePrefabs();
+            folderConfigs.Add(new FolderConfig());
+            SaveConfigs();
         }
     }
 
-    // 供运行时代码获取当前测试平台
-    public static TestPlatform GetCurrentPlatform()
+    void RenamePrefabs(FolderConfig config)
     {
-        return currentPlatform;
-    }
-
-    void RenamePrefabs()
-    {
-        if (!AssetDatabase.IsValidFolder(targetFolder))
+        if (!AssetDatabase.IsValidFolder(config.targetFolder))
         {
             EditorUtility.DisplayDialog("错误", "无效的文件夹路径!", "确定");
             return;
         }
 
-        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { targetFolder });
+        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { config.targetFolder });
         int count = 0;
 
         foreach (string guid in guids)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);
             
-            // 如果不包含子文件夹且文件不在目标文件夹直接下级，则跳过
-            if (!includeSubfolders && Path.GetDirectoryName(assetPath) != targetFolder)
+            if (!config.includeSubfolders && Path.GetDirectoryName(assetPath) != config.targetFolder)
                 continue;
 
             string fileName = Path.GetFileNameWithoutExtension(assetPath);
             string newFileName;
 
-            if (isRemoveSuffix)
+            if (config.isRemoveSuffix)
             {
-                // 如果文件名不包含后缀，跳过
-                if (!fileName.EndsWith(suffix))
+                if (!fileName.EndsWith(config.suffix))
                     continue;
                 
-                // 删除后缀
-                newFileName = fileName.Substring(0, fileName.Length - suffix.Length);
+                newFileName = fileName.Substring(0, fileName.Length - config.suffix.Length);
             }
             else
             {
-                // 如果文件名已经包含后缀，跳过
-                if (fileName.EndsWith(suffix))
+                if (fileName.EndsWith(config.suffix))
                     continue;
                 
-                // 添加后缀
-                newFileName = fileName + suffix;
+                newFileName = fileName + config.suffix;
             }
 
-            // 构建新路径
             string newPath = Path.Combine(
                 Path.GetDirectoryName(assetPath),
                 newFileName + ".prefab"
             ).Replace("\\", "/");
 
-            // 重命名资源
             AssetDatabase.MoveAsset(assetPath, newPath);
             count++;
         }
 
         AssetDatabase.Refresh();
         EditorUtility.DisplayDialog("完成", 
-            $"成功{(isRemoveSuffix ? "删除" : "添加")}后缀 {count} 个预制体!", 
+            $"成功{(config.isRemoveSuffix ? "删除" : "添加")}后缀 {count} 个预制体!", 
             "确定");
+    }
+
+    public static TestPlatform GetCurrentPlatform()
+    {
+        return currentPlatform;
     }
 }
