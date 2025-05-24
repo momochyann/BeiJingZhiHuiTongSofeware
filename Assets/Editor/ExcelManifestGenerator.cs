@@ -16,7 +16,7 @@ public class ExcelManifestGenerator : EditorWindow
     private List<string> excelFiles = new List<string>();
     private bool showPreview = false;
 
-    [MenuItem("工具/Excel文件清单生成器")]
+    [MenuItem("MomoTools/Excel文件清单生成器")]
     public static void ShowWindow()
     {
         GetWindow<ExcelManifestGenerator>("Excel文件清单生成器");

@@ -19,7 +19,7 @@ public class Build2AsyncCDN : EditorWindow
     private bool firstCopyHotUpdate = true;
     private bool enableYooAssetsPreload = true;
 
-    [MenuItem("Tools/YooAsset Build Tool")]
+    [MenuItem("MomoTools/YooAsset Build Tool")]
     public static void ShowWindow()
     {
         GetWindow<Build2AsyncCDN>("YooAsset Build Tool");

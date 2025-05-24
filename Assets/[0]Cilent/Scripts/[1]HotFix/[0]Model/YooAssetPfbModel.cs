@@ -3,22 +3,69 @@ using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
 using Cysharp.Threading.Tasks;
+
 public class YooAssetPfbModel : AbstractModel
 {
     public Dictionary<string, UnityEngine.Object> pfbDict;
+    private HashSet<string> uiAssetNames = new HashSet<string>(); // 存储UI组的资源名称
+
     protected override void OnInit()
     {
         pfbDict = new Dictionary<string, UnityEngine.Object>();
+        uiAssetNames = LoadYooAssetsTool.GetAssetInfosByTag("UI");
     }
-    
+
+    public bool CheckPfbNameInUIAssets(string pfbName)
+    {
+        foreach (var assetName in uiAssetNames)
+        {
+            if (assetName.Contains(pfbName))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private string GetPlatformSuffix()
+    {
+#if UNITY_EDITOR
+        // 在编辑器中根据选择的平台返回后缀
+        if (UnityEditor.EditorPrefs.GetInt("TestPlatform", 0) == 0)
+        {
+            return "_PC";
+        }
+        else
+        {
+            return "_Mobile";
+        }
+#elif UNITY_ANDROID || UNITY_IOS
+        return "_Mobile";
+#else
+        return "_PC";
+#endif
+    }
+
     public async UniTask<GameObject> LoadPfb(string pfbName)
     {
-        if (pfbDict.ContainsKey(pfbName))
+        string finalPath = pfbName;
+        
+        if (CheckPfbNameInUIAssets(pfbName))
         {
-            return pfbDict[pfbName] as GameObject;
+            // 移除可能已存在的平台后缀
+            finalPath = pfbName.Replace("_PC", "").Replace("_Mobile", "");
+            
+            // 添加对应平台的后缀
+            finalPath += GetPlatformSuffix();
         }
-        var pfb = await LoadYooAssetsTool.LoadAsset<GameObject>(pfbName);
-        pfbDict[pfbName] = pfb;
+
+        if (pfbDict.ContainsKey(finalPath))
+        {
+            return pfbDict[finalPath] as GameObject;
+        }
+        
+        var pfb = await LoadYooAssetsTool.LoadAsset<GameObject>(finalPath);
+        pfbDict[finalPath] = pfb;
         return pfb;
     }
 

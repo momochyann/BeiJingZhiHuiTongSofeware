@@ -102,13 +102,13 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-    - GroupName: UI
-      GroupDesc: "UI\u9884\u5236\u4F53"
-      AssetTags: 
+    - GroupName: UI_PC
+      GroupDesc: "\u7535\u8111\u7AEFUI\u9884\u5236\u4F53"
+      AssetTags: UI
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/[0]Cilent/UI
-        CollectorGUID: 0e4f5e95aaf3dec40977fba95147d4ac
+      - CollectPath: Assets/[0]Cilent/UI/PC
+        CollectorGUID: 679b015a02c574b4f80c9ac70d1d8903
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
@@ -122,6 +122,19 @@ MonoBehaviour:
       Collectors:
       - CollectPath: Assets/[0]Cilent/Scenes
         CollectorGUID: 3f10143fe77911c449c3bda1f26b4049
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: UI_Mobile
+      GroupDesc: "\u79FB\u52A8\u7AEFUI\u9884\u5236\u4F53"
+      AssetTags: UI
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/[0]Cilent/UI/Modlie
+        CollectorGUID: 18603c90244f7714f8e23070f79ae85b
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory

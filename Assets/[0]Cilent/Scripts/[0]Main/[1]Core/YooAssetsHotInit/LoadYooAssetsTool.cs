@@ -18,6 +18,7 @@ public class LoadYooAssetsTool
     /// <param name="AssetNames">资源名称</param>
     /// <param name="isLocal">是否本地加载</param>
     /// <returns></returns>
+
     public static async UniTask<T> LoadAsset<T>(string AssetNames, bool isLocal = false) where T : UnityEngine.Object
     {
         if (isLocal)
@@ -48,7 +49,7 @@ public class LoadYooAssetsTool
             return handle.GetRawFileData();
         }
     }
-    public static async UniTaskVoid LoadSceneAsync(string AssetNames,bool isLocal = false)
+    public static async UniTaskVoid LoadSceneAsync(string AssetNames, bool isLocal = false)
     {
         var sceneMode = UnityEngine.SceneManagement.LoadSceneMode.Single;
         bool suspendLoad = false;
@@ -63,6 +64,18 @@ public class LoadYooAssetsTool
             await handle.ToUniTask();
         }
         // return handle.InstantiateSync();
+    }
+    public static HashSet<string> GetAssetInfosByTag(string tag)
+    {
+        Debug.Log("GetAssetInfosByTag: " + tag);
+        HashSet<string> uiAssetNames = new HashSet<string>(); 
+        AssetInfo[] assetInfos = package.GetAssetInfos(tag);
+        foreach (var assetInfo in assetInfos)
+        {
+            uiAssetNames.Add(assetInfo.Address);
+            Debug.Log("assetInfo.Address: " + assetInfo.Address);
+        }
+        return uiAssetNames;
     }
 }
 
