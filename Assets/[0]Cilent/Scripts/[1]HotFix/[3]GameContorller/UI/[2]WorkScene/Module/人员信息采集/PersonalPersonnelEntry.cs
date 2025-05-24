@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
-
+using TMPro;
 public interface IEntry
 {
     public void DisEntry(int index);
@@ -13,15 +13,15 @@ public interface IEntry
 public class PersonalPersonnelEntry : MonoBehaviour, IController, IEntry
 {
     [SerializeField]
-    Text nameText;
+    TextMeshProUGUI nameText;
     [SerializeField]
-    Text genderText;
+    TextMeshProUGUI genderText;
     [SerializeField]
-    Text categoryText;
+    TextMeshProUGUI categoryText;
     [SerializeField]
-    Text dateOfBirthText;
+    TextMeshProUGUI dateOfBirthText;
     [SerializeField]
-    Text crisisEventPropertyText;
+    TextMeshProUGUI crisisEventPropertyText;
     [SerializeField]
     Toggle chooseToggle;
     [SerializeField]
