@@ -4,12 +4,13 @@ using UnityEngine;
 using QFramework;
 using UnityEditor;
 using Cysharp.Threading.Tasks;
+
 public class 题目
 {
     public string 题目名称 { get; set; }
     public List<string> 选项 { get; set; }
     public List<string> 答题号 { get; set; }//A,B,C
-    public List<string> 分值 { get; set; }
+    public List<string> 分值 { get; set; } 
 }
 
 

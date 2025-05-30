@@ -5,11 +5,11 @@ using UnityEngine;
 using QFramework;
 using Cysharp.Threading.Tasks;
 using System;
-
+using TMPro;
 public class MimaxiangIntervention1 : PanelBase
 {
     // Start is called before the first frame update
-    public List<InputField> 密码箱描述 = new List<InputField>();
+    public List<TMP_InputField> 密码箱描述 = new List<TMP_InputField>();
     [SerializeField] int index;
     protected override void Start()
     {

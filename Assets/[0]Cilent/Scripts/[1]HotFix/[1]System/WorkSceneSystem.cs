@@ -23,5 +23,4 @@ public class WorkSceneSystem : AbstractSystem
     {
         WorkSceneIndex = 0;
     }
-
 }

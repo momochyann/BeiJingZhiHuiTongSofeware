@@ -10,6 +10,7 @@ public class ObjectiveSelectSystem : AbstractSystem
     public PersonalPersonnelCrisisEventMessage 当前人员 { get; set; }
     public string 当前干预人员;
     public SubjectiveAssessmentArchive 当前主观评估 { get; set; }
+    
     protected override void OnInit()
     {
         当前题序 = 0;

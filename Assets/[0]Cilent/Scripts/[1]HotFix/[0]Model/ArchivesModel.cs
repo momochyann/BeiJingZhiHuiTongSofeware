@@ -29,6 +29,7 @@ public interface IArchivesBase : ICan2List
     string Interveners { get; set; }
     string FangAnName { get; set; }
     bool isCreateReport { get; set; }
+    List<string> 录音地址 { get; set; }
 }
 
 public interface ISubjectiveAssessmentArchive : IArchivesBase
@@ -62,6 +63,7 @@ public class SubjectiveAssessmentArchive : ISubjectiveAssessmentArchive
     public string FangAnName { get; set; }
     public bool isCreateReport { get; set; }
     public string createDate { get; set; }
+    public List<string> 录音地址 { get; set; }
     /// <summary>
     ///应激事件描述
     /// </summary>
@@ -91,6 +93,7 @@ public class IndividualInterventionArchive : IIndividualInterventionArchive
     public string interventionDescription { get; set; }
     public string ScoreSituation { get; set; }
     public string createDate { get; set; }
+    public List<string> 录音地址 { get; set; }
 }
 
 public interface IGroupInterventionArchive : IArchivesBase
@@ -125,8 +128,8 @@ public class ObjectiveAssessmentArchive : IObjectiveAssessmentArchive
     public string FormIntroduction { get; set; }
     public string ScoreSituation { get; set; }
     public string createDate { get; set; }
+    public List<string> 录音地址 { get; set; }
 }
-
 
 
 public class ObjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<ObjectiveAssessmentArchive>

@@ -77,6 +77,20 @@ public class LoadYooAssetsTool
         }
         return uiAssetNames;
     }
+    public static bool CheckAssetExist(string assetName)
+    {
+        var assetInfo = package.GetAssetInfo(assetName);
+        if(!string.IsNullOrEmpty(assetInfo.AssetPath))
+        {
+            Debug.Log("assetName: " + assetName + " 存在");
+            return true;
+        }
+        else
+        {
+            Debug.Log("assetName: " + assetName + " 不存在");
+            return false;
+        }
+    }
 }
 
 

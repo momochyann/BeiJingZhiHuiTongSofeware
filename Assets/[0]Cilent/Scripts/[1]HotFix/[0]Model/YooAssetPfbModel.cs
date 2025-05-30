@@ -13,6 +13,7 @@ public class YooAssetPfbModel : AbstractModel
     {
         pfbDict = new Dictionary<string, UnityEngine.Object>();
         uiAssetNames = LoadYooAssetsTool.GetAssetInfosByTag("UI");
+      
     }
 
     public bool CheckPfbNameInUIAssets(string pfbName)
@@ -27,11 +28,35 @@ public class YooAssetPfbModel : AbstractModel
         return false;
     }
 
-    private string GetPlatformSuffix()
+    private string GetPlatformSuffix(bool 取反=false)
     {
+       
 #if UNITY_EDITOR
         // 在编辑器中根据选择的平台返回后缀
         if (UnityEditor.EditorPrefs.GetInt("TestPlatform", 0) == 0)
+        {
+            if(取反)
+            {
+                return "_Mobile";
+            }
+            else
+            {
+                return "_PC";
+            }
+        }
+        else
+        {
+            if(取反)
+            {
+                return "_PC";
+            }
+            else
+            {
+                return "_Mobile";
+            }
+        }
+#elif UNITY_ANDROID || UNITY_IOS
+        if(取反)
         {
             return "_PC";
         }
@@ -39,10 +64,15 @@ public class YooAssetPfbModel : AbstractModel
         {
             return "_Mobile";
         }
-#elif UNITY_ANDROID || UNITY_IOS
-        return "_Mobile";
 #else
-        return "_PC";
+        if(取反)
+        {
+            return "_PC";
+        }
+        else
+        {
+            return "_Mobile";
+        }
 #endif
     }
 
@@ -54,11 +84,17 @@ public class YooAssetPfbModel : AbstractModel
         {
             // 移除可能已存在的平台后缀
             finalPath = pfbName.Replace("_PC", "").Replace("_Mobile", "");
-            
-            // 添加对应平台的后缀
-            finalPath += GetPlatformSuffix();
+            var fileTemp = finalPath + GetPlatformSuffix();
+            if (LoadYooAssetsTool.CheckAssetExist(fileTemp))
+            {
+                finalPath = fileTemp;
+            }
+            else
+            {
+                finalPath = pfbName + GetPlatformSuffix(true);
+            }
         }
-
+    
         if (pfbDict.ContainsKey(finalPath))
         {
             return pfbDict[finalPath] as GameObject;

@@ -5,13 +5,14 @@ using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
+using TMPro;
 public class IndividualInterventionSelectPanel : MonoBehaviour, IController
 {
     // Start is called before the first frame update
     [SerializeField] Button 开始评估按钮;
     [SerializeField] Button 情绪放松按钮;
-    [SerializeField] Text 已选择人员;
-    [SerializeField] Text 干预者;
+    [SerializeField] TMP_Text 已选择人员;
+    [SerializeField] TMP_Text 干预者;
     [SerializeField] Button 人员确定按钮;
     PersonalPersonnelCrisisEventMessage 当前人员;
     EntryDisPanelNew entryDisPanel;
@@ -69,8 +70,12 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
         var individualInterventionArchive = new IndividualInterventionArchive();
         this.GetSystem<InterventionSystem>().当前干预档案 = individualInterventionArchive;
         this.GetSystem<InterventionSystem>().当前干预档案.name = 当前人员.name;
+        this.GetSystem<InterventionSystem>().当前干预档案.录音地址 = new List<string>();
+        this.GetSystem<InterventionSystem>().是否开始干预 = true;
         // this.GetSystem<InterventionSystem>().当前干预档案.createDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         this.GetSystem<InterventionSystem>().当前干预档案.startDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        var 录制按钮 = await model.LoadPfb("干预实施录制按钮");
+        Instantiate(录制按钮, FindObjectOfType<Canvas>().transform);
        // this.GetSystem<InterventionSystem>().当前干预档案.endDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         Destroy(gameObject.transform.gameObject);
     }

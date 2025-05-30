@@ -23,11 +23,11 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterModel(new SubjectiveAssessmentArchiveModel());
         RegisterModel(new IndividualInterventionArchiveModel());
         RegisterModel(new IntervenersModel());
-
+        RegisterModel(new 部门数据Model());
 
         RegisterUtility(new Storage());
         RegisterUtility(new ExcelReader());
-
+        RegisterUtility(new AudioRecorderUtility());
     }
 
 }

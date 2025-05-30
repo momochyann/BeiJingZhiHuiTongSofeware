@@ -4,6 +4,7 @@ using UnityEngine;
 using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using TMPro;
 public class SubjectiveAssessmentArchiveStartPanel : MonoBehaviour, IController
 {
     // Start is called before the first frame update
@@ -11,7 +12,7 @@ public class SubjectiveAssessmentArchiveStartPanel : MonoBehaviour, IController
     [SerializeField] Button 下一步按钮;
     [SerializeField] Button 取消按钮;
     [SerializeField] Button 返回按钮;
-    [SerializeField] InputField 描述输入框;
+    [SerializeField] TMP_InputField 描述输入框;
     void Start()
     {
         buttonColumns = FindObjectsOfType<ButtonColumn>();
@@ -46,10 +47,10 @@ public class SubjectiveAssessmentArchiveStartPanel : MonoBehaviour, IController
             string 键 = buttonColumn.组描述;
             if (键 == "影响程度")
             {
-                录入系统.当前主观评估.influenceEvaluation =  buttonColumn.buttonList[buttonColumn.currentIndex].GetComponentInChildren<Text>().text;
+                录入系统.当前主观评估.influenceEvaluation =  buttonColumn.buttonList[buttonColumn.currentIndex].GetComponentInChildren<TMP_Text>().text;
                 continue;
             }
-            string 值 = buttonColumn.buttonList[buttonColumn.currentIndex].GetComponentInChildren<Text>().text;
+            string 值 = buttonColumn.buttonList[buttonColumn.currentIndex].GetComponentInChildren<TMP_Text>().text;
 
             // 检查键是否为空
             if (string.IsNullOrEmpty(键))

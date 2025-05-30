@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
+
 public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
 {
     // Start is called before the first frame update
@@ -39,13 +40,21 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
             Destroy(本来界面);
         }
     }
+
+    async public UniTaskVoid 加载通知(string 标题, string 内容)
+    {
+        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("通知");
+        var 通知 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<通知控制>();
+        await UniTask.Delay(10);
+        通知.播送通知(标题, 内容);
+    }
+
     async public UniTaskVoid 加载提示(string 提示文本内容)
     {
-        if (FindObjectOfType<P_TipPanel>() != null)
-            return;
-        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("提示弹窗");
-        var 提示弹窗 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<P_TipPanel>();
-        提示弹窗.显示面板(提示文本内容);
+        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("通知");
+        var 通知 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<通知控制>();
+        await UniTask.Delay(10); ;
+        通知.播送通知("操作提示",提示文本内容);
     }
     async public UniTaskVoid 加载确认提示(string 提示文本内容, string 跳转面板名称, UnityAction 确认回调)
     {

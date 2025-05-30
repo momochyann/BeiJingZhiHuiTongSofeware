@@ -17,6 +17,7 @@ public class DllLink : MonoBehaviour
     public void Show()
     {
         tMP_Text.text = "正在加载资源...";
+        tMP_Text.DOFade(1, 0.3f);
         canvasGroup.DOFade(1, 0.3f).From(0);
     }
     public void Hide()

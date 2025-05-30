@@ -8,6 +8,7 @@ public class InterventionSystem : AbstractSystem
     public IndividualInterventionArchive 当前干预档案 { get; set; }
     public PersonalPersonnelCrisisEventMessage 当前人员 { get; set; }
     public List<string> interventionDescription { get; set; }
+    public bool 是否开始干预 { get; set; }
 
     protected override void OnInit()
     {

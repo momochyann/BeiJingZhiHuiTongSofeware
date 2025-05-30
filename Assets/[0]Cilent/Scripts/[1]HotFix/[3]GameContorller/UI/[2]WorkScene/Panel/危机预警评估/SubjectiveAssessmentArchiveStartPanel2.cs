@@ -4,10 +4,11 @@ using UnityEngine;
 using QFramework;
 using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
+using TMPro;
 public class SubjectiveAssessmentArchiveStartPanel2 : PanelBase
 {
     // Start is called before the first frame update
-    [SerializeField] InputField 描述文本;
+    [SerializeField] TMP_InputField 描述文本;
     protected override void Start()
     {
         base.Start();

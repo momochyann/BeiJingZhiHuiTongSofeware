@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using QFramework;
-
+using TMPro;
 public class LoginPanel : MonoBehaviour, IController
 {
     [Header("UI引用")]
     [SerializeField] private Button loginButton;
     [SerializeField] private Button forgetPasswordButton;
-    [SerializeField] private InputField accountInputField;
-    [SerializeField] private InputField passwordInputField;
+    [SerializeField] private TMP_InputField accountInputField;
+    [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private Toggle rememberPasswordToggle;
-    [SerializeField] private Text errorMessageText;
+    [SerializeField] private TMP_Text errorMessageText;
 
     private bool isLoggingIn = false;
     private const string ACCOUNT_PREFS_KEY = "SavedAccountName";
@@ -28,14 +28,13 @@ public class LoginPanel : MonoBehaviour, IController
         // 初始化时隐藏所有Gradient
         ToggleAllGradients(accountInputField.gameObject, false);
         ToggleAllGradients(passwordInputField.gameObject, false);
-        passwordInputField.contentType = InputField.ContentType.Password;
+        passwordInputField.contentType = TMP_InputField.ContentType.Password;
         // 添加输入框焦点事件监听
         SetupInputFieldFocusEvents();
 
     }
 
-    private void InitializeUI()
-    {
+    private void InitializeUI()    {
         loginButton.onClick.AddListener(OnLoginButtonClick);
         forgetPasswordButton.onClick.AddListener(OnForgetPasswordButtonClick);
 
