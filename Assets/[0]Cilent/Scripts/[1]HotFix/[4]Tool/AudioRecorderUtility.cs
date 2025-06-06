@@ -16,9 +16,11 @@ public class AudioRecorderUtility : IUtility
     public void Init()
     {
         // 获取默认麦克风
+        Debug.Log("获取麦克风设备");
         if (Microphone.devices.Length > 0)
         {
             microphoneName = Microphone.devices[0];
+
             Debug.Log($"找到麦克风设备: {microphoneName}");
         }
         else

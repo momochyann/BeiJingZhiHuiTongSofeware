@@ -51,9 +51,9 @@ public class 干预实施录制按钮 : MonoBehaviour, IController
         图标.sprite = 是否录制 ? 图标列表[1] : 图标列表[0];
         if (是否录制)
         {
-            //  audioRecorderUtility.StartRecording();
+            audioRecorderUtility.StartRecording();
             //  audioRecorderUtility.CancelRecording();
-            WorkSceneManager.Instance.加载通知("操作提示", "开始录制音频病毒撒个谎丢啊违规二嘎网格卡箍我尅看过吧违规").Forget();
+            WorkSceneManager.Instance.加载通知("操作提示", "开始录制音频").Forget();
         }
         else
         {
