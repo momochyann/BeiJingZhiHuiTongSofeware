@@ -84,7 +84,7 @@ public class PopPanelBase : MonoBehaviour, IController
         if (isClose) return;
         isClose = true;
         弹出页面.transform.DOScale(0, 0.1f).From(1);
-        Destroy(gameObject, 0.2f);
+        Destroy(gameObject, 0.5f);
     }
     public IArchitecture GetArchitecture()
     {

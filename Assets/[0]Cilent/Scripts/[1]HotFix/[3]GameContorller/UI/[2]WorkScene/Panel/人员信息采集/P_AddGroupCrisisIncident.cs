@@ -13,11 +13,11 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     // Start is called before the first frame update
     [必填InputField("事件名称不能为空")]
     TMP_InputField 事件名称框;
-    [必填InputField("发生时间不能为空")]
+    [必填InputField("发生时间不能为空"),SerializeField]
     TMP_InputField 发生时间框;
-    [必填InputField("发生地点不能为空")]
+    // [必填InputField("发生地点不能为空")]
     TMP_InputField 发生地点框;
-    [必填InputField("事件描述不能为空")]
+    // [必填InputField("事件描述不能为空")]
     TMP_InputField 事件描述框;
     [SerializeField] Image 相关素材图片;
     Button 下一步按钮;
@@ -29,7 +29,7 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     {
         base.Awake();
         事件名称框 = 弹出页面.transform.Find("事件名称栏/输入框").GetComponent<TMP_InputField>();
-        发生时间框 = 弹出页面.transform.Find("发生时间栏/输入框").GetComponent<TMP_InputField>();
+       // 发生时间框 = 弹出页面.transform.Find("发生时间栏/输入框").GetComponent<TMP_InputField>();
         发生地点框 = 弹出页面.transform.Find("发生地点栏/输入框").GetComponent<TMP_InputField>();
         事件描述框 = 弹出页面.transform.Find("事件描述栏/输入框").GetComponent<TMP_InputField>();
         //    相关素材图片 = 弹出页面.transform.Find("相关素材栏").GetComponent<Image>();

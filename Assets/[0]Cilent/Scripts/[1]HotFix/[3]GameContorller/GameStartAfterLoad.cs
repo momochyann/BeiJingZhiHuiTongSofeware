@@ -29,7 +29,7 @@ public class GameStartAfterLoad : MonoBehaviour, IController
         await this.GetModel<YooAssetPfbModel>().LoadPfb("危机干预实施选择界面");
         await this.GetModel<YooAssetPfbModel>().LoadPfb("危机档案管理选择界面");
         await this.GetModel<YooAssetPfbModel>().LoadPfb("干预资源库面板");
-        await this.GetModel<YooAssetPfbModel>().LoadPfb("系统设置管理界面");
+       // await this.GetModel<YooAssetPfbModel>().LoadPfb("系统设置管理界面");
         //初始化录音工具
         //this.GetUtility<AudioRecorderUtility>().Init();
 

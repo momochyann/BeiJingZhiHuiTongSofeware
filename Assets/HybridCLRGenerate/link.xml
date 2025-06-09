@@ -7,7 +7,9 @@
     <type fullname="DG.Tweening.LoopType" preserve="all" />
     <type fullname="DG.Tweening.Plugins.Options.ColorOptions" preserve="all" />
     <type fullname="DG.Tweening.Plugins.Options.FloatOptions" preserve="all" />
+    <type fullname="DG.Tweening.Plugins.Options.QuaternionOptions" preserve="all" />
     <type fullname="DG.Tweening.Plugins.Options.VectorOptions" preserve="all" />
+    <type fullname="DG.Tweening.RotateMode" preserve="all" />
     <type fullname="DG.Tweening.Sequence" preserve="all" />
     <type fullname="DG.Tweening.ShortcutExtensions" preserve="all" />
     <type fullname="DG.Tweening.Tween" preserve="all" />
@@ -41,6 +43,12 @@
     <type fullname="LoadYooAssetsTool" preserve="all" />
     <type fullname="Ricimi.Gradient" preserve="all" />
     <type fullname="SupplementaryMetadata" preserve="all" />
+  </assembly>
+  <assembly fullname="ModernUI">
+    <type fullname="Michsky.MUIP.CustomDropdown" preserve="all" />
+    <type fullname="Michsky.MUIP.CustomDropdown/DropdownEvent" preserve="all" />
+    <type fullname="Michsky.MUIP.CustomDropdown/Item" preserve="all" />
+    <type fullname="Michsky.MUIP.NotificationManager" preserve="all" />
   </assembly>
   <assembly fullname="NewAssembly">
     <type fullname="UnityEngine.UI.ProceduralImage.ProceduralImage" preserve="all" />
@@ -84,6 +92,7 @@
     <type fullname="Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder`1" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.EnumerableAsyncExtensions" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.PlayerLoopTiming" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask/Awaiter" preserve="all" />
@@ -92,6 +101,7 @@
     <type fullname="Cysharp.Threading.Tasks.UniTaskVoid" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask`1" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask`1/Awaiter" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UnityAsyncExtensions" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.YieldAwaitable" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.YieldAwaitable/Awaiter" preserve="all" />
   </assembly>
@@ -99,16 +109,25 @@
     <type fullname="TMPro.TMP_Dropdown" preserve="all" />
     <type fullname="TMPro.TMP_Dropdown/DropdownEvent" preserve="all" />
     <type fullname="TMPro.TMP_Dropdown/OptionData" preserve="all" />
+    <type fullname="TMPro.TMP_InputField" preserve="all" />
+    <type fullname="TMPro.TMP_InputField/ContentType" preserve="all" />
+    <type fullname="TMPro.TMP_InputField/OnChangeEvent" preserve="all" />
+    <type fullname="TMPro.TMP_Text" preserve="all" />
+    <type fullname="TMPro.TextOverflowModes" preserve="all" />
+    <type fullname="TMPro.VerticalAlignmentOptions" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.AudioModule">
     <type fullname="UnityEngine.AudioClip" preserve="all" />
     <type fullname="UnityEngine.AudioSource" preserve="all" />
+    <type fullname="UnityEngine.Microphone" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.CoreModule">
     <type fullname="UnityEngine.Application" preserve="all" />
+    <type fullname="UnityEngine.AudioType" preserve="all" />
     <type fullname="UnityEngine.Behaviour" preserve="all" />
     <type fullname="UnityEngine.Color" preserve="all" />
     <type fullname="UnityEngine.Component" preserve="all" />
+    <type fullname="UnityEngine.ContextMenu" preserve="all" />
     <type fullname="UnityEngine.Coroutine" preserve="all" />
     <type fullname="UnityEngine.CreateAssetMenuAttribute" preserve="all" />
     <type fullname="UnityEngine.Debug" preserve="all" />
@@ -124,6 +143,7 @@
     <type fullname="UnityEngine.MonoBehaviour" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.PlayerPrefs" preserve="all" />
+    <type fullname="UnityEngine.Quaternion" preserve="all" />
     <type fullname="UnityEngine.Random" preserve="all" />
     <type fullname="UnityEngine.Rect" preserve="all" />
     <type fullname="UnityEngine.RectOffset" preserve="all" />
@@ -147,7 +167,6 @@
     <type fullname="UnityEngine.UI.Button/ButtonClickedEvent" preserve="all" />
     <type fullname="UnityEngine.UI.ColorBlock" preserve="all" />
     <type fullname="UnityEngine.UI.Dropdown" preserve="all" />
-    <type fullname="UnityEngine.UI.Dropdown/DropdownEvent" preserve="all" />
     <type fullname="UnityEngine.UI.Dropdown/OptionData" preserve="all" />
     <type fullname="UnityEngine.UI.Graphic" preserve="all" />
     <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
@@ -170,12 +189,26 @@
     <type fullname="UnityEngine.Canvas" preserve="all" />
     <type fullname="UnityEngine.CanvasGroup" preserve="all" />
   </assembly>
+  <assembly fullname="UnityEngine.UnityWebRequestAudioModule">
+    <type fullname="UnityEngine.Networking.DownloadHandlerAudioClip" preserve="all" />
+    <type fullname="UnityEngine.Networking.UnityWebRequestMultimedia" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.UnityWebRequestModule">
+    <type fullname="UnityEngine.Networking.UnityWebRequest" preserve="all" />
+    <type fullname="UnityEngine.Networking.UnityWebRequest/Result" preserve="all" />
+    <type fullname="UnityEngine.Networking.UnityWebRequestAsyncOperation" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.VideoModule">
+    <type fullname="UnityEngine.Video.VideoPlayer" preserve="all" />
+    <type fullname="UnityEngine.Video.VideoSource" preserve="all" />
+  </assembly>
   <assembly fullname="netstandard">
     <type fullname="System.Action`1" preserve="all" />
     <type fullname="System.Array" preserve="all" />
     <type fullname="System.Attribute" preserve="all" />
     <type fullname="System.AttributeTargets" preserve="all" />
     <type fullname="System.AttributeUsageAttribute" preserve="all" />
+    <type fullname="System.BitConverter" preserve="all" />
     <type fullname="System.Boolean" preserve="all" />
     <type fullname="System.Byte" preserve="all" />
     <type fullname="System.Char" preserve="all" />
@@ -183,6 +216,7 @@
     <type fullname="System.Collections.Generic.Dictionary`2" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.HashSet`1" preserve="all" />
+    <type fullname="System.Collections.Generic.HashSet`1/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.IEnumerable`1" preserve="all" />
     <type fullname="System.Collections.Generic.IEnumerator`1" preserve="all" />
     <type fullname="System.Collections.Generic.KeyValuePair`2" preserve="all" />
@@ -206,6 +240,7 @@
     <type fullname="System.Diagnostics.DebuggerHiddenAttribute" preserve="all" />
     <type fullname="System.Enum" preserve="all" />
     <type fullname="System.Exception" preserve="all" />
+    <type fullname="System.Func`1" preserve="all" />
     <type fullname="System.Func`2" preserve="all" />
     <type fullname="System.Globalization.CultureInfo" preserve="all" />
     <type fullname="System.Globalization.DateTimeStyles" preserve="all" />
@@ -214,16 +249,22 @@
     <type fullname="System.IO.Directory" preserve="all" />
     <type fullname="System.IO.DirectoryInfo" preserve="all" />
     <type fullname="System.IO.File" preserve="all" />
+    <type fullname="System.IO.FileMode" preserve="all" />
+    <type fullname="System.IO.FileStream" preserve="all" />
     <type fullname="System.IO.MemoryStream" preserve="all" />
     <type fullname="System.IO.Path" preserve="all" />
+    <type fullname="System.IO.SeekOrigin" preserve="all" />
     <type fullname="System.IO.Stream" preserve="all" />
     <type fullname="System.IO.StreamWriter" preserve="all" />
     <type fullname="System.IO.TextWriter" preserve="all" />
+    <type fullname="System.IProgress`1" preserve="all" />
+    <type fullname="System.Int16" preserve="all" />
     <type fullname="System.Int32" preserve="all" />
     <type fullname="System.Linq.Enumerable" preserve="all" />
     <type fullname="System.Math" preserve="all" />
     <type fullname="System.NotSupportedException" preserve="all" />
     <type fullname="System.Object" preserve="all" />
+    <type fullname="System.OperationCanceledException" preserve="all" />
     <type fullname="System.Predicate`1" preserve="all" />
     <type fullname="System.Reflection.BindingFlags" preserve="all" />
     <type fullname="System.Reflection.FieldInfo" preserve="all" />
@@ -240,11 +281,13 @@
     <type fullname="System.Runtime.CompilerServices.TaskAwaiter`1" preserve="all" />
     <type fullname="System.RuntimeFieldHandle" preserve="all" />
     <type fullname="System.RuntimeTypeHandle" preserve="all" />
+    <type fullname="System.Single" preserve="all" />
     <type fullname="System.String" preserve="all" />
     <type fullname="System.StringComparison" preserve="all" />
     <type fullname="System.Text.Encoding" preserve="all" />
     <type fullname="System.Text.EncodingProvider" preserve="all" />
     <type fullname="System.Threading.CancellationToken" preserve="all" />
+    <type fullname="System.Threading.CancellationTokenSource" preserve="all" />
     <type fullname="System.Threading.Tasks.Task`1" preserve="all" />
     <type fullname="System.TimeSpan" preserve="all" />
     <type fullname="System.Type" preserve="all" />

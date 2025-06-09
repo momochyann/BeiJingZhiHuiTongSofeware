@@ -14,28 +14,44 @@ public class P增加人员面板 : PopPanelBase
     // Start is called before the first frame update
     [必填InputField("姓名不能为空")]
     TMP_InputField 姓名输入框;
-    [必填InputField("部门不能为空")]
-    TMP_InputField 部门输入框;
     [必填InputField("请选择出生日期"), SerializeField]
     TMP_InputField 出生日期输入框;
     ToggleColumn 性别选择;
     ToggleColumn 状态选择;
     CustomDropdown 应激事件属性下拉框;
+    CustomDropdown 部门选择下拉框;
     ICan2List 旧数据;
     protected override void Awake()
     {
         base.Awake();
         姓名输入框 = 弹出页面.transform.Find("姓名栏/输入框").GetComponent<TMP_InputField>();
-        部门输入框 = 弹出页面.transform.Find("部门栏/输入框").GetComponent<TMP_InputField>();
+        部门选择下拉框 = 弹出页面.transform.Find("部门栏/下拉选择框").GetComponent<CustomDropdown>();
         //  出生日期输入框 = 弹出页面.transform.Find("出生日期栏/输入框").GetComponent<TMP_InputField>();
         性别选择 = 弹出页面.transform.Find("性别栏").GetComponent<ToggleColumn>();
         状态选择 = 弹出页面.transform.Find("状态栏").GetComponent<ToggleColumn>();
         应激事件属性下拉框 = 弹出页面.transform.Find("应激事件属性栏/下拉选择框").GetComponent<CustomDropdown>();
         弹出页面.transform.Find("保存按钮").GetComponent<Button>().onClick.AddListener(保存数据按钮监听);
         添加应激事件属性().Forget();
+        添加部门选项();
         OpenPanel();
     }
-
+    void 添加部门选项()
+    {
+        var 部门数据 = this.GetModel<部门数据Model>().部门列表;
+        foreach (var 部门 in 部门数据)
+        {
+            部门选择下拉框.CreateNewItem(部门.部门名称);
+        }
+        if (部门选择下拉框.items.Count > 0)
+        {
+            部门选择下拉框.ChangeDropdownInfo(0);
+            部门选择下拉框.SetupDropdown();
+        }
+        else
+        {
+            部门选择下拉框.CreateNewItem("待填入部门");
+        }
+    }
     void 保存数据按钮监听()
     {
         if (!验证输入情况())
@@ -46,7 +62,7 @@ public class P增加人员面板 : PopPanelBase
         // 应激事件消息.name = 姓名输入框.inputText.text;
 
         应激事件消息.name = 姓名输入框.text;
-        应激事件消息.category = 部门输入框.text;
+        应激事件消息.category = 部门选择下拉框.items[部门选择下拉框.selectedItemIndex].itemName;
         应激事件消息.dateOfBirth = 出生日期输入框.text;
         应激事件消息.gender = 性别选择.currentIndex == 0 ? "男" : "女";
         应激事件消息.ID = this.GetModel<PersonalPersonnelCrisisEventMessageModel>().personalPersonnelCrisisEventMessages.Count;

@@ -17,7 +17,7 @@ public class 干预实施录制按钮 : MonoBehaviour, IController
     void Start()
     {
         录制按钮 = GetComponent<Button>();
-        图标 = transform.Find("图标").GetComponent<Image>();
+        图标 = GetComponent<Image>();
         录制按钮.onClick.AddListener(录制按钮点击);
         audioRecorderUtility = this.GetUtility<AudioRecorderUtility>();
         this.GetSystem<InterventionSystem>().是否开始干预 = true;
@@ -26,6 +26,7 @@ public class 干预实施录制按钮 : MonoBehaviour, IController
     async UniTaskVoid 开始监听是否处于干预状态()
     {
         await UniTask.WaitUntil(() => !this.GetSystem<InterventionSystem>().是否开始干预);
+        Debug.Log("是否录制" + 是否录制);
         if (是否录制)
         {
             WorkSceneManager.Instance.加载确认提示("是否停止并保存录制？", "", () =>

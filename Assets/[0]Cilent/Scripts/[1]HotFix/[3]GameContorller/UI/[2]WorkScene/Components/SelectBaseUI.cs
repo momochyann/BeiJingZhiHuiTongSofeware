@@ -6,7 +6,7 @@ using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 using System;
-
+using System.Linq;
 public class SelectBaseUI : MonoBehaviour, IController
 {
     // Start is called before the first frame update
@@ -42,21 +42,32 @@ public class SelectBaseUI : MonoBehaviour, IController
 
     private void OnButton2Click()
     {
-        if (currentPanel != null)
-            Destroy(currentPanel);
-        Transform parent = isOurSelf ? FindObjectOfType<Canvas>().transform : transform.parent;
-        currentPanel = Instantiate(panel2Pfb, parent);
+        Transform canvas = FindObjectsOfType<Canvas>().Where(c => c.gameObject.name == "Canvas").FirstOrDefault().transform;
+
+        Debug.Log(canvas.gameObject.name + "parent" + currentPanel.name);
+        var _InstalPanel = Instantiate(panel2Pfb, canvas);
         Animation(2).Forget();
+        Debug.Log("OnButton2Click");
+        if (currentPanel != null)
+        {
+            var _currentPanel = currentPanel;
+            currentPanel = _InstalPanel;
+            Destroy(_currentPanel);
+        }
     }
 
     private void OnButton1Click()
     {
-        if (currentPanel != null)
-            Destroy(currentPanel);
-
         Transform parent = isOurSelf ? FindObjectOfType<Canvas>().transform : transform.parent;
-        currentPanel = Instantiate(panel1Pfb, parent);
+        var _InstalPanel = Instantiate(panel1Pfb, parent);
         Animation(1).Forget();
+        if (currentPanel != null)
+        {
+            var _currentPanel = currentPanel;
+            currentPanel = _InstalPanel;
+            Destroy(_currentPanel);
+        }
+
     }
 
     async protected virtual UniTaskVoid Animation(int index)
@@ -64,8 +75,10 @@ public class SelectBaseUI : MonoBehaviour, IController
         await UniTask.Yield(this.GetCancellationTokenOnDestroy());
         button1.GetComponentInChildren<Text>().DOColor(index == 1 ? Color.white : Color.gray, 0.3f);
         button2.GetComponentInChildren<Text>().DOColor(index == 2 ? Color.white : Color.gray, 0.3f);
-
-        selectImageBack.transform.DOMoveX(index == 1 ? button1.transform.position.x : button2.transform.position.x, 0.3f);
+        if (selectImageBack != null)
+        {
+            selectImageBack.transform.DOMoveX(index == 1 ? button1.transform.position.x : button2.transform.position.x, 0.3f);
+        }
     }
     // Update is called once per frame
 

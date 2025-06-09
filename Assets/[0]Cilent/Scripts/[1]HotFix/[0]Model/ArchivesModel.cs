@@ -79,7 +79,9 @@ public class SubjectiveAssessmentArchive : ISubjectiveAssessmentArchive
 
 }
 
-
+/// <summary>
+/// 个人干预档案类
+/// </summary>
 public class IndividualInterventionArchive : IIndividualInterventionArchive
 {
     public string name { get; set; }
@@ -131,7 +133,9 @@ public class ObjectiveAssessmentArchive : IObjectiveAssessmentArchive
     public List<string> 录音地址 { get; set; }
 }
 
-
+/// <summary>
+/// 客观评估数据库
+/// </summary>
 public class ObjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<ObjectiveAssessmentArchive>
 {
     public List<ObjectiveAssessmentArchive> objectiveAssessmentArchives => dataList;
@@ -160,7 +164,9 @@ public class ObjectiveAssessmentArchiveModel : CrisisIncidentBaseModel<Objective
     //     return indexList;
     // }
 }
-
+/// <summary>
+/// 个体干预实施数据库
+/// </summary>
 public class IndividualInterventionArchiveModel : CrisisIncidentBaseModel<IndividualInterventionArchive>
 {
     public List<IndividualInterventionArchive> individualInterventionArchives => dataList;

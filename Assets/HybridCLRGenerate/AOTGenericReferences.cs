@@ -22,22 +22,28 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<AudioRecorderUtility.<LoadAudioClipAsync>d__12,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<AudioRecorderUtility.<LoadAudioClipAsync>d__13,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<AudioRecorderUtility.<LoadMultipleAudioClipsAsync>d__14,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<ExcelReader.<GetAllExcelFilesAsync>d__2,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<ExcelReader.<ReadFileManifestAsync>d__3,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<ExcelReader.<ReadObjectiveAssessmentDataAsync>d__1,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<GameStartAfterLoad.<WaitLoadAnimation>d__2>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<GroupCrisisIncidentPerSonSelect.<InitAsync>d__8>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<ObjectiveAssessmentStartPanel.<计时>d__16>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<YooAssetPfbModel.<LoadConfig>d__3<object>,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<YooAssetPfbModel.<LoadPfb>d__2,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<YooAssetPfbModel.<LoadConfig>d__6<object>,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<YooAssetPfbModel.<LoadPfb>d__5,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<AudioRecorderUtility.<LoadAudioClipAsync>d__12,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<AudioRecorderUtility.<LoadAudioClipAsync>d__13,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<AudioRecorderUtility.<LoadMultipleAudioClipsAsync>d__14,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<ExcelReader.<GetAllExcelFilesAsync>d__2,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<ExcelReader.<ReadFileManifestAsync>d__3,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<ExcelReader.<ReadObjectiveAssessmentDataAsync>d__1,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<GameStartAfterLoad.<WaitLoadAnimation>d__2>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<GroupCrisisIncidentPerSonSelect.<InitAsync>d__8>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<ObjectiveAssessmentStartPanel.<计时>d__16>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<YooAssetPfbModel.<LoadConfig>d__3<object>,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<YooAssetPfbModel.<LoadPfb>d__2,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<YooAssetPfbModel.<LoadConfig>d__6<object>,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<YooAssetPfbModel.<LoadPfb>d__5,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<ButtonChangeScene.<加载面板>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<EntryDisPanelNew.<InitAsync>d__19>
@@ -65,6 +71,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<P_AddPerson.<添加应激事件属性>d__10>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<PanelBase.<AsyncStart>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<PerSonGroupSelect.<Init>d__10>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<P增加人员面板.<添加应激事件属性>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SelectBaseUI.<Animation>d__13>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SelectBaseUI.<Init>d__10>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SubjectiveAssessmentArchiveEntry.<查看按钮监听>d__10>
@@ -72,11 +79,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<SubjectiveAssessmentSelectCom.<AsyncInit>d__9>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<LoadPanel>d__4>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载提示>d__6>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载确认提示>d__7>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载提示>d__7>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载确认提示>d__8>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<加载通知>d__6>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkSceneManager.<跳转界面>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkScenePanelSelect.<Animation>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<WorkScenePanelSelect.<Init>d__8>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<干预实施录制按钮.<开始监听是否处于干预状态>d__6>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<情绪放松.<播放视频>d__4>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<ButtonChangeScene.<加载面板>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<EntryDisPanelNew.<InitAsync>d__19>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<EntryEditorButton.<添加条目按钮监听>d__6>
@@ -103,6 +113,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<P_AddPerson.<添加应激事件属性>d__10>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<PanelBase.<AsyncStart>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<PerSonGroupSelect.<Init>d__10>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<P增加人员面板.<添加应激事件属性>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SelectBaseUI.<Animation>d__13>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SelectBaseUI.<Init>d__10>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SubjectiveAssessmentArchiveEntry.<查看按钮监听>d__10>
@@ -110,13 +121,25 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<SubjectiveAssessmentSelectCom.<AsyncInit>d__9>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<LoadPanel>d__4>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载提示>d__6>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载确认提示>d__7>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载提示>d__7>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载确认提示>d__8>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<加载通知>d__6>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkSceneManager.<跳转界面>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkScenePanelSelect.<Animation>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<WorkScenePanelSelect.<Init>d__8>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<干预实施录制按钮.<开始监听是否处于干预状态>d__6>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<情绪放松.<播放视频>d__4>
 	// Cysharp.Threading.Tasks.CompilerServices.IStateMachineRunnerPromise<object>
 	// Cysharp.Threading.Tasks.ITaskPoolNode<object>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.UIntPtr>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.UIntPtr>>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
+	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>>
 	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>>
 	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
@@ -127,6 +150,15 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,System.ValueTuple<byte,object>>>
 	// Cysharp.Threading.Tasks.IUniTaskSource<System.ValueTuple<byte,object>>
 	// Cysharp.Threading.Tasks.IUniTaskSource<object>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.UIntPtr>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.UIntPtr>>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
@@ -137,6 +169,15 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,System.ValueTuple<byte,object>>>
 	// Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,object>>
 	// Cysharp.Threading.Tasks.UniTask.Awaiter<object>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.UIntPtr>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.UIntPtr>>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
@@ -147,6 +188,15 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,System.ValueTuple<byte,object>>>
 	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<System.ValueTuple<byte,object>>
 	// Cysharp.Threading.Tasks.UniTask.IsCanceledSource<object>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.UIntPtr>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.UIntPtr>>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
@@ -157,6 +207,18 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,System.ValueTuple<byte,object>>>
 	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<System.ValueTuple<byte,object>>
 	// Cysharp.Threading.Tasks.UniTask.MemoizeSource<object>
+	// Cysharp.Threading.Tasks.UniTask.WhenAllPromise.<>c<object>
+	// Cysharp.Threading.Tasks.UniTask.WhenAllPromise<object>
+	// Cysharp.Threading.Tasks.UniTask<System.UIntPtr>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.UIntPtr>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>>
+	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>>
 	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
@@ -169,6 +231,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.UniTask<System.ValueTuple<byte,object>>
 	// Cysharp.Threading.Tasks.UniTask<object>
 	// Cysharp.Threading.Tasks.UniTaskCompletionSourceCore<Cysharp.Threading.Tasks.AsyncUnit>
+	// Cysharp.Threading.Tasks.UniTaskCompletionSourceCore<System.UIntPtr>
 	// Cysharp.Threading.Tasks.UniTaskCompletionSourceCore<object>
 	// DG.Tweening.Core.DOGetter<UnityEngine.Vector3>
 	// DG.Tweening.Core.DOGetter<float>
@@ -184,6 +247,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Action<object>
 	// System.Collections.Generic.ArraySortHelper<int>
 	// System.Collections.Generic.ArraySortHelper<object>
+	// System.Collections.Generic.Comparer<System.UIntPtr>
+	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.UIntPtr>>
+	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
 	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
 	// System.Collections.Generic.Comparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>
@@ -208,6 +279,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary<object,ES3Internal.ES3Data>
 	// System.Collections.Generic.Dictionary<object,object>
 	// System.Collections.Generic.EqualityComparer<ES3Internal.ES3Data>
+	// System.Collections.Generic.EqualityComparer<System.UIntPtr>
+	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.UIntPtr>>
+	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
 	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
 	// System.Collections.Generic.EqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>
@@ -221,6 +300,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.HashSet.Enumerator<object>
 	// System.Collections.Generic.HashSet<object>
 	// System.Collections.Generic.HashSetEqualityComparer<object>
+	// System.Collections.Generic.ICollection<Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,ES3Internal.ES3Data>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.Generic.ICollection<int>
@@ -231,10 +311,12 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IDictionary<object,LitJson.ObjectMetadata>
 	// System.Collections.Generic.IDictionary<object,LitJson.PropertyMetadata>
 	// System.Collections.Generic.IDictionary<object,object>
+	// System.Collections.Generic.IEnumerable<Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,ES3Internal.ES3Data>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.Generic.IEnumerable<int>
 	// System.Collections.Generic.IEnumerable<object>
+	// System.Collections.Generic.IEnumerator<Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,ES3Internal.ES3Data>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.Generic.IEnumerator<int>
@@ -248,6 +330,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.List.Enumerator<object>
 	// System.Collections.Generic.List<int>
 	// System.Collections.Generic.List<object>
+	// System.Collections.Generic.ObjectComparer<System.UIntPtr>
+	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.UIntPtr>>
+	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
 	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
 	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>
 	// System.Collections.Generic.ObjectComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>
@@ -259,6 +348,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ObjectComparer<int>
 	// System.Collections.Generic.ObjectComparer<object>
 	// System.Collections.Generic.ObjectEqualityComparer<ES3Internal.ES3Data>
+	// System.Collections.Generic.ObjectEqualityComparer<System.UIntPtr>
+	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.UIntPtr>>
+	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
 	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
 	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>
 	// System.Collections.Generic.ObjectEqualityComparer<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>
@@ -274,18 +370,27 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.ObjectModel.ReadOnlyCollection<object>
 	// System.Comparison<int>
 	// System.Comparison<object>
+	// System.Func<Cysharp.Threading.Tasks.UniTask<object>,byte>
+	// System.Func<byte>
 	// System.Func<int>
+	// System.Func<object,Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Func<object,byte>
 	// System.Func<object,object,object>
 	// System.Func<object,object>
 	// System.Func<object>
+	// System.Linq.Buffer<Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.<CastIterator>d__99<object>
+	// System.Linq.Enumerable.Iterator<Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.Iterator<object>
 	// System.Linq.Enumerable.WhereArrayIterator<object>
+	// System.Linq.Enumerable.WhereEnumerableIterator<Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.WhereEnumerableIterator<object>
 	// System.Linq.Enumerable.WhereListIterator<object>
+	// System.Linq.Enumerable.WhereSelectArrayIterator<object,Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.WhereSelectArrayIterator<object,object>
+	// System.Linq.Enumerable.WhereSelectEnumerableIterator<object,Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.WhereSelectEnumerableIterator<object,object>
+	// System.Linq.Enumerable.WhereSelectListIterator<object,Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.WhereSelectListIterator<object,object>
 	// System.Predicate<int>
 	// System.Predicate<object>
@@ -296,6 +401,15 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Threading.Tasks.Task<object>
 	// System.Threading.Tasks.TaskFactory.<>c__DisplayClass35_0<object>
 	// System.Threading.Tasks.TaskFactory<object>
+	// System.ValueTuple<byte,System.UIntPtr>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>
+	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.UIntPtr>>>>>>>>>
 	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>>
 	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
@@ -325,24 +439,34 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,GameStartAfterLoad.<WaitLoadAnimation>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter&,GameStartAfterLoad.<WaitLoadAnimation>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,ObjectiveAssessmentStartPanel.<计时>d__16>(Cysharp.Threading.Tasks.UniTask.Awaiter&,ObjectiveAssessmentStartPanel.<计时>d__16&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,GroupCrisisIncidentPerSonSelect.<InitAsync>d__8>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,GroupCrisisIncidentPerSonSelect.<InitAsync>d__8&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,AudioRecorderUtility.<LoadAudioClipAsync>d__12>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,AudioRecorderUtility.<LoadAudioClipAsync>d__12&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,AudioRecorderUtility.<LoadAudioClipAsync>d__13>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,AudioRecorderUtility.<LoadAudioClipAsync>d__13&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,AudioRecorderUtility.<LoadMultipleAudioClipsAsync>d__14>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,AudioRecorderUtility.<LoadMultipleAudioClipsAsync>d__14&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,ExcelReader.<GetAllExcelFilesAsync>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,ExcelReader.<GetAllExcelFilesAsync>d__2&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,YooAssetPfbModel.<LoadConfig>d__3<object>>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,YooAssetPfbModel.<LoadConfig>d__3<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,YooAssetPfbModel.<LoadPfb>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,YooAssetPfbModel.<LoadPfb>d__2&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,YooAssetPfbModel.<LoadConfig>d__6<object>>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,YooAssetPfbModel.<LoadConfig>d__6<object>&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,YooAssetPfbModel.<LoadPfb>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,YooAssetPfbModel.<LoadPfb>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,ExcelReader.<ReadFileManifestAsync>d__3>(System.Runtime.CompilerServices.TaskAwaiter<object>&,ExcelReader.<ReadFileManifestAsync>d__3&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,ExcelReader.<ReadObjectiveAssessmentDataAsync>d__1>(System.Runtime.CompilerServices.TaskAwaiter<object>&,ExcelReader.<ReadObjectiveAssessmentDataAsync>d__1&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.Start<GameStartAfterLoad.<WaitLoadAnimation>d__2>(GameStartAfterLoad.<WaitLoadAnimation>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.Start<GroupCrisisIncidentPerSonSelect.<InitAsync>d__8>(GroupCrisisIncidentPerSonSelect.<InitAsync>d__8&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.Start<ObjectiveAssessmentStartPanel.<计时>d__16>(ObjectiveAssessmentStartPanel.<计时>d__16&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<AudioRecorderUtility.<LoadAudioClipAsync>d__12>(AudioRecorderUtility.<LoadAudioClipAsync>d__12&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<AudioRecorderUtility.<LoadAudioClipAsync>d__13>(AudioRecorderUtility.<LoadAudioClipAsync>d__13&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<AudioRecorderUtility.<LoadMultipleAudioClipsAsync>d__14>(AudioRecorderUtility.<LoadMultipleAudioClipsAsync>d__14&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<ExcelReader.<GetAllExcelFilesAsync>d__2>(ExcelReader.<GetAllExcelFilesAsync>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<ExcelReader.<ReadFileManifestAsync>d__3>(ExcelReader.<ReadFileManifestAsync>d__3&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<ExcelReader.<ReadObjectiveAssessmentDataAsync>d__1>(ExcelReader.<ReadObjectiveAssessmentDataAsync>d__1&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<LoadYooAssetsTool.<LoadAsset>d__4<object>>(LoadYooAssetsTool.<LoadAsset>d__4<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<YooAssetPfbModel.<LoadConfig>d__3<object>>(YooAssetPfbModel.<LoadConfig>d__3<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<YooAssetPfbModel.<LoadPfb>d__2>(YooAssetPfbModel.<LoadPfb>d__2&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<YooAssetPfbModel.<LoadConfig>d__6<object>>(YooAssetPfbModel.<LoadConfig>d__6<object>&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<YooAssetPfbModel.<LoadPfb>d__5>(YooAssetPfbModel.<LoadPfb>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,EntryDisPanelNew.<InitAsync>d__19>(Cysharp.Threading.Tasks.UniTask.Awaiter&,EntryDisPanelNew.<InitAsync>d__19&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,ObjectiveAssessmentSelectPanel.<Init>d__10>(Cysharp.Threading.Tasks.UniTask.Awaiter&,ObjectiveAssessmentSelectPanel.<Init>d__10&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,SelectBaseUI.<Animation>d__13>(Cysharp.Threading.Tasks.UniTask.Awaiter&,SelectBaseUI.<Animation>d__13&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,WorkSceneManager.<LoadPanel>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter&,WorkSceneManager.<LoadPanel>d__4&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,WorkSceneManager.<加载提示>d__7>(Cysharp.Threading.Tasks.UniTask.Awaiter&,WorkSceneManager.<加载提示>d__7&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,WorkSceneManager.<加载通知>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter&,WorkSceneManager.<加载通知>d__6&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,干预实施录制按钮.<开始监听是否处于干预状态>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter&,干预实施录制按钮.<开始监听是否处于干预状态>d__6&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,情绪放松.<播放视频>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter&,情绪放松.<播放视频>d__4&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,ButtonChangeScene.<加载面板>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,ButtonChangeScene.<加载面板>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,EntryDisPanelNew.<InitAsync>d__19>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,EntryDisPanelNew.<InitAsync>d__19&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,EntryEditorButton.<添加条目按钮监听>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,EntryEditorButton.<添加条目按钮监听>d__6&)
@@ -368,16 +492,19 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,P_AddPerson.<添加应激事件属性>d__10>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,P_AddPerson.<添加应激事件属性>d__10&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,PanelBase.<AsyncStart>d__11>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,PanelBase.<AsyncStart>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,PerSonGroupSelect.<Init>d__10>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,PerSonGroupSelect.<Init>d__10&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,P增加人员面板.<添加应激事件属性>d__11>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,P增加人员面板.<添加应激事件属性>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SelectBaseUI.<Init>d__10>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SelectBaseUI.<Init>d__10&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SubjectiveAssessmentArchiveEntry.<查看按钮监听>d__10>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SubjectiveAssessmentArchiveEntry.<查看按钮监听>d__10&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SubjectiveAssessmentArchiveSelectPanel.<开始评估>d__9&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SubjectiveAssessmentArchiveStartPanel.<下一步>d__7&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,SubjectiveAssessmentSelectCom.<AsyncInit>d__9>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,SubjectiveAssessmentSelectCom.<AsyncInit>d__9&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载提示>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载提示>d__6&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载确认提示>d__7>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载确认提示>d__7&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载提示>d__7>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载提示>d__7&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载确认提示>d__8>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载确认提示>d__8&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<加载通知>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<加载通知>d__6&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkSceneManager.<跳转界面>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkSceneManager.<跳转界面>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,WorkScenePanelSelect.<Init>d__8>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,WorkScenePanelSelect.<Init>d__8&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.YieldAwaitable.Awaiter,WorkScenePanelSelect.<Animation>d__11>(Cysharp.Threading.Tasks.YieldAwaitable.Awaiter&,WorkScenePanelSelect.<Animation>d__11&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.YieldAwaitable.Awaiter,情绪放松.<播放视频>d__4>(Cysharp.Threading.Tasks.YieldAwaitable.Awaiter&,情绪放松.<播放视频>d__4&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<ButtonChangeScene.<加载面板>d__5>(ButtonChangeScene.<加载面板>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<EntryDisPanelNew.<InitAsync>d__19>(EntryDisPanelNew.<InitAsync>d__19&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<EntryEditorButton.<添加条目按钮监听>d__6>(EntryEditorButton.<添加条目按钮监听>d__6&)
@@ -406,6 +533,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<P_AddPerson.<添加应激事件属性>d__10>(P_AddPerson.<添加应激事件属性>d__10&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<PanelBase.<AsyncStart>d__11>(PanelBase.<AsyncStart>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<PerSonGroupSelect.<Init>d__10>(PerSonGroupSelect.<Init>d__10&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<P增加人员面板.<添加应激事件属性>d__11>(P增加人员面板.<添加应激事件属性>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SelectBaseUI.<Animation>d__13>(SelectBaseUI.<Animation>d__13&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SelectBaseUI.<Init>d__10>(SelectBaseUI.<Init>d__10&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SubjectiveAssessmentArchiveDisPanel.<填入数据>d__13>(SubjectiveAssessmentArchiveDisPanel.<填入数据>d__13&)
@@ -414,11 +542,17 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SubjectiveAssessmentArchiveStartPanel.<下一步>d__7>(SubjectiveAssessmentArchiveStartPanel.<下一步>d__7&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<SubjectiveAssessmentSelectCom.<AsyncInit>d__9>(SubjectiveAssessmentSelectCom.<AsyncInit>d__9&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<LoadPanel>d__4>(WorkSceneManager.<LoadPanel>d__4&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载提示>d__6>(WorkSceneManager.<加载提示>d__6&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载确认提示>d__7>(WorkSceneManager.<加载确认提示>d__7&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载提示>d__7>(WorkSceneManager.<加载提示>d__7&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载确认提示>d__8>(WorkSceneManager.<加载确认提示>d__8&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<加载通知>d__6>(WorkSceneManager.<加载通知>d__6&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkSceneManager.<跳转界面>d__5>(WorkSceneManager.<跳转界面>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkScenePanelSelect.<Animation>d__11>(WorkScenePanelSelect.<Animation>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<WorkScenePanelSelect.<Init>d__8>(WorkScenePanelSelect.<Init>d__8&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<干预实施录制按钮.<开始监听是否处于干预状态>d__6>(干预实施录制按钮.<开始监听是否处于干预状态>d__6&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<情绪放松.<播放视频>d__4>(情绪放松.<播放视频>d__4&)
+		// System.Collections.Generic.IEnumerable<Cysharp.Threading.Tasks.UniTask<object>> Cysharp.Threading.Tasks.EnumerableAsyncExtensions.Select<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,Cysharp.Threading.Tasks.UniTask<object>>)
+		// Cysharp.Threading.Tasks.UniTask<System.UIntPtr> Cysharp.Threading.Tasks.UniTask.FromResult<System.UIntPtr>(System.UIntPtr)
+		// Cysharp.Threading.Tasks.UniTask<object[]> Cysharp.Threading.Tasks.UniTask.WhenAll<object>(Cysharp.Threading.Tasks.UniTask<object>[])
 		// object DG.Tweening.TweenExtensions.Pause<object>(object)
 		// object DG.Tweening.TweenExtensions.Play<object>(object)
 		// DG.Tweening.Core.TweenerCore<UnityEngine.Vector3,UnityEngine.Vector3,DG.Tweening.Plugins.Options.VectorOptions> DG.Tweening.TweenSettingsExtensions.From<UnityEngine.Vector3,UnityEngine.Vector3,DG.Tweening.Plugins.Options.VectorOptions>(DG.Tweening.Core.TweenerCore<UnityEngine.Vector3,UnityEngine.Vector3,DG.Tweening.Plugins.Options.VectorOptions>,UnityEngine.Vector3,bool,bool)
@@ -441,6 +575,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ES3Writer.Write<object>(string,object)
 		// object LitJson.JsonMapper.ToObject<object>(string)
 		// Cysharp.Threading.Tasks.UniTask<object> LoadYooAssetsTool.LoadAsset<object>(string,bool)
+		// object QFramework.Architecture<object>.GetUtility<object>()
 		// System.Void QFramework.Architecture<object>.RegisterModel<object>(object)
 		// System.Void QFramework.Architecture<object>.RegisterSystem<object>(object)
 		// System.Void QFramework.Architecture<object>.RegisterUtility<object>(object)
@@ -451,11 +586,16 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void QFramework.IArchitecture.SendCommand<object>(object)
 		// System.Void QFramework.IArchitecture.SendEvent<object>(object)
 		// System.Void QFramework.IOCContainer.Register<object>(object)
+		// object[] System.Array.Empty<object>()
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Cast<object>(System.Collections.IEnumerable)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.CastIterator<object>(System.Collections.IEnumerable)
+		// object System.Linq.Enumerable.FirstOrDefault<object>(System.Collections.Generic.IEnumerable<object>)
+		// System.Collections.Generic.IEnumerable<Cysharp.Threading.Tasks.UniTask<object>> System.Linq.Enumerable.Select<object,Cysharp.Threading.Tasks.UniTask<object>>(System.Collections.Generic.IEnumerable<object>,System.Func<object,Cysharp.Threading.Tasks.UniTask<object>>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Select<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>)
+		// Cysharp.Threading.Tasks.UniTask<object>[] System.Linq.Enumerable.ToArray<Cysharp.Threading.Tasks.UniTask<object>>(System.Collections.Generic.IEnumerable<Cysharp.Threading.Tasks.UniTask<object>>)
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
+		// System.Collections.Generic.IEnumerable<Cysharp.Threading.Tasks.UniTask<object>> System.Linq.Enumerable.Iterator<object>.Select<Cysharp.Threading.Tasks.UniTask<object>>(System.Func<object,Cysharp.Threading.Tasks.UniTask<object>>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Iterator<object>.Select<object>(System.Func<object,object>)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,GameStartAfterLoad.<GameLoadedInit>d__1>(Cysharp.Threading.Tasks.UniTask.Awaiter&,GameStartAfterLoad.<GameLoadedInit>d__1&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,P_AddGroupCrisisIncident_2.<>c__DisplayClass16_0.<<上一步按钮监听async>b__0>d>(Cysharp.Threading.Tasks.UniTask.Awaiter&,P_AddGroupCrisisIncident_2.<>c__DisplayClass16_0.<<上一步按钮监听async>b__0>d&)
@@ -463,12 +603,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,GameStartAfterLoad.<GameLoadedInit>d__1>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,GameStartAfterLoad.<GameLoadedInit>d__1&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,IndividualInterventionSelectPanel.<情绪放松按钮监听>d__8>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,IndividualInterventionSelectPanel.<情绪放松按钮监听>d__8&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,LoadNewGameVesionUI.<OnClickConfimButton>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,LoadNewGameVesionUI.<OnClickConfimButton>d__5&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,LoginSceneManager.<LoadLoginPanel>d__1>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,LoginSceneManager.<LoadLoginPanel>d__1&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,MimaxiangIntervention1.<保存干预数据>d__6>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,MimaxiangIntervention1.<保存干预数据>d__6&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,ObjectiveAssessmentStartPanel.<跳转面板>d__18>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,ObjectiveAssessmentStartPanel.<跳转面板>d__18&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,P_TipPanel.<跳转面板>d__11>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,P_TipPanel.<跳转面板>d__11&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<GameStartAfterLoad.<GameLoadedInit>d__1>(GameStartAfterLoad.<GameLoadedInit>d__1&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<IndividualInterventionSelectPanel.<情绪放松按钮监听>d__8>(IndividualInterventionSelectPanel.<情绪放松按钮监听>d__8&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<LoadNewGameVesionUI.<OnClickConfimButton>d__5>(LoadNewGameVesionUI.<OnClickConfimButton>d__5&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<LoginSceneManager.<LoadLoginPanel>d__1>(LoginSceneManager.<LoadLoginPanel>d__1&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<MimaxiangIntervention1.<保存干预数据>d__6>(MimaxiangIntervention1.<保存干预数据>d__6&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<ObjectiveAssessmentStartPanel.<跳转面板>d__18>(ObjectiveAssessmentStartPanel.<跳转面板>d__18&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<P_AddGroupCrisisIncident_2.<>c__DisplayClass16_0.<<上一步按钮监听async>b__0>d>(P_AddGroupCrisisIncident_2.<>c__DisplayClass16_0.<<上一步按钮监听async>b__0>d&)
