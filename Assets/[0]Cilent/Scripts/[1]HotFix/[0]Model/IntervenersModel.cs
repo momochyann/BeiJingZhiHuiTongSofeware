@@ -12,6 +12,9 @@ public class Intervener : ICan2List
     public string 用户名;
     public string 密码;
 }
+/// <summary>
+/// 干预者数据库
+/// </summary>
 public class IntervenersModel : CrisisIncidentBaseModel<Intervener>
 {
     public List<Intervener> intervenerList => dataList;

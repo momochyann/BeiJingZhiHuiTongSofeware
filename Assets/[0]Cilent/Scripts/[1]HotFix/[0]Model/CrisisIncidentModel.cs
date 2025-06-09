@@ -42,6 +42,10 @@ public interface IGroupCrisisIncident : ICan2List
     GroupCrisisIncidentType groupCrisisIncidentType { get; set; }
     AffectedLevel affectedLevel { get; set; }
 }
+
+/// <summary>
+/// 群体危机事件类
+/// </summary>
 public class GroupCrisisIncident : IGroupCrisisIncident
 {
     public int incidentId { get; set; }
@@ -54,7 +58,9 @@ public class GroupCrisisIncident : IGroupCrisisIncident
     public AffectedLevel affectedLevel { get; set; }
 
 }
-
+/// <summary>
+/// 群体危机事件数据库
+/// </summary>
 public class GroupCrisisIncidentModel : CrisisIncidentBaseModel<GroupCrisisIncident>
 {
     public List<GroupCrisisIncident> groupCrisisIncidents => dataList;

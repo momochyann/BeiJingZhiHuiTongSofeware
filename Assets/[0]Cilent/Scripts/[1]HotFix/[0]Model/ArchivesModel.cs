@@ -53,7 +53,9 @@ public interface IIndividualInterventionArchive : IArchivesBase
     string interventionDescription { get; set; }
     string ScoreSituation { get; set; }
 }
-
+/// <summary>
+/// 主观评估档案类
+/// </summary>
 public class SubjectiveAssessmentArchive : ISubjectiveAssessmentArchive
 {
     public string name { get; set; }

@@ -13,7 +13,9 @@ public class 题目
     public List<string> 分值 { get; set; } 
 }
 
-
+/// <summary>
+/// 客观评估类
+/// </summary>
 public class ObjectiveAssessment : ICan2List
 {
     public string 量表简介 { get; set; }
@@ -21,7 +23,9 @@ public class ObjectiveAssessment : ICan2List
     public List<题目> 题目列表 { get; set; }
     public 记分规则 记分规则 { get; set; }
 }
-
+/// <summary>
+/// 客观评估数据库
+/// </summary>
 public class ObjectiveAssessmentModel : CrisisIncidentBaseModel<ObjectiveAssessment>
 {
     public List<ObjectiveAssessment> objectiveAssessments => dataList;

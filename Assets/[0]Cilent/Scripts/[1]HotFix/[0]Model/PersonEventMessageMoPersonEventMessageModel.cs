@@ -34,7 +34,9 @@ public interface IGroupPersonnelCrisisEventMessage : IPersonnelCrisisEventMessag
     string focusOfTheWork { get; set; }
     string notes { get; set; }
 }
-
+/// <summary>
+/// 群体危机人员类
+/// </summary>
 public class GroupPersonnelCrisisEventMessage : IGroupPersonnelCrisisEventMessage
 {
     public int ID { get; set; }
@@ -50,6 +52,9 @@ public class GroupPersonnelCrisisEventMessage : IGroupPersonnelCrisisEventMessag
     public string focusOfTheWork { get; set; }
     public string notes { get; set; }
 }
+/// <summary>
+/// 个人危机人员类
+/// </summary>
 
 public class PersonalPersonnelCrisisEventMessage : IPersonalPersonnelCrisisEventMessage
 {
@@ -62,7 +67,9 @@ public class PersonalPersonnelCrisisEventMessage : IPersonalPersonnelCrisisEvent
     public PersonalCrisisEventProperty personalCrisisEventProperty { get; set; }
     public PersonalCrisisEventMessageFlag personalCrisisEventMessageFlag { get; set; }
 }
-
+/// <summary>
+/// 个人危机人员数据库
+/// </summary>
 public class PersonalPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<PersonalPersonnelCrisisEventMessage>
 {
     public List<PersonalPersonnelCrisisEventMessage> personalPersonnelCrisisEventMessages => dataList;
@@ -87,8 +94,9 @@ public class PersonalPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<
         return indexList;
     }
 }
-
-
+/// <summary>
+/// 群体危机人员数据库
+/// </summary>
 public class GroupPersonnelCrisisEventMessageModel : CrisisIncidentBaseModel<GroupPersonnelCrisisEventMessage>
 {
     public List<GroupPersonnelCrisisEventMessage> groupPersonnelCrisisEventMessages => dataList;
