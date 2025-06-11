@@ -12,7 +12,8 @@ public class P添加部门界面 : PopPanelBase
 {
     [必填InputField("部门名称不能为空")]
     TMP_InputField 部门名称输入框;
-   
+    [必填InputField("部门级别不能为空")]
+    TMP_InputField 部门级别输入框;
     TMP_InputField 部门描述输入框;
     
     ICan2List 旧数据;
@@ -21,6 +22,7 @@ public class P添加部门界面 : PopPanelBase
     {
         base.Awake();
         部门名称输入框 = 弹出页面.transform.Find("部门名称栏/输入框").GetComponent<TMP_InputField>();
+        部门级别输入框 = 弹出页面.transform.Find("部门级别栏/输入框").GetComponent<TMP_InputField>();
         部门描述输入框 = 弹出页面.transform.Find("部门描述栏/输入框").GetComponent<TMP_InputField>();
         弹出页面.transform.Find("保存按钮").GetComponent<Button>().onClick.AddListener(保存数据按钮监听);
         OpenPanel();
@@ -35,6 +37,7 @@ public class P添加部门界面 : PopPanelBase
         
         部门 新部门 = new 部门();
         新部门.部门名称 = 部门名称输入框.text;
+        新部门.部门级别 = 部门级别输入框.text;
         新部门.部门描述 = 部门描述输入框.text;
         
         if (旧数据 != null)
@@ -49,6 +52,7 @@ public class P添加部门界面 : PopPanelBase
             // 新增模式，自动生成编号
             新部门.部门编号 = 生成部门编号();
             this.SendCommand(new AddEntryCommand(新部门 as ICan2List, "部门数据Model"));
+            Debug.Log("添加成功");
         }
         ClosePanel();
     }
@@ -85,6 +89,7 @@ public class P添加部门界面 : PopPanelBase
         Debug.Log("编辑部门条目: " + 部门信息.部门名称);
         
         部门名称输入框.text = 部门信息.部门名称;
+        部门级别输入框.text = 部门信息.部门级别;
         部门描述输入框.text = 部门信息.部门描述;
         
         旧数据 = ICan2List;

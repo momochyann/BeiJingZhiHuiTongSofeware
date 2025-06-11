@@ -78,7 +78,6 @@ public class AddEntryCommand : AbstractCommand
         {
             model.AddItem(entry);
             Debug.Log("添加" + entryModelName);
-            WorkSceneManager.Instance.加载提示("添加成功");
         }
         else
         {
