@@ -32,9 +32,9 @@ public class TextToTMPConverter : EditorWindow
 
         // 选择转换模式
         conversionMode = (ConversionMode)EditorGUILayout.EnumPopup("Conversion Mode", conversionMode);
-        
+
         GUILayout.Space(5);
-        
+
         // 根据模式显示不同的说明
         switch (conversionMode)
         {
@@ -50,9 +50,9 @@ public class TextToTMPConverter : EditorWindow
         }
 
         includeInactive = EditorGUILayout.Toggle("Include Inactive Objects", includeInactive);
-        
+
         GUILayout.Space(10);
-        
+
         if (GUILayout.Button("Scan for Text Components"))
         {
             ScanForTextComponents();
@@ -62,9 +62,9 @@ public class TextToTMPConverter : EditorWindow
         {
             GUILayout.Space(10);
             GUILayout.Label($"Found {foundTextComponents.Count} Text components:", EditorStyles.boldLabel);
-            
+
             showPreview = EditorGUILayout.Foldout(showPreview, "Preview Components");
-            
+
             if (showPreview)
             {
                 scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(200));
@@ -79,7 +79,7 @@ public class TextToTMPConverter : EditorWindow
             }
 
             GUILayout.Space(10);
-            
+
             if (GUILayout.Button("Convert All to TextMeshPro"))
             {
                 ConvertAllTextToTMP();
@@ -94,7 +94,7 @@ public class TextToTMPConverter : EditorWindow
     private void ScanForTextComponents()
     {
         foundTextComponents.Clear();
-        
+
         switch (conversionMode)
         {
             case ConversionMode.Scene:
@@ -107,7 +107,7 @@ public class TextToTMPConverter : EditorWindow
                 ScanPrefabStage();
                 break;
         }
-        
+
         Debug.Log($"Found {foundTextComponents.Count} Text components");
     }
 
@@ -120,7 +120,7 @@ public class TextToTMPConverter : EditorWindow
     private void ScanSelectedObjects()
     {
         GameObject[] selectedObjects = Selection.gameObjects;
-        
+
         if (selectedObjects.Length == 0)
         {
             EditorUtility.DisplayDialog("No Selection", "Please select one or more GameObjects to scan.", "OK");
@@ -139,7 +139,7 @@ public class TextToTMPConverter : EditorWindow
     {
         // 检查是否在预制体编辑模式
         var prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
-        
+
         if (prefabStage == null)
         {
             EditorUtility.DisplayDialog("Not in Prefab Mode", "Please open a prefab for editing to use this mode.", "OK");
@@ -148,7 +148,7 @@ public class TextToTMPConverter : EditorWindow
 
         // 获取预制体根对象
         GameObject prefabRoot = prefabStage.prefabContentsRoot;
-        
+
         if (prefabRoot != null)
         {
             Text[] texts = prefabRoot.GetComponentsInChildren<Text>(includeInactive);
@@ -165,16 +165,16 @@ public class TextToTMPConverter : EditorWindow
         }
 
         bool proceed = EditorUtility.DisplayDialog(
-            "Convert Text Components", 
-            $"This will convert {foundTextComponents.Count} Text components to TextMeshPro. This action cannot be undone. Continue?", 
-            "Convert", 
+            "Convert Text Components",
+            $"This will convert {foundTextComponents.Count} Text components to TextMeshPro. This action cannot be undone. Continue?",
+            "Convert",
             "Cancel"
         );
 
         if (!proceed) return;
 
         int convertedCount = 0;
-        
+
         // 记录Undo操作
         Undo.SetCurrentGroupName("Convert Text to TMP");
         int undoGroup = Undo.GetCurrentGroup();
@@ -192,20 +192,20 @@ public class TextToTMPConverter : EditorWindow
             }
 
             Undo.CollapseUndoOperations(undoGroup);
-            
+
             // 如果在预制体模式，标记预制体为已修改
             var prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
             if (prefabStage != null)
             {
                 EditorUtility.SetDirty(prefabStage.prefabContentsRoot);
             }
-            
+
             EditorUtility.DisplayDialog(
-                "Conversion Complete", 
-                $"Successfully converted {convertedCount} Text components to TextMeshPro.", 
+                "Conversion Complete",
+                $"Successfully converted {convertedCount} Text components to TextMeshPro.",
                 "OK"
             );
-            
+
             // 清空列表
             foundTextComponents.Clear();
         }
@@ -219,7 +219,7 @@ public class TextToTMPConverter : EditorWindow
     private void ConvertTextToTMP(Text originalText)
     {
         GameObject gameObject = originalText.gameObject;
-        
+
         // 记录原始属性
         string text = originalText.text;
         Font font = originalText.font;
@@ -233,7 +233,7 @@ public class TextToTMPConverter : EditorWindow
         HorizontalWrapMode horizontalOverflow = originalText.horizontalOverflow;
         VerticalWrapMode verticalOverflow = originalText.verticalOverflow;
         float lineSpacing = originalText.lineSpacing;
-        
+
         // 记录RectTransform属性
         RectTransform rectTransform = originalText.rectTransform;
         Vector2 anchoredPosition = rectTransform.anchoredPosition;
@@ -262,7 +262,7 @@ public class TextToTMPConverter : EditorWindow
         {
             tmpText.font = tmpFont;
         }
-
+    
         // 设置字体大小
         tmpText.fontSize = fontSize;
 
@@ -280,7 +280,7 @@ public class TextToTMPConverter : EditorWindow
         tmpText.richText = supportRichText;
         tmpText.overflowMode = ConvertOverflowMode(horizontalOverflow, verticalOverflow);
         tmpText.lineSpacing = lineSpacing;
-        
+
         if (material != null)
         {
             tmpText.material = material;
@@ -297,7 +297,7 @@ public class TextToTMPConverter : EditorWindow
 
         // 标记对象为已修改
         EditorUtility.SetDirty(gameObject);
-        
+
         Debug.Log($"Converted Text component on {gameObject.name} to TextMeshPro");
     }
 
@@ -313,7 +313,7 @@ public class TextToTMPConverter : EditorWindow
 
     private TMP_FontAsset GetTMPFont(Font originalFont)
     {
-        if (originalFont == null) 
+        if (originalFont == null)
         {
             // 返回TMP默认字体
             return GetDefaultTMPFont();
@@ -321,7 +321,7 @@ public class TextToTMPConverter : EditorWindow
 
         // 尝试在项目中找到同名的TMP字体
         string[] guids = AssetDatabase.FindAssets($"{originalFont.name} t:TMP_FontAsset");
-        
+
         if (guids.Length > 0)
         {
             string path = AssetDatabase.GUIDToAssetPath(guids[0]);
@@ -335,16 +335,16 @@ public class TextToTMPConverter : EditorWindow
     private TMP_FontAsset GetDefaultTMPFont()
     {
         // 方法1：尝试加载TMP默认字体
-        TMP_FontAsset defaultFont = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
-        if (defaultFont != null) return defaultFont;
-        
+        // TMP_FontAsset defaultFont = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
+        // if (defaultFont != null) return defaultFont;
+        TMP_FontAsset defaultFont = null;
         // 方法2：尝试从TMP设置中获取默认字体
         TMP_Settings tmpSettings = TMP_Settings.instance;
         if (tmpSettings != null && TMP_Settings.defaultFontAsset != null)
         {
             return TMP_Settings.defaultFontAsset;
         }
-        
+
         // 方法3：查找项目中的第一个TMP字体
         string[] fontGuids = AssetDatabase.FindAssets("t:TMP_FontAsset");
         if (fontGuids.Length > 0)
@@ -352,11 +352,11 @@ public class TextToTMPConverter : EditorWindow
             string path = AssetDatabase.GUIDToAssetPath(fontGuids[0]);
             return AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(path);
         }
-        
+
         // 方法4：尝试加载Arial字体（如果存在）
         defaultFont = Resources.Load<TMP_FontAsset>("Fonts & Materials/Arial SDF");
         if (defaultFont != null) return defaultFont;
-        
+
         Debug.LogWarning("Could not find any TMP_FontAsset. Please ensure TextMeshPro is properly imported.");
         return null;
     }
@@ -404,4 +404,4 @@ public class TextToTMPConverter : EditorWindow
                 return TextAlignmentOptions.Center;
         }
     }
-} 
+}

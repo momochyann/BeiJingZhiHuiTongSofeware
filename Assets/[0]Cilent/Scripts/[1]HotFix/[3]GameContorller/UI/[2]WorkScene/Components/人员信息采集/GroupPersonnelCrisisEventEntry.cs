@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
+using TMPro;
 // public interface IEntry
 // {
 //     public void DisEntry(int index);
@@ -12,23 +13,23 @@ using QFramework;
 public class GroupPersonnelCrisisEventEntry : MonoBehaviour, IController, IEntry
 {
     [SerializeField]
-    Text nameText;
+    TMP_Text nameText;
     [SerializeField]
-    Text genderText;
+    TMP_Text genderText;
     [SerializeField]
-    Text categoryText;
+    TMP_Text categoryText;
     [SerializeField]
-    Text dateOfBirthText;
+    TMP_Text dateOfBirthText;
     [SerializeField]
-    Text crisisEventNameText;
+    TMP_Text crisisEventNameText;
     [SerializeField]
-    Text crisisEventDescriptionText;
+    TMP_Text crisisEventDescriptionText;
     [SerializeField]
-    Text crisisEventTimeText;
+    TMP_Text crisisEventTimeText;
     [SerializeField]
-    Text affectedLevelText;
+    TMP_Text affectedLevelText;
     [SerializeField]
-    Text focusOfTheWorkText;
+    TMP_Text focusOfTheWorkText;
 
     [SerializeField]
     Toggle chooseToggle;

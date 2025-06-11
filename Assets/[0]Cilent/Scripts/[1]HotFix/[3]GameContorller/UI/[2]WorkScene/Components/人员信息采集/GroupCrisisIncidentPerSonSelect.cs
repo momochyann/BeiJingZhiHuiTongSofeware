@@ -52,10 +52,10 @@ public class GroupCrisisIncidentPerSonSelect : MonoBehaviour, IController
         动画底线.DOMoveX(团体危机人员显示按钮.transform.position.x, 0.3f);
         动画底线.DOScale(new Vector3(0.7f, 1, 1f), 0.3f);
         //团体危机显示按钮.GetComponentInChildren<TMP_Text>().Color(Color.black, 0.3f);
-        团体危机显示按钮.GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
-        Debug.Log("团体危机显示按钮颜色:"+团体危机显示按钮.GetComponentInChildren<Text>().color);
-        团体危机人员显示按钮.GetComponentInChildren<Text>().DOColor(选中颜色, 0.3f);
-        团体危机人员显示按钮.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
+        团体危机显示按钮.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Normal;
+        //Debug.Log("团体危机显示按钮颜色:"+团体危机显示按钮.GetComponentInChildren<Text>().color);
+        团体危机人员显示按钮.GetComponentInChildren<TMP_Text>().DOColor(选中颜色, 0.3f);
+        团体危机人员显示按钮.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Bold;
 
         是否为事件显示面板 = false;
         Destroy(transform.parent.GetComponentInChildren<EntryDisPanelNew>().gameObject);

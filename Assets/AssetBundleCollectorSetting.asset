@@ -235,6 +235,19 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+    - GroupName: Vedio
+      GroupDesc: "\u97F3\u9891"
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/[1]Local/Vedio
+        CollectorGUID: db4cc16dad2740f458c0244575f3e4ef
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
   - PackageName: LocalRawFilePackage
     PackageDesc: "\u672C\u5730\u4EE3\u7801\u5305"
     EnableAddressable: 1

@@ -5,17 +5,35 @@
     
     <!-- 权限声明 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" 
+                     android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" 
+                     android:maxSdkVersion="32" />
+    
+    <!-- Android 13+ 新的媒体权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    
+    <!-- 网络权限（如果需要） -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- Android 14兼容性设置 -->
+    <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="34" />
     
     <application
         android:theme="@style/UnityThemeSelector"
         android:icon="@mipmap/app_icon"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:preserveLegacyExternalStorage="true"
+        android:hardwareAccelerated="true">
         
         <activity android:name="com.unity3d.player.UnityPlayerActivity"
                   android:exported="true"
-                  android:launchMode="singleTask">
+                  android:launchMode="singleTask"
+                  android:screenOrientation="landscape"
+                  android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

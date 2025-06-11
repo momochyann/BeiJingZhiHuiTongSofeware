@@ -4,25 +4,26 @@ using UnityEngine;
 using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using TMPro;
 public class GroupCrisisIncidentEntry : MonoBehaviour, IController, IEntry
 {
     // Start is called before the first frame update
     [SerializeField]
     Toggle chooseToggle;
     [SerializeField]
-    Text nameText;
+    TMP_Text nameText;
     [SerializeField]
-    Text dateText;
+    TMP_Text dateText;
     [SerializeField]
-    Text placeText;
+    TMP_Text placeText;
     [SerializeField]
-    Text descriptionText;
+    TMP_Text descriptionText;
     [SerializeField]
     Image image;
     [SerializeField]
-    Text typeText;
+    TMP_Text typeText;
     [SerializeField]
-    Text affectedLevelText;
+    TMP_Text affectedLevelText;
     void Start()
     {
 

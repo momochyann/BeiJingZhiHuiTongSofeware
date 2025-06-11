@@ -12,6 +12,7 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
     WorkScenePanelSelect workScenePanelSelect;
     public string 干预者;
     public GameObject 界面生成节点;
+    [SerializeField] string[] 界面名称;
     void Start()
     {
         界面生成节点 = GameObject.Find("界面生成节点");
@@ -24,10 +25,12 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
     {
         var index = this.GetSystem<WorkSceneSystem>().WorkSceneIndex;
         Debug.Log("index: " + index);
-        await UniTask.Delay(500);
-        workScenePanelSelect = FindObjectOfType<WorkScenePanelSelect>();
-        Debug.Log("workScenePanelSelect: " + workScenePanelSelect.gameObject.name);
-        workScenePanelSelect.LoadPanelByIndex(index - 1);
+        加载界面(界面名称[index - 1]).Forget();
+        // await UniTask.Delay(500);
+
+        // workScenePanelSelect = FindObjectOfType<WorkScenePanelSelect>();
+        // Debug.Log("workScenePanelSelect: " + workScenePanelSelect.gameObject.name);
+        // workScenePanelSelect.LoadPanelByIndex(index - 1);
     }
     async public UniTaskVoid 跳转界面(string 跳转界面名称, GameObject 本来界面 = null)
     {
@@ -40,7 +43,11 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
             Destroy(本来界面);
         }
     }
-
+    async public UniTaskVoid 加载界面(string 界面名称)
+    {
+        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb(界面名称);
+        Instantiate(pfb, 界面生成节点.transform);
+    }
     async public UniTaskVoid 加载通知(string 标题, string 内容)
     {
         var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("通知");
@@ -54,7 +61,7 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
         var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("通知");
         var 通知 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<通知控制>();
         await UniTask.Delay(10); ;
-        通知.播送通知("操作提示",提示文本内容);
+        通知.播送通知("操作提示", 提示文本内容);
     }
     async public UniTaskVoid 加载确认提示(string 提示文本内容, string 跳转面板名称, UnityAction 确认回调)
     {
