@@ -4,6 +4,9 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
+
+//using NativeGalleryNamespace;
+using QFramework;
 public class DllLink : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -12,7 +15,7 @@ public class DllLink : MonoBehaviour
     [SerializeField] CanvasGroup canvasGroup;
     void Start()
     {
-
+        PickImageFromGalleryAsync().Forget();
     }
     public void Show()
     {
@@ -23,6 +26,12 @@ public class DllLink : MonoBehaviour
     public void Hide()
     {
         canvasGroup.DOFade(0, 0.3f);
+
+    }
+    async UniTask<Texture2D> PickImageFromGalleryAsync()
+    {
+        await UniTask.Delay(1000);
+        return default;
     }
     private void EnsureTMPAssemblyReference()
     {
@@ -36,4 +45,6 @@ public class DllLink : MonoBehaviour
     {
 
     }
+
+
 }

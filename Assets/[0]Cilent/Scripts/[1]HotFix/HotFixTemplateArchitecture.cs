@@ -30,6 +30,7 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         this.GetUtility<ExcelReader>().Init();
         RegisterUtility(new AudioRecorderUtility());
         this.GetUtility<AudioRecorderUtility>().Init();
+        RegisterUtility(new ImagePickerUtility());
     }
 
 }

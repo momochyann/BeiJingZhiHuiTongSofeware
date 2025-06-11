@@ -50,6 +50,13 @@
     <type fullname="Michsky.MUIP.CustomDropdown/Item" preserve="all" />
     <type fullname="Michsky.MUIP.NotificationManager" preserve="all" />
   </assembly>
+  <assembly fullname="NativeGallery.Runtime">
+    <type fullname="NativeGallery" preserve="all" />
+    <type fullname="NativeGallery/MediaPickCallback" preserve="all" />
+    <type fullname="NativeGallery/MediaType" preserve="all" />
+    <type fullname="NativeGallery/Permission" preserve="all" />
+    <type fullname="NativeGallery/PermissionType" preserve="all" />
+  </assembly>
   <assembly fullname="NewAssembly">
     <type fullname="UnityEngine.UI.ProceduralImage.ProceduralImage" preserve="all" />
   </assembly>
@@ -97,6 +104,7 @@
     <type fullname="Cysharp.Threading.Tasks.UniTask" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask/Awaiter" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTaskCancellationExtensions" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UniTaskCompletionSource`1" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTaskExtensions" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTaskVoid" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask`1" preserve="all" />
@@ -106,6 +114,7 @@
     <type fullname="Cysharp.Threading.Tasks.YieldAwaitable/Awaiter" preserve="all" />
   </assembly>
   <assembly fullname="Unity.TextMeshPro">
+    <type fullname="TMPro.FontStyles" preserve="all" />
     <type fullname="TMPro.TMP_Dropdown" preserve="all" />
     <type fullname="TMPro.TMP_Dropdown/DropdownEvent" preserve="all" />
     <type fullname="TMPro.TMP_Dropdown/OptionData" preserve="all" />
@@ -123,6 +132,7 @@
   </assembly>
   <assembly fullname="UnityEngine.CoreModule">
     <type fullname="UnityEngine.Application" preserve="all" />
+    <type fullname="UnityEngine.Application/LogCallback" preserve="all" />
     <type fullname="UnityEngine.AudioType" preserve="all" />
     <type fullname="UnityEngine.Behaviour" preserve="all" />
     <type fullname="UnityEngine.Color" preserve="all" />
@@ -139,7 +149,9 @@
     <type fullname="UnityEngine.GameObject" preserve="all" />
     <type fullname="UnityEngine.HeaderAttribute" preserve="all" />
     <type fullname="UnityEngine.HideInInspector" preserve="all" />
+    <type fullname="UnityEngine.LogType" preserve="all" />
     <type fullname="UnityEngine.Mathf" preserve="all" />
+    <type fullname="UnityEngine.Matrix4x4" preserve="all" />
     <type fullname="UnityEngine.MonoBehaviour" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.PlayerPrefs" preserve="all" />
@@ -148,16 +160,25 @@
     <type fullname="UnityEngine.Rect" preserve="all" />
     <type fullname="UnityEngine.RectOffset" preserve="all" />
     <type fullname="UnityEngine.RectTransform" preserve="all" />
+    <type fullname="UnityEngine.Screen" preserve="all" />
     <type fullname="UnityEngine.ScriptableObject" preserve="all" />
     <type fullname="UnityEngine.SerializeField" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
+    <type fullname="UnityEngine.Texture" preserve="all" />
+    <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
     <type fullname="UnityEngine.Vector2" preserve="all" />
     <type fullname="UnityEngine.Vector3" preserve="all" />
     <type fullname="UnityEngine.WaitForSeconds" preserve="all" />
   </assembly>
+  <assembly fullname="UnityEngine.IMGUIModule">
+    <type fullname="UnityEngine.GUI" preserve="all" />
+    <type fullname="UnityEngine.GUIStyle" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.ImageConversionModule">
+    <type fullname="UnityEngine.ImageConversion" preserve="all" />
+  </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule">
-    <type fullname="UnityEngine.FontStyle" preserve="all" />
     <type fullname="UnityEngine.HorizontalWrapMode" preserve="all" />
     <type fullname="UnityEngine.VerticalWrapMode" preserve="all" />
   </assembly>
@@ -199,6 +220,7 @@
     <type fullname="UnityEngine.Networking.UnityWebRequestAsyncOperation" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.VideoModule">
+    <type fullname="UnityEngine.Video.VideoClip" preserve="all" />
     <type fullname="UnityEngine.Video.VideoPlayer" preserve="all" />
     <type fullname="UnityEngine.Video.VideoSource" preserve="all" />
   </assembly>
@@ -278,16 +300,19 @@
     <type fullname="System.Runtime.CompilerServices.IteratorStateMachineAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.RuntimeHelpers" preserve="all" />
+    <type fullname="System.Runtime.CompilerServices.TaskAwaiter" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.TaskAwaiter`1" preserve="all" />
     <type fullname="System.RuntimeFieldHandle" preserve="all" />
     <type fullname="System.RuntimeTypeHandle" preserve="all" />
     <type fullname="System.Single" preserve="all" />
     <type fullname="System.String" preserve="all" />
     <type fullname="System.StringComparison" preserve="all" />
+    <type fullname="System.StringSplitOptions" preserve="all" />
     <type fullname="System.Text.Encoding" preserve="all" />
     <type fullname="System.Text.EncodingProvider" preserve="all" />
     <type fullname="System.Threading.CancellationToken" preserve="all" />
     <type fullname="System.Threading.CancellationTokenSource" preserve="all" />
+    <type fullname="System.Threading.Tasks.Task" preserve="all" />
     <type fullname="System.Threading.Tasks.Task`1" preserve="all" />
     <type fullname="System.TimeSpan" preserve="all" />
     <type fullname="System.Type" preserve="all" />
