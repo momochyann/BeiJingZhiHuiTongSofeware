@@ -6,6 +6,7 @@ public class 部门 : ICan2List
 {
     public string 部门名称;
     public string 部门编号;
+    public string 部门级别;
     public string 部门描述;
     //public List<string> 部门成员;
     
@@ -43,7 +44,7 @@ public class 部门数据Model : CrisisIncidentBaseModel<部门>
         return indexList;
     }
     
- 
+    
     
     // 根据部门编号查找部门
     public 部门 根据编号查找部门(string 编号)
