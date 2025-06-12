@@ -4,6 +4,8 @@ using UnityEngine;
 using QFramework;
 using System;
 using System.Linq;
+using LitJson;
+using System.IO;
 
 public class Can2ListModelChangeEvent
 {
@@ -203,11 +205,128 @@ public abstract class CrisisIncidentBaseModel<T> : AbstractModel, ICanGetSystem,
     {
         return new List<int>();
     }
+
+    #region JSON导入导出功能
+    
+    /// <summary>
+    /// 导出数据为JSON文件
+    /// </summary>
+    /// <param name="fileName">文件名（不含扩展名，可选）</param>
+    /// <returns>是否导出成功</returns>
+    public bool ExportToJson(string fileName = null)
+    {
+        var jsonUtility = this.GetUtility<JsonDataUtility>();
+        if(fileName == null)
+        {
+            fileName = GetStorageKey();
+        }
+        return jsonUtility.ExportToJson(dataList, fileName);
+    }
+    
+    /// <summary>
+    /// 从JSON文件导入数据
+    /// </summary>
+    /// <param name="fileName">文件名（含或不含扩展名）</param>
+    /// <param name="clearExisting">是否清空现有数据</param>
+    /// <returns>是否导入成功</returns>
+    public bool ImportFromJson(bool clearExisting = true,string fileName = null)
+    {
+        var jsonUtility = this.GetUtility<JsonDataUtility>();
+        if(fileName == null)
+        {
+            fileName = GetStorageKey();
+        }
+        var importedData = jsonUtility.ImportFromJson<T>(fileName);
+        
+        if (importedData == null)
+        {
+            return false;
+        }
+        
+        // 清空现有数据（如果需要）
+        if (clearExisting)
+        {
+            dataList.Clear();
+        }
+        
+        // 添加导入的数据
+        foreach (var item in importedData)
+        {
+            dataList.Add(item);
+        }
+        
+        // 保存数据
+        SaveData();
+        
+        return true;
+    }
+    
+    /// <summary>
+    /// 获取所有可用的JSON文件名
+    /// </summary>
+    /// <returns>文件名列表</returns>
+    public List<string> GetAvailableJsonFileNames()
+    {
+        var jsonUtility = this.GetUtility<JsonDataUtility>();
+        return jsonUtility.GetAvailableJsonFileNames();
+    }
+    
+    /// <summary>
+    /// 打开导出目录
+    /// </summary>
+    public void OpenExportDirectory()
+    {
+        var jsonUtility = this.GetUtility<JsonDataUtility>();
+        jsonUtility.OpenExportDirectory();
+    }
+    
+    #endregion
 }
 public abstract class CrisisIncidentFileBaseModel<T> : CrisisIncidentBaseModel<T> where T : ICan2List
 {
-    protected void ExportFile()
+    /// <summary>
+    /// 导出到特定路径（重写基类方法以支持更多文件格式）
+    /// </summary>
+    /// <param name="filePath">文件路径</param>
+    /// <param name="format">文件格式</param>
+    /// <returns>是否成功</returns>
+    public virtual bool ExportToFile(string filePath, string format = "json")
     {
-
+        switch (format.ToLower())
+        {
+            case "json":
+                // 由于我们简化了设计，这里暂时不支持指定路径导出
+                Debug.LogWarning("当前版本不支持指定路径导出，请使用默认路径导出");
+                return ExportToJson();
+            case "csv":
+                return ExportToCsv(filePath);
+            case "xml":
+                return ExportToXml(filePath);
+            default:
+                Debug.LogError($"不支持的文件格式: {format}");
+                return false;
+        }
+    }
+    
+    /// <summary>
+    /// 导出为CSV格式（可选功能）
+    /// </summary>
+    /// <param name="filePath">文件路径</param>
+    /// <returns>是否成功</returns>
+    protected virtual bool ExportToCsv(string filePath)
+    {
+        Debug.LogWarning("CSV导出功能需要子类实现");
+        return false;
+    }
+    
+    /// <summary>
+    /// 导出为XML格式（可选功能）
+    /// </summary>
+    /// <param name="filePath">文件路径</param>
+    /// <returns>是否成功</returns>
+    protected virtual bool ExportToXml(string filePath)
+    {
+        Debug.LogWarning("XML导出功能需要子类实现");
+        return false;
     }
 }

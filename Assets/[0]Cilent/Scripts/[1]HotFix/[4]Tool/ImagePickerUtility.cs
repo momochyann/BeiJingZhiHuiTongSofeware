@@ -137,6 +137,40 @@ public class ImagePickerUtility : IImagePickerUtility
     }
     
     /// <summary>
+    /// 创建可读的纹理副本
+    /// </summary>
+    private Texture2D MakeTextureReadable(Texture2D source)
+    {
+        if (source == null) return null;
+
+        // 创建RenderTexture
+        RenderTexture renderTex = RenderTexture.GetTemporary(
+            source.width, 
+            source.height, 
+            0, 
+            RenderTextureFormat.Default, 
+            RenderTextureReadWrite.Linear);
+
+        // 将源纹理绘制到RenderTexture
+        Graphics.Blit(source, renderTex);
+        
+        // 保存当前活动的RenderTexture
+        RenderTexture previous = RenderTexture.active;
+        RenderTexture.active = renderTex;
+        
+        // 创建新的可读Texture2D
+        Texture2D readableTexture = new Texture2D(source.width, source.height);
+        readableTexture.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
+        readableTexture.Apply();
+        
+        // 恢复RenderTexture状态
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(renderTex);
+        
+        return readableTexture;
+    }
+
+    /// <summary>
     /// 保存图片到缓存目录
     /// </summary>
     public async UniTask<string> SaveImageToCacheAsync(Texture2D texture, string fileName)
@@ -155,8 +189,19 @@ public class ImagePickerUtility : IImagePickerUtility
             // 构建完整路径
             string filePath = Path.Combine(ImageCacheDirectory, fileName + ".png");
             
+            // 创建可读的纹理副本
+            Texture2D readableTexture = MakeTextureReadable(texture);
+            if (readableTexture == null)
+            {
+                Debug.LogError("无法创建可读纹理副本");
+                return null;
+            }
+            
             // 将纹理转换为PNG字节数组
-            byte[] imageData = texture.EncodeToPNG();
+            byte[] imageData = readableTexture.EncodeToPNG();
+            
+            // 清理临时纹理
+            UnityEngine.Object.DestroyImmediate(readableTexture);
             
             // 异步写入文件
             await File.WriteAllBytesAsync(filePath, imageData);
