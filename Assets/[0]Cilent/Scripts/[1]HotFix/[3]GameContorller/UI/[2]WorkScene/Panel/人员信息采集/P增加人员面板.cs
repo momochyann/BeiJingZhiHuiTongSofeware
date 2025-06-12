@@ -154,7 +154,20 @@ public class P增加人员面板 : PopPanelBase
     {
         var 应激事件消息 = ICan2List as PersonalPersonnelCrisisEventMessage;
         Debug.Log("编辑条目" + ICan2List);
-        ;
+        姓名输入框.text = 应激事件消息.name;
+        Debug.Log(应激事件消息.dateOfBirth);
+        出生日期输入框.text = 应激事件消息.dateOfBirth;
+ 
+        // 查找包含该部门名称的完整项目名称（格式：级别-部门名称）
+        int 部门索引 = 部门选择下拉框.items.FindIndex(item => item.itemName.EndsWith("-" + 应激事件消息.category));
+        if (部门索引 == -1)
+        {
+            // 如果没找到带前缀的，直接查找部门名称
+            部门索引 = 部门选择下拉框.items.FindIndex(item => item.itemName == 应激事件消息.category);
+        }
+        部门选择下拉框.ChangeDropdownInfo(部门索引);
+        Debug.Log("部门索引" + 部门索引);
+        
         性别选择.currentIndex = 应激事件消息.gender == "男" ? 0 : 1;
         状态选择.currentIndex = (int)应激事件消息.personalCrisisEventMessageFlag;
         //   应激事件属性下拉框.value = 应激事件属性下拉框.options.FindIndex(选项 => 选项.text == 应激事件消息.personalCrisisEventProperty.eventDescription);

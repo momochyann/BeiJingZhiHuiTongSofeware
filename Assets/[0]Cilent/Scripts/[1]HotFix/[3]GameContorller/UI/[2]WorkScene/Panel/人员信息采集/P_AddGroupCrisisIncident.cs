@@ -89,4 +89,13 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     {
 
     }
+    public override void 编辑条目(ICan2List ICan2List)
+    {
+        var 应激事件消息 = ICan2List as GroupCrisisIncident;
+        事件名称框.text = 应激事件消息.incidentName;
+        发生时间框.text = 应激事件消息.occurrenceTime;
+        发生地点框.text = 应激事件消息.occurrencePlace;
+        事件描述框.text = 应激事件消息.incidentDescription;
+        旧数据 = ICan2List;
+    }
 }
