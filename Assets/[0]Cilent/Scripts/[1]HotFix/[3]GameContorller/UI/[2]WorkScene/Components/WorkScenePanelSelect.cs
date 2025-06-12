@@ -176,26 +176,38 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
     async protected virtual UniTaskVoid Animation(int index)
     {
         await UniTask.Yield();
+        
+        // 无论移动方向如何，都要更新文字颜色
+        for (int i = 0; i < 栏目列表.Count; i++)
+        {
+            var textComponent = 栏目列表[i].button.GetComponentInChildren<Text>();
+            var tmpTextComponent = 栏目列表[i].button.GetComponentInChildren<TMPro.TMP_Text>();
+            
+            Color targetColor = (i == index) ? Color.white : new Color(0.2f, 0.2f, 0.2f, 1f); // 深灰色
+            
+            if (textComponent != null)
+            {
+                textComponent.DOColor(targetColor, 0.3f);
+            }
+            else if (tmpTextComponent != null)
+            {
+                tmpTextComponent.DOColor(targetColor, 0.3f);
+            }
+            else
+            {
+                Debug.LogWarning($"按钮 {栏目列表[i].button.name} 找不到Text或TMP_Text组件");
+            }
+        }
+        
         if (移动方向 == 提示移动方向.纬)
         {
             selectImageBack.transform.DOMoveX(栏目列表[index].button.transform.position.x, 0.3f);
-            for (int i = 0; i < 栏目列表.Count; i++)
-            {
-                if (i == index)
-                {
-                    栏目列表[i].button.GetComponentInChildren<Text>().DOColor(Color.white, 0.3f);
-                }
-                else
-                {
-                    栏目列表[i].button.GetComponentInChildren<Text>().DOColor(Color.black, 0.3f);
-                }
-            }
         }
         else if (移动方向 == 提示移动方向.经)
         {
             selectImageBack.transform.DOMoveY(栏目列表[index].button.transform.position.y, 0.3f);
-
         }
+        
         触发动画?.Invoke(index);
     }
     // Update is called once per frame

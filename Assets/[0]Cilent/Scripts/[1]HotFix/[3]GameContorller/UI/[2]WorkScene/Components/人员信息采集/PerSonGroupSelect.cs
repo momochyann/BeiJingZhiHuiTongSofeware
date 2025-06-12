@@ -44,10 +44,27 @@ public class PerSonGroupSelect : MonoBehaviour, IController
 
     void 切换动画(string 界面名称)
     {
-        Color 团体文字颜色 = 界面名称 == 团体界面名称 ? Color.white : Color.gray;
-        Color 个人文字颜色 = 界面名称 == 个人界面名称 ? Color.white : Color.gray;
-        团体按钮.GetComponentInChildren<TMP_Text>().DOColor(团体文字颜色, 0.3f);
-        个人按钮.GetComponentInChildren<TMP_Text>().DOColor(个人文字颜色, 0.3f);
+        Debug.Log($"切换动画 - 界面名称: {界面名称}, 团体界面名称: {团体界面名称}, 个人界面名称: {个人界面名称}");
+        
+        Color 深灰色 = new Color(0.2f, 0.2f, 0.2f, 1);  // 改为更深的灰色
+        Color 团体文字颜色 = 界面名称 == 团体界面名称 ? Color.white : 深灰色;
+        Color 个人文字颜色 = 界面名称 == 个人界面名称 ? Color.white : 深灰色;
+        
+        Debug.Log($"团体文字颜色: {团体文字颜色}, 个人文字颜色: {个人文字颜色}");
+        
+        var 团体文本组件 = 团体按钮.GetComponentInChildren<TMP_Text>();
+        var 个人文本组件 = 个人按钮.GetComponentInChildren<TMP_Text>();
+        
+        if (团体文本组件 != null)
+            团体文本组件.DOColor(团体文字颜色, 0.5f);
+        else
+            Debug.LogError("找不到团体按钮的文本组件");
+            
+        if (个人文本组件 != null)
+            个人文本组件.DOColor(个人文字颜色, 0.5f);
+        else
+            Debug.LogError("找不到个人按钮的文本组件");
+            
         选中图片.transform.DOMove(选中图片位置[界面名称 == 团体界面名称 ? 1 : 0].position, 0.3f);
     }
 
