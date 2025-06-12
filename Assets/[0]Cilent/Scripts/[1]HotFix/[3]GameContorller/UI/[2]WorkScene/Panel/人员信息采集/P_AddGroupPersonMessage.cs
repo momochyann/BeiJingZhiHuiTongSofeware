@@ -26,6 +26,7 @@ public class P_AddGroupPersonMessage : PopPanelBase
     [SerializeField] String 目标面板名称;
     GroupCrisisIncidentModel 团体事件数据;
     GroupCrisisIncident groupCrisisIncident => 团体事件数据.groupCrisisIncidents.Count > 0 ? 团体事件数据.groupCrisisIncidents[团体事件选择下拉框.selectedItemIndex] : null;
+    ICan2List 旧数据;
     protected override void Awake()
     {
         base.Awake();
@@ -119,16 +120,31 @@ public class P_AddGroupPersonMessage : PopPanelBase
     }
     public override void 编辑条目(ICan2List ICan2List)
     {
-        base.编辑条目(ICan2List);
-        // var 应激事件消息 = ICan2List as PersonalPersonnelCrisisEventMessage;
-        // Debug.Log("编辑条目" + ICan2List);
-        // 姓名输入框.text = 应激事件消息.name;
-        // 部门输入框.text = 应激事件消息.category;
-        // 出生日期输入框.text = 应激事件消息.dateOfBirth;
-        // 性别选择.currentIndex = 应激事件消息.gender == "男" ? 0 : 1;
-        // 状态选择.currentIndex = (int)应激事件消息.personalCrisisEventMessageFlag;
-        // 应激事件属性下拉框.value = 应激事件属性下拉框.options.FindIndex(选项 => 选项.text == 应激事件消息.personalCrisisEventProperty.eventDescription);
-        // 旧数据 = ICan2List;
+
+        var 应激事件消息 = ICan2List as GroupPersonnelCrisisEventMessage;
+        Debug.Log("编辑条目" + ICan2List);
+        姓名输入框.text = 应激事件消息.name;
+        int 部门索引 = 部门选择下拉框.items.FindIndex(item => item.itemName.EndsWith("-" + 应激事件消息.category));
+        if (部门索引 == -1)
+        {
+            // 如果没找到带前缀的，直接查找部门名称
+            部门索引 = 部门选择下拉框.items.FindIndex(item => item.itemName == 应激事件消息.category);
+        }
+        int 事件索引 = 团体事件选择下拉框.items.FindIndex(item => item.itemName == 应激事件消息.groupCrisisIncident.incidentName);
+        团体事件选择下拉框.ChangeDropdownInfo(事件索引);
+        团体事件选择下拉框.SetupDropdown();
+        部门选择下拉框.ChangeDropdownInfo(部门索引);
+        部门选择下拉框.SetupDropdown();
+
+        性别选择.currentIndex = 应激事件消息.gender == "男" ? 0 : 1;
+        接触时间框.text = 应激事件消息.EventContactTime;
+        备注输入框.text = 应激事件消息.notes;
+        事件描述输入框.text = 应激事件消息.Description;
+        受影响人员级别选择下拉框.ChangeDropdownInfo(应激事件消息.affectedLevelIndex);
+        受影响人员级别选择下拉框.SetupDropdown();
+        // 团体事件选择下拉框.ChangeDropdownInfo(团体事件数据.groupCrisisIncidents.FindIndex(item => item == 应激事件消息.groupCrisisIncident.incidentName));
+        // 团体事件选择下拉框.SetupDropdown();
+        旧数据 = ICan2List;
     }
     protected override bool 验证输入情况()
     {
