@@ -494,6 +494,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Func<object,object>
 	// System.Func<object>
 	// System.Linq.Buffer<Cysharp.Threading.Tasks.UniTask<object>>
+	// System.Linq.Buffer<object>
 	// System.Linq.Enumerable.<CastIterator>d__99<object>
 	// System.Linq.Enumerable.Iterator<Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.Iterator<object>
@@ -507,6 +508,19 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.Enumerable.WhereSelectEnumerableIterator<object,object>
 	// System.Linq.Enumerable.WhereSelectListIterator<object,Cysharp.Threading.Tasks.UniTask<object>>
 	// System.Linq.Enumerable.WhereSelectListIterator<object,object>
+	// System.Linq.EnumerableSorter<object,object>
+	// System.Linq.EnumerableSorter<object>
+	// System.Linq.GroupedEnumerable<object,object,object>
+	// System.Linq.IGrouping<object,object>
+	// System.Linq.IdentityFunction.<>c<object>
+	// System.Linq.IdentityFunction<object>
+	// System.Linq.Lookup.<GetEnumerator>d__12<object,object>
+	// System.Linq.Lookup.Grouping.<GetEnumerator>d__7<object,object>
+	// System.Linq.Lookup.Grouping<object,object>
+	// System.Linq.Lookup<object,object>
+	// System.Linq.OrderedEnumerable.<GetEnumerator>d__1<object>
+	// System.Linq.OrderedEnumerable<object,object>
+	// System.Linq.OrderedEnumerable<object>
 	// System.Predicate<System.ValueTuple<object,object>>
 	// System.Predicate<int>
 	// System.Predicate<object>
@@ -743,6 +757,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Cast<object>(System.Collections.IEnumerable)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.CastIterator<object>(System.Collections.IEnumerable)
 		// object System.Linq.Enumerable.FirstOrDefault<object>(System.Collections.Generic.IEnumerable<object>)
+		// System.Collections.Generic.IEnumerable<System.Linq.IGrouping<object,object>> System.Linq.Enumerable.GroupBy<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>)
+		// System.Linq.IOrderedEnumerable<object> System.Linq.Enumerable.OrderBy<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>)
 		// System.Collections.Generic.IEnumerable<Cysharp.Threading.Tasks.UniTask<object>> System.Linq.Enumerable.Select<object,Cysharp.Threading.Tasks.UniTask<object>>(System.Collections.Generic.IEnumerable<object>,System.Func<object,Cysharp.Threading.Tasks.UniTask<object>>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Select<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>)
 		// Cysharp.Threading.Tasks.UniTask<object>[] System.Linq.Enumerable.ToArray<Cysharp.Threading.Tasks.UniTask<object>>(System.Collections.Generic.IEnumerable<Cysharp.Threading.Tasks.UniTask<object>>)

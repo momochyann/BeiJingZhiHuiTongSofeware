@@ -108,9 +108,17 @@ public class EntryDisPanelNew : MonoBehaviour, IController
                 return;
             var entry = Instantiate(entryPfb, entryBox.transform);
             entry.GetComponent<IEntry>().DisEntry(当前展示条目序号列表[i]);
+            展示动画(entry,i-(页面索引 - 1) * pageSize);
         }
     }
+    void 展示动画(GameObject entry,int index)
+    {
+        var canvasGroup = entry.AddComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+       // index = Mathf.Clamp(index,0,3);
+        canvasGroup.DOFade(1, 0.5f).SetDelay(index * 0.05f);
 
+    }
     private void OnModelChange(Can2ListModelChangeEvent _event)
     {
         Debug.Log("修改数据并显示");

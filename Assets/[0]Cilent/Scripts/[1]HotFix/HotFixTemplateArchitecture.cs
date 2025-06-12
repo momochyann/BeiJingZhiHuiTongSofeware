@@ -31,6 +31,7 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterUtility(new AudioRecorderUtility());
         this.GetUtility<AudioRecorderUtility>().Init();
         RegisterUtility(new ImagePickerUtility());
+        RegisterUtility(new JsonDataUtility());
     }
 
 }
