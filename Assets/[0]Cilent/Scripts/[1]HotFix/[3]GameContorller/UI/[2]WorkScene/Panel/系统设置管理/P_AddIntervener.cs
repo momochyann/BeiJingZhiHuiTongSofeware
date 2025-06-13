@@ -14,11 +14,11 @@ public class P_AddIntervener : PopPanelBase
     [必填InputField("密码不能为空")]
     InputField 密码输入框;
     InputField 确认密码输入框;
-    [必填InputField("邮箱不能为空")]
+   // [必填InputField("邮箱不能为空")]
     InputField 邮箱输入框;
     [必填InputField("电话不能为空")]
     InputField 电话输入框;
-    [必填InputField("简介不能为空")]
+    //[必填InputField("简介不能为空")]
     InputField 简介输入框;
     [必填InputField("用户名不能为空")]
     InputField 用户名输入框;
