@@ -29,8 +29,4 @@ public class H_显示名称 : MonoBehaviour
         总称文本框.text = $"{单位名称值}-{软件名称值}";
     }
 
-    void Update()
-    {
-
-    }
 }

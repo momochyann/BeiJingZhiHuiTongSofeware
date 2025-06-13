@@ -25,6 +25,8 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
     {
         var index = this.GetSystem<WorkSceneSystem>().WorkSceneIndex;
         Debug.Log("index: " + index);
+        if (index <= 0)
+            index = 1;
         加载界面(界面名称[index - 1]).Forget();
         // await UniTask.Delay(500);
 

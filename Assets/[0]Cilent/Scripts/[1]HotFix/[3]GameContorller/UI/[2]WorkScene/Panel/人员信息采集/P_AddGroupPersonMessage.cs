@@ -8,17 +8,18 @@ using DG.Tweening;
 using System;
 using System.Linq;
 using Michsky.MUIP;
+using TMPro;
 public class P_AddGroupPersonMessage : PopPanelBase
 {
     [必填InputField("姓名不能为空")]
-    InputField 姓名输入框;
+    TMP_InputField 姓名输入框;
     CustomDropdown 部门选择下拉框;
     [必填InputField("接触时间不能为空")]
-    InputField 接触时间框;
+    TMP_InputField 接触时间框;
 
-    InputField 备注输入框;
+    TMP_InputField 备注输入框;
     [必填InputField("事件描述不能为空")]
-    InputField 事件描述输入框;
+    TMP_InputField 事件描述输入框;
     ToggleColumn 性别选择;
     [SerializeField] CustomDropdown 团体事件选择下拉框;
     [SerializeField] CustomDropdown 受影响人员级别选择下拉框;
@@ -30,12 +31,12 @@ public class P_AddGroupPersonMessage : PopPanelBase
     protected override void Awake()
     {
         base.Awake();
-        姓名输入框 = 弹出页面.transform.Find("姓名栏/输入框").GetComponent<InputField>();
+        姓名输入框 = 弹出页面.transform.Find("姓名栏/输入框").GetComponent<TMP_InputField>();
         部门选择下拉框 = 弹出页面.transform.Find("部门栏/下拉选择框").GetComponent<CustomDropdown>();
         //  部门输入框 = 弹出页面.transform.Find("部门栏/输入框").GetComponent<InputField>();
-        接触时间框 = 弹出页面.transform.Find("接触时间栏/输入框").GetComponent<InputField>();
-        备注输入框 = 弹出页面.transform.Find("备注栏/输入框").GetComponent<InputField>();
-        事件描述输入框 = 弹出页面.transform.Find("事件描述栏/输入框").GetComponent<InputField>();
+        接触时间框 = 弹出页面.transform.Find("接触时间栏/输入框").GetComponent<TMP_InputField>();
+        备注输入框 = 弹出页面.transform.Find("备注栏/输入框").GetComponent<TMP_InputField>();
+        事件描述输入框 = 弹出页面.transform.Find("事件描述栏/输入框").GetComponent<TMP_InputField>();
         性别选择 = 弹出页面.transform.Find("性别栏").GetComponent<ToggleColumn>();
         弹出页面.transform.Find("保存按钮").GetComponent<Button>().onClick.AddListener(保存数据按钮监听);
         团体事件数据 = this.GetModel<GroupCrisisIncidentModel>();

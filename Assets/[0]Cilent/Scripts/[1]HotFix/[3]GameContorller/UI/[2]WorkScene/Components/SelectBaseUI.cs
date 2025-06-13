@@ -37,6 +37,7 @@ public class SelectBaseUI : MonoBehaviour, IController
         else
         {
             currentPanel = transform.parent.parent.gameObject;
+            Debug.Log("currentPanel: " + currentPanel.name);
         }
     }
 
@@ -58,7 +59,7 @@ public class SelectBaseUI : MonoBehaviour, IController
 
     private void OnButton1Click()
     {
-        Transform parent = isOurSelf ? FindObjectOfType<Canvas>().transform : transform.parent;
+        Transform parent = FindObjectsOfType<Canvas>().Where(c => c.gameObject.name == "Canvas").FirstOrDefault().transform;
         var _InstalPanel = Instantiate(panel1Pfb, parent);
         Animation(1).Forget();
         if (currentPanel != null)

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using QFramework;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Michsky.MUIP;
 public class P_AddGroupPersonCrisislncideMore : PopPanelBase
 {
     // Start is called before the first frame update
-    [SerializeField] Button 导出模板按钮;
-    [SerializeField] Button 导入模板按钮;
+    [SerializeField] ButtonManager 导出模板按钮;
+    [SerializeField] ButtonManager 导入模板按钮;
     GroupPersonnelCrisisEventMessageModel groupPersonnelCrisisEventMessageModel;
 
     void Start()
