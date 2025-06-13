@@ -8,10 +8,6 @@ using UnityEngine.UI;
 public class H_显示名称 : MonoBehaviour
 {
     
-    void Awake()
-    {
-       
-    }
 
     public TMP_Text 总称文本框;
 
@@ -25,6 +21,8 @@ public class H_显示名称 : MonoBehaviour
     {
         string 单位名称值 = PlayerPrefs.GetString("单位名称", "");
         string 软件名称值 = PlayerPrefs.GetString("软件名称", "");
+        if (单位名称值 == "" || 软件名称值 == "")
+        return;
         // 设置标题
         总称文本框.text = $"{单位名称值}-{软件名称值}";
     }
