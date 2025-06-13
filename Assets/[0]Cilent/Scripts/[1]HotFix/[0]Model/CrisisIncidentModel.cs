@@ -72,7 +72,7 @@ public class GroupCrisisIncidentModel : CrisisIncidentBaseModel<GroupCrisisIncid
     {
          base.OnInit();
     }
-        protected override List<int> OnSearchByName(string keyword)
+    protected override List<int> OnSearchByName(string keyword)
     {
         List<int> indexList = new List<int>();
         for (int i = 0; i < dataList.Count; i++)
@@ -86,4 +86,37 @@ public class GroupCrisisIncidentModel : CrisisIncidentBaseModel<GroupCrisisIncid
     }
 }
 
+public class 干预实施团队 : ICan2List
+{
+    public string 组别名称 { get; set; }
+    public string 主干预人员 { get; set; }
+    public string 助理人员 { get; set; }
+    public List<GroupPersonnelCrisisEventMessage> 人员列表 { get; set; }
+    public string 备注 { get; set; }
+}
 
+public class 干预实施Model : CrisisIncidentBaseModel<干预实施团队>
+{
+    public List<干预实施团队> 干预实施列表 => dataList;
+    protected override string GetStorageKey()
+    {
+        return "干预实施";
+    }
+    protected override void OnInit()
+    {
+        base.OnInit();
+    }
+     protected override List<int> OnSearchByName(string keyword)
+    {
+        List<int> indexList = new List<int>();
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            if (dataList[i].组别名称.Contains(keyword))
+            {
+                indexList.Add(i);
+            }
+        }
+        return indexList;
+    }
+    
+}

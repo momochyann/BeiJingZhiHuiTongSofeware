@@ -13,15 +13,22 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
     [SerializeField] Button 情绪放松按钮;
     [SerializeField] TMP_Text 已选择人员;
     [SerializeField] TMP_Text 干预者;
-    [SerializeField] Button 人员确定按钮;
     PersonalPersonnelCrisisEventMessage 当前人员;
     EntryDisPanelNew entryDisPanel;
+    private IEntry[] currentEntries;
+    private bool isWatching = false;
     void Start()
     {
         开始评估按钮.onClick.AddListener(开始评估按钮监听);
-        人员确定按钮.onClick.AddListener(人员确定按钮监听);
         情绪放松按钮.onClick.AddListener(情绪放松按钮监听);
         干预者.text = this.GetSystem<WorkSceneSystem>().干预者;
+        DelayedInit().Forget();
+
+    }
+    async UniTaskVoid DelayedInit()
+    {
+        await UniTask.Delay(500); // 0.5秒
+        选择人员();
     }
 
     private async void 情绪放松按钮监听()
@@ -30,6 +37,37 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
         var pfb = await model.LoadPfb("情绪放松");
         var emotionalRelaxationPanel = Instantiate(pfb, transform.parent);
         Destroy(gameObject.transform.gameObject);
+    }
+    async UniTaskVoid WatchEntries()
+    {
+        isWatching = true;
+        var cancellationToken = this.GetCancellationTokenOnDestroy();
+        
+        while (isWatching && !cancellationToken.IsCancellationRequested)
+        {
+            await UniTask.Delay(200, cancellationToken: cancellationToken); // 每0.2秒检测一次
+            
+            if (entryDisPanel != null && currentEntries != null)
+            {
+                // 检测当前entries是否被销毁
+                bool entriesDestroyed = false;
+                foreach (IEntry entry in currentEntries)
+                {
+                    if (entry == null || (entry is MonoBehaviour mono && mono == null))
+                    {
+                        entriesDestroyed = true;
+                        break;
+                    }
+                }
+                
+                if (entriesDestroyed)
+                {
+                    Debug.Log("检测到entries被销毁，重新获取并绑定");
+                    await UniTask.Delay(500, cancellationToken: cancellationToken); // 等待新entries生成
+                    选择人员();
+                }
+            }
+        }
     }
 
     void 开始评估按钮监听()
@@ -41,22 +79,49 @@ public class IndividualInterventionSelectPanel : MonoBehaviour, IController
         开始评估().Forget();
 
     }
-    void 人员确定按钮监听()
+    void 选择人员()
     {
         if (entryDisPanel == null)
         {
             entryDisPanel = FindObjectOfType<EntryDisPanelNew>();
         }
+        
+        if (entryDisPanel == null) return;
+        
         IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
         foreach (IEntry entry in entries)
         {
-            if (entry.IsChoose)
+            if (entry is MonoBehaviour entryMono)
             {
-                PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
-                已选择人员.text = personalPersonnelCrisisEventMessage.name;
-                当前人员 = personalPersonnelCrisisEventMessage;
-                WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
-                return;
+                Toggle toggle = entryMono.GetComponentInChildren<Toggle>();
+                if (toggle != null)
+                {
+                    // 清除旧的监听器，避免重复绑定
+                    toggle.onValueChanged.RemoveAllListeners();
+                    
+                    toggle.onValueChanged.AddListener((bool isOn) => {
+                        PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
+                        
+                        if (isOn && entry.IsChoose)
+                        {
+                            foreach (IEntry otherEntry in entries)
+                            {
+                                if (otherEntry != entry && otherEntry.IsChoose)
+                                {
+                                    otherEntry.IsChoose = false;
+                                }
+                            }
+                            已选择人员.text = personalPersonnelCrisisEventMessage.name;
+                            当前人员 = personalPersonnelCrisisEventMessage;
+                            WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
+                        }
+                        else
+                        {
+                            已选择人员.text = "待选择";
+                            WorkSceneManager.Instance.加载提示("人员去除成功").Forget();
+                        }
+                    });
+                }
             }
         }
     }
