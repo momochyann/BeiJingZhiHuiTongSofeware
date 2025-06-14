@@ -13,6 +13,9 @@ public class AudioRecorderUtility : IUtility
     private AudioClip recordedClip;
     private bool isRecording = false;
     private string microphoneName;
+    private int recordingStartTime; // 记录开始录音时的Microphone位置
+    private int frequency = 44100; // 记录采样率
+    
     public void Init()
     {
         // 获取默认麦克风
@@ -50,8 +53,10 @@ public class AudioRecorderUtility : IUtility
         
         try
         {
+            this.frequency = frequency; // 保存采样率
             // 开始录音：设备名，是否循环，录音时长（秒），采样率
             recordedClip = Microphone.Start(microphoneName, false, maxRecordTime, frequency);
+            recordingStartTime = Microphone.GetPosition(microphoneName); // 记录开始位置
             isRecording = true;
             Debug.Log("开始录音");
             return true;
@@ -78,12 +83,27 @@ public class AudioRecorderUtility : IUtility
         
         try
         {
+            // 获取录音结束时的位置
+            int recordingEndTime = Microphone.GetPosition(microphoneName);
             Microphone.End(microphoneName);
             isRecording = false;
             Debug.Log("停止录音");
             
-            // 保存音频文件
-            string savedPath = SaveAudioToFile(fileName);
+            // 计算实际录音长度
+            int actualRecordingSamples = recordingEndTime - recordingStartTime;
+            if (actualRecordingSamples < 0)
+            {
+                // 处理循环录音的情况（虽然我们设置的是false，但以防万一）
+                actualRecordingSamples = recordedClip.samples + actualRecordingSamples;
+            }
+            
+            Debug.Log($"录音样本数: {actualRecordingSamples}, 录音时长: {(float)actualRecordingSamples / frequency}秒");
+            
+            // 裁剪音频到实际录音长度
+            AudioClip trimmedClip = TrimAudioClip(recordedClip, actualRecordingSamples);
+            
+            // 保存裁剪后的音频文件
+            string savedPath = SaveAudioToFile(trimmedClip, fileName);
             return savedPath;
         }
         catch (System.Exception e)
@@ -121,15 +141,62 @@ public class AudioRecorderUtility : IUtility
     {
         if (isRecording && !string.IsNullOrEmpty(microphoneName))
         {
-            return (float)Microphone.GetPosition(microphoneName) / 44100f; // 假设采样率为44100
+            int currentPosition = Microphone.GetPosition(microphoneName);
+            int recordedSamples = currentPosition - recordingStartTime;
+            if (recordedSamples < 0)
+            {
+                recordedSamples = recordedClip.samples + recordedSamples;
+            }
+            return (float)recordedSamples / frequency;
         }
         return 0f;
     }
     
-
-    private string SaveAudioToFile(string fileName)
+    /// <summary>
+    /// 裁剪AudioClip到指定的样本数量
+    /// </summary>
+    /// <param name="originalClip">原始音频剪辑</param>
+    /// <param name="sampleCount">要保留的样本数量</param>
+    /// <returns>裁剪后的AudioClip</returns>
+    private AudioClip TrimAudioClip(AudioClip originalClip, int sampleCount)
     {
-        if (recordedClip == null)
+        if (originalClip == null || sampleCount <= 0)
+        {
+            Debug.LogError("无效的音频剪辑或样本数量");
+            return originalClip;
+        }
+        
+        // 确保样本数量不超过原始音频的长度
+        sampleCount = Mathf.Min(sampleCount, originalClip.samples);
+        
+        // 创建新的AudioClip
+        AudioClip trimmedClip = AudioClip.Create(
+            "TrimmedRecording", 
+            sampleCount, 
+            originalClip.channels, 
+            originalClip.frequency, 
+            false
+        );
+        
+        // 获取原始音频数据
+        float[] originalData = new float[originalClip.samples * originalClip.channels];
+        originalClip.GetData(originalData, 0);
+        
+        // 裁剪数据
+        float[] trimmedData = new float[sampleCount * originalClip.channels];
+        Array.Copy(originalData, trimmedData, trimmedData.Length);
+        
+        // 设置裁剪后的数据
+        trimmedClip.SetData(trimmedData, 0);
+        
+        Debug.Log($"音频裁剪完成: 原始长度 {originalClip.length}秒, 裁剪后长度 {trimmedClip.length}秒");
+        
+        return trimmedClip;
+    }
+
+    private string SaveAudioToFile(AudioClip clipToSave, string fileName)
+    {
+        if (clipToSave == null)
         {
             Debug.LogError("没有录音数据可保存");
             return null;
@@ -168,9 +235,9 @@ public class AudioRecorderUtility : IUtility
             }
             
             // 保存为WAV文件
-            SavWav.Save(filePath, recordedClip);
+            SavWav.Save(filePath, clipToSave);
             
-            Debug.Log($"录音已保存到: {filePath}");
+            Debug.Log($"录音已保存到: {filePath}, 时长: {clipToSave.length}秒");
             return filePath;
         }
         catch (System.Exception e)

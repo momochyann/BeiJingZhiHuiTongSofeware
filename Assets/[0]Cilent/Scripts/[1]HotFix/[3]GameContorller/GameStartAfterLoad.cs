@@ -14,6 +14,7 @@ public class GameStartAfterLoad : MonoBehaviour, IController
     }
     async void GameLoadedInit()
     {
+        Application.targetFrameRate = 120;
         Debug.Log("GameHotedInit4");
         await WaitLoadAnimation(this.GetCancellationTokenOnDestroy());
         Debug.Log("加载数据完成22");
@@ -24,15 +25,7 @@ public class GameStartAfterLoad : MonoBehaviour, IController
         // 如果需要，生成清单文件
         excelReader.GenerateExcelManifest();
         this.GetModel<PersonalPersonnelCrisisEventMessageModel>();
-        await this.GetModel<YooAssetPfbModel>().LoadPfb("人员信息采集界面");
-        await this.GetModel<YooAssetPfbModel>().LoadPfb("危机评估预警界面");
-        await this.GetModel<YooAssetPfbModel>().LoadPfb("危机干预实施选择界面");
-        await this.GetModel<YooAssetPfbModel>().LoadPfb("危机档案管理选择界面");
-        await this.GetModel<YooAssetPfbModel>().LoadPfb("干预资源库面板");
-       // await this.GetModel<YooAssetPfbModel>().LoadPfb("系统设置管理界面");
-        //初始化录音工具
-        //this.GetUtility<AudioRecorderUtility>().Init();
-
+        await 加载UI下所有预制体();
         await UniTask.Delay(1000);
       
 
@@ -47,6 +40,16 @@ public class GameStartAfterLoad : MonoBehaviour, IController
         {
             await UniTask.Delay(100, cancellationToken: cancellationToken);
         }
+    }
+    async UniTask 加载UI下所有预制体()
+    {
+      //  yoo
+      var uiAssetNames = LoadYooAssetsTool.GetAssetInfosByTag("UI");
+      foreach (var assetName in uiAssetNames)
+      {
+        var finalPath = assetName.Replace("_PC", "").Replace("_Mobile", "");
+        await this.GetModel<YooAssetPfbModel>().LoadPfb(finalPath);
+      }
     }
     public IArchitecture GetArchitecture()
     {

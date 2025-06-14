@@ -52,8 +52,17 @@ public class GroupCrisisIncidentEntry : MonoBehaviour, IController, IEntry
     async UniTaskVoid LoadImage(string imageURL)
     {
         if (string.IsNullOrEmpty(imageURL)) return;
-        var sprite = await this.GetModel<YooAssetPfbModel>().LoadConfig<Sprite>(imageURL);
+        var texture = await this.GetUtility<ImagePickerUtility>().LoadImageFromCacheAsync(imageURL);
+        // 创建Sprite并显示
+        if (texture == null) return;
+        Sprite sprite = Sprite.Create(
+            texture,
+            new Rect(0, 0, texture.width, texture.height),
+            new Vector2(0.5f, 0.5f)
+        );
         image.sprite = sprite;
+        image.preserveAspect = true;
+        image.color = Color.white; // 确保显示正常颜色
     }
     public bool IsChoose { get => chooseToggle.isOn; set => chooseToggle.isOn = value; }
     public ICan2List can2ListValue { get => _can2List; set => _can2List = value; }

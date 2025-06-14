@@ -172,7 +172,12 @@ public class 图片选择组件 : MonoBehaviour, IController
         
         return null;
     }
-    
+    public string GetCurrentImageCacheName()
+    {
+        var imageUtility = this.GetUtility<ImagePickerUtility>();
+        string lastImageName = imageUtility.GetLastImageRecord();
+        return lastImageName;
+    }
     private void OnDestroy()
     {
         // 清理纹理资源

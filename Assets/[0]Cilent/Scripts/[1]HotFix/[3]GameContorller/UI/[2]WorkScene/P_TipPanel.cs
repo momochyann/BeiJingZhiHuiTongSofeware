@@ -5,11 +5,11 @@ using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
-
+using TMPro;
 public class P_TipPanel : PopPanelBase
 {
     // Start is called before the first frame update
-    [SerializeField] Text 提示文本;
+    [SerializeField] TMP_Text 提示文本;
     public UnityAction 确认回调;
     [SerializeField] Button 确认按钮;
     [SerializeField] Button 取消按钮;

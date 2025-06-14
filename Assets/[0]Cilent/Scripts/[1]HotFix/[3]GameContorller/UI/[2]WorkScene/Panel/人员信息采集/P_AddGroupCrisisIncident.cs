@@ -13,13 +13,14 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     // Start is called before the first frame update
     [必填InputField("事件名称不能为空")]
     TMP_InputField 事件名称框;
-    [必填InputField("发生时间不能为空"),SerializeField]
+    [必填InputField("发生时间不能为空"), SerializeField]
     TMP_InputField 发生时间框;
     // [必填InputField("发生地点不能为空")]
     TMP_InputField 发生地点框;
     // [必填InputField("事件描述不能为空")]
     TMP_InputField 事件描述框;
-    [SerializeField] Image 相关素材图片;
+
+    [SerializeField] 图片选择组件 相关素材图片;
     Button 下一步按钮;
 
     Button 取消按钮;
@@ -29,7 +30,7 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     {
         base.Awake();
         事件名称框 = 弹出页面.transform.Find("事件名称栏/输入框").GetComponent<TMP_InputField>();
-       // 发生时间框 = 弹出页面.transform.Find("发生时间栏/输入框").GetComponent<TMP_InputField>();
+        // 发生时间框 = 弹出页面.transform.Find("发生时间栏/输入框").GetComponent<TMP_InputField>();
         发生地点框 = 弹出页面.transform.Find("发生地点栏/输入框").GetComponent<TMP_InputField>();
         事件描述框 = 弹出页面.transform.Find("事件描述栏/输入框").GetComponent<TMP_InputField>();
         //    相关素材图片 = 弹出页面.transform.Find("相关素材栏").GetComponent<Image>();
@@ -59,7 +60,7 @@ public class P_AddGroupCrisisIncident : PopPanelBase
         groupCrisisIncident.occurrenceTime = 发生时间框.text;
         groupCrisisIncident.occurrencePlace = 发生地点框.text;
         groupCrisisIncident.incidentDescription = 事件描述框.text;
-
+        groupCrisisIncident.incidentImageURL = 相关素材图片.GetCurrentImageCacheName() == null ? "" : 相关素材图片.GetCurrentImageCacheName();
         var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("增加事件面板2");
         弹出页面.GetComponent<CanvasGroup>().DOFade(0, 0.3f).OnComplete(() =>
         {
