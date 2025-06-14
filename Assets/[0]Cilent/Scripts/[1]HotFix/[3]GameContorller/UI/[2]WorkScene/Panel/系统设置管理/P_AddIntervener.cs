@@ -5,28 +5,29 @@ using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System.Linq;
+using TMPro;
 
 public class P_AddIntervener : PopPanelBase
 {
     // Start is called before the first frame update
-    [必填InputField("姓名不能为空")]
-    InputField 姓名输入框;
-    [必填InputField("密码不能为空")]
-    InputField 密码输入框;
-    InputField 确认密码输入框;
-    [必填InputField("邮箱不能为空")]
-    InputField 邮箱输入框;
-    [必填InputField("电话不能为空")]
-    InputField 电话输入框;
-    [必填InputField("简介不能为空")]
-    InputField 简介输入框;
-    [必填InputField("用户名不能为空")]
-    InputField 用户名输入框;
+    [必填InputField("姓名不能为空!")]
+    TMP_InputField 姓名输入框;
+    [必填InputField("密码不能为空!")]
+    TMP_InputField 密码输入框;
+    TMP_InputField 确认密码输入框;
+   // [必填InputField("邮箱不能为空")]
+    TMP_InputField 邮箱输入框;
+    [必填InputField("电话不能为空!")]
+    TMP_InputField 电话输入框;
+    //[必填InputField("简介不能为空")]
+    TMP_InputField 简介输入框;
+    [必填InputField("用户名不能为空!")]
+    TMP_InputField 用户名输入框;
     ToggleColumn 性别选择;
 
     Dropdown 应激事件属性下拉框;
     ICan2List 旧数据;
-    Text 提示信息;
+    TMP_Text 提示信息;
     [SerializeField] Image 密码输入框背景;
     [SerializeField] Image 确认密码输入框背景;
 
@@ -37,28 +38,28 @@ public class P_AddIntervener : PopPanelBase
     protected override void Awake()
     {
         base.Awake();
-        姓名输入框 = 弹出页面.transform.Find("姓名栏/输入框").GetComponent<InputField>();
-        密码输入框 = 弹出页面.transform.Find("密码栏/输入框").GetComponent<InputField>();
-        确认密码输入框 = 弹出页面.transform.Find("确认密码栏/输入框").GetComponent<InputField>();
-        邮箱输入框 = 弹出页面.transform.Find("邮箱栏/输入框").GetComponent<InputField>();
-        电话输入框 = 弹出页面.transform.Find("电话栏/输入框").GetComponent<InputField>();
-        简介输入框 = 弹出页面.transform.Find("简介栏/输入框").GetComponent<InputField>();
-        用户名输入框 = 弹出页面.transform.Find("用户名栏/输入框").GetComponent<InputField>();
+        姓名输入框 = 弹出页面.transform.Find("姓名栏/输入框").GetComponent<TMP_InputField>();
+        密码输入框 = 弹出页面.transform.Find("密码栏/输入框").GetComponent<TMP_InputField>();
+        确认密码输入框 = 弹出页面.transform.Find("确认密码栏/输入框").GetComponent<TMP_InputField>();
+        邮箱输入框 = 弹出页面.transform.Find("邮箱栏/输入框").GetComponent<TMP_InputField>();
+        电话输入框 = 弹出页面.transform.Find("电话栏/输入框").GetComponent<TMP_InputField>();
+        简介输入框 = 弹出页面.transform.Find("简介栏/输入框").GetComponent<TMP_InputField>();
+        用户名输入框 = 弹出页面.transform.Find("用户名栏/输入框").GetComponent<TMP_InputField>();
         性别选择 = 弹出页面.transform.Find("性别栏").GetComponent<ToggleColumn>();
         
         // 获取提示信息文本和输入框背景
-        提示信息 = 弹出页面.transform.Find("提示信息").GetComponent<Text>();
+        提示信息 = 弹出页面.transform.Find("提示信息").GetComponent<TMP_Text>();
       
         
         // 初始化提示信息
         提示信息.text = "";
         
         // 添加密码输入限制
-        密码输入框.contentType = InputField.ContentType.Password;
+        密码输入框.contentType = TMP_InputField.ContentType.Password;
         密码输入框.characterLimit = 8;  // 限制最多输入8个字符
         
         // 添加确认密码输入限制
-        确认密码输入框.contentType = InputField.ContentType.Password;
+        确认密码输入框.contentType = TMP_InputField.ContentType.Password;
         确认密码输入框.characterLimit = 8;  // 限制最多输入8个字符
         
         // 添加密码输入框的实时验证
