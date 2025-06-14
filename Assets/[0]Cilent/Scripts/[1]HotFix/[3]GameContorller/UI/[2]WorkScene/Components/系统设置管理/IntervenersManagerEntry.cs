@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
+using TMPro;
 
 
 public class IntervenersManagerEntry : MonoBehaviour, IController, IEntry
 {
     [SerializeField]
-    Text 姓名;
+    TMP_Text 姓名;
     [SerializeField]
-    Text 性别;
+    TMP_Text 性别;
     [SerializeField]
-    Text 电话;
+    TMP_Text 电话;
     [SerializeField]
-    Text 邮箱;
+    TMP_Text 邮箱;
     [SerializeField]
-    Text 简介;
+    TMP_Text 简介;
     [SerializeField]
-    Text 用户名;
+    TMP_Text 用户名;
     [SerializeField]
 
     Toggle chooseToggle;

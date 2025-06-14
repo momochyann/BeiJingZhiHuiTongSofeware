@@ -17,6 +17,11 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
     {
         界面生成节点 = GameObject.Find("界面生成节点");
         LoadPanel().Forget();
+        var 当前干预人员名称 = PlayerPrefs.GetString("当前干预人员")        ;
+        if (!string.IsNullOrEmpty(当前干预人员名称))
+        {
+            干预者 = 当前干预人员名称;
+        }
         Debug.Log("WorkSceneManager Start");
     }
 
