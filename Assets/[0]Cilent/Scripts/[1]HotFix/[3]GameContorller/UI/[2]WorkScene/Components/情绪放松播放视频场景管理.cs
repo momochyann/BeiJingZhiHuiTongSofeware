@@ -45,7 +45,10 @@ public class 情绪放松播放视频场景管理 : PanelBase
         // 获取StreamingAssets中视频文件的路径
         //  string videoPath = GetStreamingAssetsPath(videoFileName);
         var video = await this.GetModel<YooAssetPfbModel>().LoadConfig<VideoClip>(videoDisplayNames[index], true);
-
+        if (video == null)
+        {
+            return;
+        }
         if (videoPlayer != null)
         {
             // 设置视频源为URL
@@ -61,7 +64,7 @@ public class 情绪放松播放视频场景管理 : PanelBase
             {
                 await UniTask.Yield();
             }
-            
+
             // 播放视频
             videoPlayer.Play();
 
