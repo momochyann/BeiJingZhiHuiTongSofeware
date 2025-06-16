@@ -119,12 +119,12 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
                 {
                     Toggle toggle = entryMono.GetComponentInChildren<Toggle>();
                     if (toggle != null)
-                    {
+                {
                         // 清除旧的监听器，避免重复绑定
                         toggle.onValueChanged.RemoveAllListeners();
                         
                         toggle.onValueChanged.AddListener((bool isOn) => {
-                            PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
+                    PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
                             
                             if (isOn && entry.IsChoose)
                             {
@@ -137,9 +137,9 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
                                     }
                                 }
                                 
-                                已选择人员.text = personalPersonnelCrisisEventMessage.name;
-                                当前人员 = personalPersonnelCrisisEventMessage;
-                                WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
+                    已选择人员.text = personalPersonnelCrisisEventMessage.name;
+                    当前人员 = personalPersonnelCrisisEventMessage;
+                    WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
                             }
                             else if (!isOn)
                             {
@@ -148,8 +148,8 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
                                 WorkSceneManager.Instance.加载提示("人员去除成功").Forget();
                             }
                         });
-                    }
                 }
+            }
             }
             break; // 找到目标面板后退出循环
         }
@@ -181,7 +181,7 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
     {
         isWatching = false;
     }
-    
+
     public IArchitecture GetArchitecture()
     {
         return HotFixTemplateArchitecture.Interface;

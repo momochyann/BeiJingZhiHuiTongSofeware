@@ -24,6 +24,7 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterModel(new IndividualInterventionArchiveModel());
         RegisterModel(new IntervenersModel());
         RegisterModel(new 部门数据Model());
+        RegisterModel(new 干预实施Model());
 
         RegisterUtility(new Storage());
         RegisterUtility(new ExcelReader());
