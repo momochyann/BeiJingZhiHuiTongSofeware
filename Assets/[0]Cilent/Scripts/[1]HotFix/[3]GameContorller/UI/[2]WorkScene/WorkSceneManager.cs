@@ -33,7 +33,7 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
         if (index <= 0)
             index = 1;
         加载界面(界面名称[index - 1]).Forget();
-        // await UniTask.Delay(500);
+        //await UniTask.Delay(500);
 
         // workScenePanelSelect = FindObjectOfType<WorkScenePanelSelect>();
         // Debug.Log("workScenePanelSelect: " + workScenePanelSelect.gameObject.name);
@@ -65,10 +65,39 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
 
     async public UniTaskVoid 加载提示(string 提示文本内容)
     {
-        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("通知");
-        var 通知 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<通知控制>();
-        await UniTask.Delay(10); ;
-        通知.播送通知("操作提示", 提示文本内容);
+        try
+        {
+            Debug.Log($"开始加载提示: {提示文本内容}");
+            var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("通知");
+            if (pfb == null)
+            {
+                Debug.LogError("通知预制体加载失败");
+                return;
+            }
+            Debug.Log("通知预制体加载成功");
+            
+            var canvas = FindObjectOfType<Canvas>();
+            if (canvas == null)
+            {
+                Debug.LogError("未找到Canvas");
+                return;
+            }
+            
+            var 通知 = Instantiate(pfb, canvas.transform).GetComponent<通知控制>();
+            if (通知 == null)
+            {
+                Debug.LogError("未找到通知控制组件");
+                return;
+            }
+            
+            await UniTask.Delay(10);
+            通知.播送通知("操作提示", 提示文本内容);
+            Debug.Log($"提示已显示: {提示文本内容}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"加载提示时发生错误: {e.Message}\n{e.StackTrace}");
+        }
     }
     async public UniTaskVoid 加载确认提示(string 提示文本内容, string 跳转面板名称, UnityAction 确认回调)
     {

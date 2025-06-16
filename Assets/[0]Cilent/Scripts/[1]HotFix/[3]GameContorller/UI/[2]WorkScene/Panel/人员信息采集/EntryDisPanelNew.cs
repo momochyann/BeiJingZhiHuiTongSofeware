@@ -44,25 +44,86 @@ public class EntryDisPanelNew : MonoBehaviour, IController
     async UniTaskVoid InitAsync()
     {
         var cancellationToken = this.GetCancellationTokenOnDestroy();
-        Debug.Log("gameObject:"+gameObject.name);
-        entryPfb = await this.GetModel<YooAssetPfbModel>().LoadPfb(pfbName);
-        pagePromptBoxPfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("PagePromptBox");
+        Debug.Log($"InitAsync开始 - GameObject: {gameObject.name}");
+
+        if (string.IsNullOrEmpty(pfbName))
+        {
+            Debug.LogError("pfbName为空");
+            return;
+        }
+
+        var yooAssetPfbModel = this.GetModel<YooAssetPfbModel>();
+        if (yooAssetPfbModel == null)
+        {
+            Debug.LogError("YooAssetPfbModel为空");
+            return;
+        }
+
+        entryPfb = await yooAssetPfbModel.LoadPfb(pfbName);
+        if (entryPfb == null)
+        {
+            Debug.LogError($"加载预制体失败: {pfbName}");
+            return;
+        }
+
+        pagePromptBoxPfb = await yooAssetPfbModel.LoadPfb("PagePromptBox");
+        if (pagePromptBoxPfb == null)
+        {
+            Debug.LogError("加载PagePromptBox预制体失败");
+            return;
+        }
+
+        if (BeforePageButton == null)
+        {
+            Debug.LogError("BeforePageButton为空");
+            return;
+        }
         BeforePageButton.onClick.AddListener(OnBeforePageButtonClick);
+
+        if (NextPageButton == null)
+        {
+            Debug.LogError("NextPageButton为空");
+            return;
+        }
         NextPageButton.onClick.AddListener(OnNextPageButtonClick);
-        Model实例 = this.GetSystem<GetCan2ListModelByStringSystem>().GetModel<IListModel>(Model名称);
-        await UniTask.Delay(100,cancellationToken:cancellationToken);
+
+        if (string.IsNullOrEmpty(Model名称))
+        {
+            Debug.LogError("Model名称为空");
+            return;
+        }
+
+        var getModelSystem = this.GetSystem<GetCan2ListModelByStringSystem>();
+        if (getModelSystem == null)
+        {
+            Debug.LogError("GetCan2ListModelByStringSystem为空");
+            return;
+        }
+
+        Model实例 = getModelSystem.GetModel<IListModel>(Model名称);
+        if (Model实例 == null)
+        {
+            Debug.LogError($"获取Model实例失败: {Model名称}");
+            return;
+        }
+
+        await UniTask.Delay(100, cancellationToken: cancellationToken);
         this.RegisterEvent<Can2ListModelChangeEvent>(OnModelChange).UnRegisterWhenGameObjectDestroyed(gameObject);
+
         pageLeftList = new List<int>();
         for (int i = 1; i < 5; i++)
         {
             pageLeftList.Add(i);   
         }
+
         await UniTask.Delay(100);
 
         当前展示条目序号列表 = 更新展示条目序号列表(false);
         currentPageIndex = 1;
         UpdatePagePromptBox(RefreshTiming.other);
         展示对应页面数据(currentPageIndex);
+
+        Debug.Log("InitAsync完成");
     }
     public void 更新搜索页面(bool 是否为搜查列表)
     {
@@ -78,20 +139,42 @@ public class EntryDisPanelNew : MonoBehaviour, IController
     }
     List<int> 更新展示条目序号列表(bool 是否为搜查列表)
     {
-        Debug.Log("更新展示条目序号列表");
+        Debug.Log($"更新展示条目序号列表 - 是否为搜查列表: {是否为搜查列表}");
         List<int> 展示条目序号列表 = new List<int>();
+        
         if (是否为搜查列表)
         {
-            展示条目序号列表 = this.GetSystem<SearchEntrySystem>().GetShowEntryIndexList();
+            var searchSystem = this.GetSystem<SearchEntrySystem>();
+            if (searchSystem == null)
+            {
+                Debug.LogError("SearchEntrySystem为空");
+                return 展示条目序号列表;
+            }
+            展示条目序号列表 = searchSystem.GetShowEntryIndexList();
         }
         else
         {
+            if (Model实例 == null)
+            {
+                Debug.LogError($"Model实例为空，Model名称: {Model名称}");
+                return 展示条目序号列表;
+            }
+
             var 展示数据列表 = Model实例.GetAllItems();
+            if (展示数据列表 == null)
+            {
+                Debug.LogError("展示数据列表为空");
+                return 展示条目序号列表;
+            }
+
+            Debug.Log($"展示数据列表数量: {展示数据列表.Count}");
             for (int i = 0; i < 展示数据列表.Count; i++)
             {
                 展示条目序号列表.Add(i);
             }
         }
+        
+        Debug.Log($"更新后的展示条目序号列表数量: {展示条目序号列表.Count}");
         return 展示条目序号列表;
     }
 

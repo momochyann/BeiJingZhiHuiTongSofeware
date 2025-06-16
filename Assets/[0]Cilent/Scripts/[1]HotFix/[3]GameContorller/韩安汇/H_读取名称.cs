@@ -14,9 +14,7 @@ public class H_读取名称 : MonoBehaviour, IController
     // PlayerPrefs.GetString("systemInfo");
     [SerializeField] TMP_InputField 单位名称输入框1;
     [SerializeField] TMP_InputField 单位名称输入框2;
-    [SerializeField] string 预制体名称 = "通知控制";
     private Button 替换按钮;
-    private GameObject 当前预制体实例;
 
     void Start()
     {
