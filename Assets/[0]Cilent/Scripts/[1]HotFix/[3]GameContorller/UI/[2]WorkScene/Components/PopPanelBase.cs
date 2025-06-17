@@ -74,7 +74,7 @@ public class PopPanelBase : MonoBehaviour, IController
     }
     protected virtual void OpenPanel()
     {
-        弹出页面.transform.DOScale(1, 0.3f).From(0);
+        弹出页面.SetActive(true);
         关闭按钮.onClick.AddListener(ClosePanel);
     }
     // Update is called once per frame
@@ -83,8 +83,8 @@ public class PopPanelBase : MonoBehaviour, IController
         Debug.Log("ClosePanel");
         if (isClose) return;
         isClose = true;
-        弹出页面.transform.DOScale(0, 0.1f).From(1);
-        Destroy(gameObject, 0.5f);
+        弹出页面.SetActive(false);
+        Destroy(gameObject);
     }
     public IArchitecture GetArchitecture()
     {
