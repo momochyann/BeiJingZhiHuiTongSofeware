@@ -53,20 +53,31 @@ public class P添加部门界面1 : PopPanelBase
             return;
         }
 
-        // 检查并获取保存按钮
-        var 保存按钮对象 = 弹出页面.transform.Find("保存按钮");
-        if (保存按钮对象 == null)
+        // 设置下拉框文字居中
+        if (单位选择下拉框.selectedText != null)
         {
-            Debug.LogError("找不到保存按钮");
+            单位选择下拉框.selectedText.alignment = TextAlignmentOptions.Center;
+            Debug.Log("已设置下拉框文字居中");
+        }
+        else
+        {
+            Debug.LogWarning("下拉框selectedText组件为空，无法设置文字居中");
+        }
+
+        // 检查并获取下一步按钮
+        var 下一步按钮对象 = 弹出页面.transform.Find("下一步按钮");
+        if (下一步按钮对象 == null)
+        {
+            Debug.LogError("找不到下一步按钮");
             return;
         }
-        var 保存按钮 = 保存按钮对象.GetComponent<Button>();
-        if (保存按钮 == null)
+        var 下一步按钮 = 下一步按钮对象.GetComponent<Button>();
+        if (下一步按钮 == null)
         {
-            Debug.LogError("保存按钮上没有Button组件");
+            Debug.LogError("下一步按钮上没有Button组件");
             return;
         }
-        保存按钮.onClick.AddListener(下一个界面按钮监听);
+        下一步按钮.onClick.AddListener(下一个界面按钮监听);
         
         // 初始化下拉框
         初始化下拉框();
@@ -80,15 +91,18 @@ public class P添加部门界面1 : PopPanelBase
     void 初始化下拉框()
     {
         var 部门模型 = this.GetModel<部门数据Model>();
-        var 单位列表 = 部门模型.部门列表.Select(d => d.部门名称).ToList();
+        var 单位列表 = 部门模型.部门列表.Select(d => d.单位名称).Distinct().ToList();
         
         // 清空现有选项
         单位选择下拉框.items.Clear();
         
-        // 添加部门选项
+        // 添加单位选项
         foreach (var 单位 in 单位列表)
         {
-            单位选择下拉框.CreateNewItem(单位);
+            if (!string.IsNullOrEmpty(单位))
+            {
+                单位选择下拉框.CreateNewItem(单位);
+            }
         }
         
         // 添加"新建单位"选项
@@ -99,10 +113,29 @@ public class P添加部门界面1 : PopPanelBase
         {
             单位选择下拉框.selectedItemIndex = 0;
             单位选择下拉框.SetupDropdown();
+            
+            // 确保文字居中
+            if (单位选择下拉框.selectedText != null)
+            {
+                单位选择下拉框.selectedText.alignment = TextAlignmentOptions.Center;
+            }
+            
+            // 初始化后立即检查是否需要显示输入框
+            检查并处理下拉框选择(0);
+        }
+        else
+        {
+            Debug.LogWarning("下拉框没有可选项");
         }
     }
 
-    async void 下拉框选择事件(int index)
+    void 下拉框选择事件(int index)
+    {
+        Debug.Log($"下拉框选择事件触发，索引: {index}");
+        检查并处理下拉框选择(index);
+    }
+
+    async void 检查并处理下拉框选择(int index)
     {
         // 检查下拉框是否为空
         if (单位选择下拉框 == null || 单位选择下拉框.selectedText == null)
@@ -111,9 +144,18 @@ public class P添加部门界面1 : PopPanelBase
             return;
         }
 
+        Debug.Log($"当前选中的文本: {单位选择下拉框.selectedText.text}");
+
+        // 确保文字居中
+        if (单位选择下拉框.selectedText != null)
+        {
+            单位选择下拉框.selectedText.alignment = TextAlignmentOptions.Center;
+        }
+
         // 如果选择了"新建单位"
         if (单位选择下拉框.selectedText.text == "新建单位")
         {
+            Debug.Log("选择了新建单位，准备创建输入框");
             if (单位名称输入框实例 == null)
             {
                 try
@@ -155,7 +197,10 @@ public class P添加部门界面1 : PopPanelBase
                     // 添加输入事件监听
                     var inputField = 单位名称输入框实例.AddComponent<TMP_InputField>();
                     inputField.textComponent = 单位名称文本;
+                    inputField.caretColor = Color.black;
                     inputField.onValueChanged.AddListener(On单位名称输入);
+                    
+                    Debug.Log("成功创建单位名称输入框");
                 }
                 catch (System.Exception e)
                 {
@@ -163,11 +208,17 @@ public class P添加部门界面1 : PopPanelBase
                     return;
                 }
             }
+            else
+            {
+                Debug.Log("输入框已存在，无需重复创建");
+            }
         }
         else
         {
+            Debug.Log($"选择了已有单位: {单位选择下拉框.selectedText.text}");
             if (单位名称输入框实例 != null)
             {
+                Debug.Log("销毁输入框实例");
                 Destroy(单位名称输入框实例);
                 单位名称输入框实例 = null;
                 单位名称文本 = null;
@@ -188,10 +239,28 @@ public class P添加部门界面1 : PopPanelBase
 
     async void 下一个界面按钮监听()
     {
+        Debug.Log("点击下一步按钮");
+        
         if (!验证输入情况())
         {
+            Debug.Log("验证输入情况失败，不执行下一步");
             return;
         }
+        
+        // 检查下拉框状态
+        if (单位选择下拉框 == null)
+        {
+            Debug.LogError("单位选择下拉框为空");
+            return;
+        }
+        
+        if (单位选择下拉框.selectedText == null)
+        {
+            Debug.LogError("下拉框选中文本为空");
+            return;
+        }
+        
+        Debug.Log($"当前选择的选项: {单位选择下拉框.selectedText.text}");
         
         // 加载增加部门面板预制体
         var 增加部门面板 = await LoadYooAssetsTool.LoadAsset<GameObject>("增加部门面板_Mobile");
@@ -206,11 +275,13 @@ public class P添加部门界面1 : PopPanelBase
                 if (单位选择下拉框.selectedText.text == "新建单位")
                 {
                     要传递的单位名称 = 当前输入的单位名称;
+                    Debug.Log($"选择新建单位，传递的单位名称: {要传递的单位名称}");
                 }
                 else
                 {
                     // 如果选择了已有单位，使用选中的单位名称
                     要传递的单位名称 = 单位选择下拉框.selectedText.text;
+                    Debug.Log($"选择已有单位，传递的单位名称: {要传递的单位名称}");
                 }
 
                 // 确保单位名称不为空
@@ -221,6 +292,7 @@ public class P添加部门界面1 : PopPanelBase
                 }
 
                 界面2.设置单位名称(要传递的单位名称);
+                Debug.Log("成功设置单位名称，关闭当前面板");
                 ClosePanel();
             }
             else
@@ -238,6 +310,14 @@ public class P添加部门界面1 : PopPanelBase
     {
         if (!base.验证输入情况())
         {
+            Debug.LogError("验证输入情况失败");
+            return false;
+        }
+
+        // 检查下拉框是否有选择
+        if (单位选择下拉框 == null || 单位选择下拉框.selectedText == null)
+        {
+            WorkSceneManager.Instance.加载通知("提示", "请选择单位").Forget();
             return false;
         }
 
@@ -250,7 +330,7 @@ public class P添加部门界面1 : PopPanelBase
                 return false;
             }
         }
-
+        
         return true;
     }
     
