@@ -60,6 +60,7 @@ public class 干预人员管理界面 : MonoBehaviour, IController
                 var 干预人员 = entry.can2ListValue as Intervener;
                 PlayerPrefs.SetString("当前干预人员", 干预人员.name);
                 当前干预人员.text = "主干预人员:" + 干预人员.name;
+                this.GetSystem<WorkSceneSystem>().干预者 = 干预人员.name;
                 WorkSceneManager.Instance.干预者 = 干预人员.name;
                 WorkSceneManager.Instance.加载提示("干预人员已确认").Forget();
                 return;

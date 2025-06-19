@@ -7,7 +7,9 @@ using UnityEngine.UI;
 using System.Reflection;
 using System;
 using TMPro;
+using UnityEngine.Events;
 using Cysharp.Threading.Tasks;
+using System.Linq;
 /// <summary>
 /// 用于标记必填的TMP_InputField
 /// </summary>
@@ -29,12 +31,24 @@ public class PopPanelBase : MonoBehaviour, IController
     protected GameObject 弹出页面;
     protected Button 关闭按钮;
     bool isClose = false;
+    
     protected virtual void Awake()
     {
         弹出页面 = transform.Find("弹出页面").gameObject;
         关闭按钮 = 弹出页面.transform.Find("关闭按钮").GetComponent<Button>();
+        
     }
-     void Start()
+    protected async UniTaskVoid 加载预制体(string 提示文本内容)
+    {
+        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("弹出界面提示");
+        Transform canvas = FindObjectsOfType<Canvas>().Where(c => c.gameObject.name == "Canvas").FirstOrDefault().transform;
+        var Instance = Instantiate(pfb,canvas.transform);
+        Debug.Log(Instance.name+提示文本内容);
+        Instance.GetComponent<H_弹出界面提示>().显示提示(提示文本内容);
+        Debug.Log("加载预制体"+提示文本内容);
+        // 淡出效果会自动处理销毁，无需手动延迟销毁
+    }
+    void Start()
     {
         OpenPanel();
     }
@@ -42,6 +56,7 @@ public class PopPanelBase : MonoBehaviour, IController
     {
 
     }
+    
     protected virtual bool 验证输入情况()
     {
         Type 类型 = this.GetType();
@@ -69,18 +84,18 @@ public class PopPanelBase : MonoBehaviour, IController
 
         return true;
     }
+    
     protected virtual void 验证失败处理(string 错误提示)
     {
-        WorkSceneManager.Instance.加载提示(错误提示).Forget();
+        显示提示并自动消失(错误提示);
         Debug.Log(错误提示);
     }
- 
+    
     protected virtual void OpenPanel()
     {
         弹出页面.SetActive(true);
         关闭按钮.onClick.AddListener(ClosePanel);
     }
-    // Update is called once per frame
     public void ClosePanel()
     {
         Debug.Log("ClosePanel");
@@ -88,6 +103,14 @@ public class PopPanelBase : MonoBehaviour, IController
         isClose = true;
         弹出页面.SetActive(false);
         Destroy(gameObject);
+    }
+    /// <summary>
+    /// 显示提示并在3秒后自动消失
+    /// </summary>
+    /// <param name="提示文本内容">要显示的提示内容</param>
+    public void 显示提示并自动消失(string 提示文本内容)
+    {
+        加载预制体(提示文本内容).Forget();
     }
     public IArchitecture GetArchitecture()
     {
