@@ -101,7 +101,7 @@ public class P_增加团队面板 : PopPanelBase
         }
 
         // 将选中的名字用逗号连接显示
-        人员详情.text = string.Join("、", 选中人员列表);
+        人员详情.text = string.Join(",", 选中人员列表);
         人员数量.text = 选中人员列表.Count.ToString();
     }
 }

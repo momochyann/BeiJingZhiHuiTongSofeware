@@ -19,8 +19,14 @@ public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
     void Start()
     {
         开始评估按钮.onClick.AddListener(开始评估按钮监听);
+        if(PlayerPrefs.GetString("当前干预人员")=="")
+        {
+            主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者==""? "未选择干预者": this.GetSystem<WorkSceneSystem>().干预者;
+        }else
+        {
+            主干预老师.text = PlayerPrefs.GetString("当前干预人员");
+        }
         
-        主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者==""? "未选择干预者": this.GetSystem<WorkSceneSystem>().干预者;
         
         // // 延迟初始化Toggle监听
         DelayedInit().Forget();

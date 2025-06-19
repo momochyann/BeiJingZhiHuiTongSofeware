@@ -57,7 +57,7 @@ public class 团体干预实施信息条目 : MonoBehaviour, IController, IEntry
         人员 = await this.GetModel<YooAssetPfbModel>().LoadPfb("人员");
         Debug.Log("人员加载完成");
     }
-
+    
     public void DisEntry(int index)
     {
         // 实现接口方法
