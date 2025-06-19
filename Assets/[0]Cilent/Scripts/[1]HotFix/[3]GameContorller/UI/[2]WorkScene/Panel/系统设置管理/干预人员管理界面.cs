@@ -40,6 +40,8 @@ public class 干预人员管理界面 : MonoBehaviour, IController
         foreach (IEntry entry in entries)
         {
             var 干预人员 = entry.can2ListValue as Intervener;
+            if(干预人员==null)
+            return;
             if (干预人员.name == 当前干预人员名称)
             {
                 entry.IsChoose = true;
