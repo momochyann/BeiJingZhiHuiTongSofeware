@@ -25,7 +25,7 @@ public class H_显示名称 : MonoBehaviour
         // 如果两个值都为空，显示默认文本
         if (string.IsNullOrEmpty(单位名称值) && string.IsNullOrEmpty(软件名称值))
         {
-            总称文本框.text = "未设置名称";
+            总称文本框.text = "智慧童-心理危机干预辅助管理系统";
             return;
         }
         

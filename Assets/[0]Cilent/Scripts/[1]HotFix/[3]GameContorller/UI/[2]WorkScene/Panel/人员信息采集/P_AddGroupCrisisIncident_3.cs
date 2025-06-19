@@ -5,6 +5,7 @@ using QFramework;
 using DG.Tweening;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using TMPro;
 
 
 
@@ -66,8 +67,8 @@ public class P_AddGroupCrisisIncident_3 : PopPanelBase
             return;
         Debug.Log(级别设置布局.transform.childCount);
         var 级别设置栏实例 = Instantiate(级别设置栏, 级别设置布局.transform);
-        级别设置栏实例.transform.Find("标题").GetComponent<Text>().text = 级别名称[级别设置布局.transform.childCount - 1];
-        级别设置栏实例.transform.Find("输入框/Placeholder").GetComponent<Text>().text = 级别描述配置[级别设置布局.transform.childCount - 1];
+        级别设置栏实例.transform.Find("标题").GetComponent<TMP_Text>().text = 级别名称[级别设置布局.transform.childCount - 1];
+        级别设置栏实例.transform.Find("输入框/Placeholder").GetComponent<TMP_Text>().text = 级别描述配置[级别设置布局.transform.childCount - 1];
     }
 
     private void 保存按钮监听()
@@ -77,8 +78,8 @@ public class P_AddGroupCrisisIncident_3 : PopPanelBase
         for (int i = 0; i < 级别设置布局.transform.childCount; i++)
         {
             var 级别设置栏实例 = 级别设置布局.transform.GetChild(i).gameObject;
-            var 级别名称 = 级别设置栏实例.transform.Find("标题").GetComponent<Text>().text;
-            var 级别描述 = 级别设置栏实例.transform.Find("输入框").GetComponent<InputField>().text;
+            var 级别名称 = 级别设置栏实例.transform.Find("标题").GetComponent<TMP_Text>().text;
+            var 级别描述 = 级别设置栏实例.transform.Find("输入框").GetComponent<TMP_InputField>().text;
             if (级别描述 == "")
             {
                 级别描述 = 级别描述配置[i];

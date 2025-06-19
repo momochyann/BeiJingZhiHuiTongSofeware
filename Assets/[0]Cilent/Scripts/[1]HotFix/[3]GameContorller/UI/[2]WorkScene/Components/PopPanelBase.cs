@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System.Reflection;
 using System;
 using TMPro;
+using Cysharp.Threading.Tasks;
 /// <summary>
 /// 用于标记必填的TMP_InputField
 /// </summary>
@@ -71,7 +72,9 @@ public class PopPanelBase : MonoBehaviour, IController
     protected virtual void 验证失败处理(string 错误提示)
     {
         WorkSceneManager.Instance.加载提示(错误提示).Forget();
+        Debug.Log(错误提示);
     }
+ 
     protected virtual void OpenPanel()
     {
         弹出页面.SetActive(true);

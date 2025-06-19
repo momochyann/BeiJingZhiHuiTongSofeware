@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
+using TMPro;
 public class P_AddGroupCrisisIncident_2 : PopPanelBase
 {
     // Start is called before the first frame update
@@ -78,13 +79,13 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
         GroupCrisisIncidentType groupCrisisIncidentType = new GroupCrisisIncidentType();
         if (事件类型选项.currentIndex == 0)
         {
-            groupCrisisIncidentType.CrisisIncidentTypeName = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型名称").GetComponent<Text>().text;
-            groupCrisisIncidentType.CrisisIncidentTypeDescription = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型描述").GetComponent<Text>().text;
+            groupCrisisIncidentType.CrisisIncidentTypeName = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型名称").GetComponent<TMP_Text>().text;
+            groupCrisisIncidentType.CrisisIncidentTypeDescription = 公共事件选项.transform.GetChild(公共事件选项.currentIndex).transform.Find("类型描述").GetComponent<TMP_Text>().text;
         }
         else
         {
-            groupCrisisIncidentType.CrisisIncidentTypeName = 个体事件选项.transform.GetChild(个体事件选项.currentIndex).transform.Find("类型名称").GetComponent<Text>().text;
-            groupCrisisIncidentType.CrisisIncidentTypeDescription = 个体事件选项.transform.GetChild(个体事件选项.currentIndex).transform.Find("类型描述").GetComponent<Text>().text;
+            groupCrisisIncidentType.CrisisIncidentTypeName = 个体事件选项.transform.GetChild(个体事件选项.currentIndex).transform.Find("类型名称").GetComponent<TMP_Text>().text;
+            groupCrisisIncidentType.CrisisIncidentTypeDescription = 个体事件选项.transform.GetChild(个体事件选项.currentIndex).transform.Find("类型描述").GetComponent<TMP_Text>().text;
         }
         groupCrisisIncident.groupCrisisIncidentType = groupCrisisIncidentType;
         弹出页面.GetComponent<CanvasGroup>().DOFade(0, 0.3f).OnComplete(() =>
@@ -113,8 +114,8 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
         {
             var 团体事件选项 = Instantiate(团体事件选项预制体, 个体事件面板布局.transform);
             团体事件选项.gameObject.name = item.CrisisIncidentTypeName;
-            团体事件选项.transform.Find("类型名称").GetComponent<Text>().text = item.CrisisIncidentTypeName;
-            团体事件选项.transform.Find("类型描述").GetComponent<Text>().text = item.CrisisIncidentTypeDescription;
+            团体事件选项.transform.Find("类型名称").GetComponent<TMP_Text>().text = item.CrisisIncidentTypeName;
+            团体事件选项.transform.Find("类型描述").GetComponent<TMP_Text>().text = item.CrisisIncidentTypeDescription;
         }
         个体事件选项 = 个体事件面板布局.gameObject.AddComponent<ToggleColumn>();
         // Canvas.ForceUpdateCanvases();
@@ -127,8 +128,8 @@ public class P_AddGroupCrisisIncident_2 : PopPanelBase
         {
             var 团体事件选项 = Instantiate(团体事件选项预制体, 公共危机事件面板.transform);
             团体事件选项.gameObject.name = item.CrisisIncidentTypeName;
-            团体事件选项.transform.Find("类型名称").GetComponent<Text>().text = item.CrisisIncidentTypeName;
-            团体事件选项.transform.Find("类型描述").GetComponent<Text>().text = item.CrisisIncidentTypeDescription;
+            团体事件选项.transform.Find("类型名称").GetComponent<TMP_Text>().text = item.CrisisIncidentTypeName;
+            团体事件选项.transform.Find("类型描述").GetComponent<TMP_Text>().text = item.CrisisIncidentTypeDescription;
         }
         公共事件选项 = 公共危机事件面板.gameObject.AddComponent<ToggleColumn>();
 

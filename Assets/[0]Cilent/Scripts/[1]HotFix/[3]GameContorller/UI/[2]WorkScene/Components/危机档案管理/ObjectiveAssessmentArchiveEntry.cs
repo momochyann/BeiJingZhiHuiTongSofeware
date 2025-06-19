@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
 using UnityEngine.UI;
+using TMPro;
 using Cysharp.Threading.Tasks;
 public class ObjectiveAssessmentArchiveEntry : MonoBehaviour, IController, IEntry
 {
@@ -10,21 +11,21 @@ public class ObjectiveAssessmentArchiveEntry : MonoBehaviour, IController, IEntr
     [SerializeField]
     Toggle chooseToggle;
     [SerializeField]
-    Text nameText;
+    TMP_Text nameText;
     [SerializeField]
-    Text 性别框;
+    TMP_Text 性别框;
     [SerializeField]
-    Text 部门框;
+    TMP_Text 部门框;
     [SerializeField]
-    Text dateText;
+    TMP_Text dateText;
     [SerializeField]
     Button 生成按钮;
     [SerializeField]
     Button 查看按钮;
     [SerializeField]
-    Text 干预人员文本框;
+    TMP_Text 干预人员文本框;
     [SerializeField]
-    Text 量表名称;
+    TMP_Text 量表名称;
     void Start()
     {
 
@@ -76,7 +77,7 @@ public class ObjectiveAssessmentArchiveEntry : MonoBehaviour, IController, IEntr
             // 更新生成按钮文本
             if (生成按钮 != null)
             {
-                Text 按钮文本 = 生成按钮.GetComponentInChildren<Text>();
+                TMP_Text 按钮文本 = 生成按钮.GetComponentInChildren<TMP_Text>();
                 生成按钮.onClick.AddListener(() =>
                 {
                     if (!EntryRawValue.isCreateReport)

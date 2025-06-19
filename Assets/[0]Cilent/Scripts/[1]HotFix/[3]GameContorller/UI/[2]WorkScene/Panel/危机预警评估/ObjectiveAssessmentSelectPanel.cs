@@ -42,7 +42,7 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
         主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者;
         
         // 延迟初始化Toggle监听
-        await UniTask.Delay(500);
+        await UniTask.Delay(500,cancellationToken: this.GetCancellationTokenOnDestroy());
         选择人员();
     }
     

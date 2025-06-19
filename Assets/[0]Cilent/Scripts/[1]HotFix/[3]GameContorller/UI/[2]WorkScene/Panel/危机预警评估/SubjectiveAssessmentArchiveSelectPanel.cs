@@ -31,7 +31,7 @@ public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
     
     async UniTaskVoid DelayedInit()
     {
-        await UniTask.Delay(500); // 0.5秒
+        await UniTask.Delay(500,cancellationToken: this.GetCancellationTokenOnDestroy()); // 0.5秒
         选择人员();
     }
     

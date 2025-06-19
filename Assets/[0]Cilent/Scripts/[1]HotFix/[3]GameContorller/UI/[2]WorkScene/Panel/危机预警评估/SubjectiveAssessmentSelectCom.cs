@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using QFramework;
 using Cysharp.Threading.Tasks;
 using System.Linq;
+using TMPro;
 public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
 {
     // Start is called before the first frame update
@@ -57,7 +58,7 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
         foreach (var toggle in toggleList)
         {
             // 获取Toggle子物体下的Text组件
-            Text toggleText = toggle.GetComponentInChildren<Text>();
+            TMP_Text toggleText = toggle.GetComponentInChildren<TMP_Text>();
             if (toggleText == null) continue;
             if (调级面板.transform.childCount == 0)
             {
@@ -74,7 +75,7 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
                 if (child.childCount > 0)
                 {
                     // 获取第一个子物体的Text组件
-                    Text childText = child.GetChild(0).GetComponent<Text>();
+                    TMP_Text childText = child.GetChild(0).GetComponent<TMP_Text>();
 
                     // 如果找到Text组件且文本与Toggle的Text相同，则将该Toggle设置为选中状态
                     if (childText != null && childText.text == toggleText.text)
@@ -96,7 +97,7 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
         int currentIndex = toggleList.IndexOf(toggle);
 
         // 获取Toggle子物体下的Text组件
-        Text toggleText = toggle.GetComponentInChildren<Text>();
+        TMP_Text toggleText = toggle.GetComponentInChildren<TMP_Text>();
 
         // 遍历调级面板的一级子物体
         for (int i = 0; i < 调级面板.transform.childCount; i++)
@@ -107,7 +108,7 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
             if (child.childCount > 0)
             {
                 // 获取第一个子物体的Text组件
-                Text childText = child.GetChild(0).GetComponent<Text>();
+                TMP_Text childText = child.GetChild(0).GetComponent<TMP_Text>();
 
                 // 如果找到Text组件且文本与Toggle的Text相同，则销毁该一级子物体
                 if (childText != null && toggleText != null && childText.text == toggleText.text)
@@ -125,14 +126,14 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
         int currentIndex = toggleList.IndexOf(toggle);
 
         // 获取Toggle子物体下的Text组件
-        Text toggleText = toggle.GetComponentInChildren<Text>();
+        TMP_Text toggleText = toggle.GetComponentInChildren<TMP_Text>();
 
 
         // 实例化滑动条
         var sliderObj = Instantiate(等级滑动条pfb, 调级面板.transform);
 
         // 设置滑动条第一个子物体的Text等于toggle子物体下的Text
-        Text sliderText = sliderObj.transform.GetChild(0).GetComponent<Text>();
+        TMP_Text sliderText = sliderObj.transform.GetChild(0).GetComponent<TMP_Text>();
         if (sliderText != null && toggleText != null)
         {
             sliderText.text = toggleText.text;
@@ -142,8 +143,8 @@ public class SubjectiveAssessmentSelectCom : MonoBehaviour, IController
         Slider slider = sliderObj.GetComponentInChildren<Slider>(true);
 
         // 查找显示数值的Text组件
-        Text valueText = null;
-        valueText = slider.GetComponentInChildren<Text>(true);
+        TMP_Text valueText = null;
+        valueText = slider.GetComponentInChildren<TMP_Text>(true);
 
 
 

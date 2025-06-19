@@ -18,6 +18,7 @@ public class SubjectiveAssessmentArchiveStartPanel : MonoBehaviour, IController
         buttonColumns = FindObjectsOfType<ButtonColumn>();
         下一步按钮.onClick.AddListener(下一步按钮监听);
         取消按钮.onClick.AddListener(取消按钮监听);
+        if(返回按钮!=null)
         返回按钮.onClick.AddListener(返回按钮监听);
     }
     void 下一步按钮监听()
