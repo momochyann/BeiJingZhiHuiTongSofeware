@@ -4,27 +4,28 @@ using UnityEngine;
 using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using TMPro;
 public class IndividualInterventionArchiveEntry : MonoBehaviour, IController, IEntry
 {
     // Start is called before the first frame update
     [SerializeField]
     Toggle chooseToggle;
     [SerializeField]
-    Text nameText;
+    TMP_Text nameText;
     [SerializeField]
-    Text 性别框;
+    TMP_Text 性别框;
     [SerializeField]
-    Text 部门框;
+    TMP_Text 部门框;
     [SerializeField]
-    Text dateText;
+    TMP_Text dateText;
     [SerializeField]
     Button 生成按钮;
     [SerializeField]
     Button 查看按钮;
     [SerializeField]
-    Text 干预人员文本框;
+    TMP_Text 干预人员文本框;
     [SerializeField]
-    Text 干预实施方案文本框;
+    TMP_Text 干预实施方案文本框;
     void Start()
     {
 
@@ -75,7 +76,7 @@ public class IndividualInterventionArchiveEntry : MonoBehaviour, IController, IE
             // 更新生成按钮文本
             if (生成按钮 != null)
             {
-                Text 按钮文本 = 生成按钮.GetComponentInChildren<Text>();
+                TMP_Text 按钮文本 = 生成按钮.GetComponentInChildren<TMP_Text>();
                 生成按钮.onClick.AddListener(() =>
                 {
                     if (!EntryRawValue.isCreateReport)

@@ -29,7 +29,7 @@ public interface IArchivesBase : ICan2List
     string Interveners { get; set; }
     string FangAnName { get; set; }
     bool isCreateReport { get; set; }
-    List<string> 录音地址 { get; set; }
+    
 }
 
 public interface ISubjectiveAssessmentArchive : IArchivesBase
@@ -69,7 +69,7 @@ public class SubjectiveAssessmentArchive : ISubjectiveAssessmentArchive
     /// <summary>
     ///应激事件描述
     /// </summary>
-    public string stressEventDescription { get; set; }
+    public string stressEventDescription { get; set; } 
     /// <summary>
     /// 影响评估
     /// </summary>
@@ -80,7 +80,12 @@ public class SubjectiveAssessmentArchive : ISubjectiveAssessmentArchive
     public PersonnelState personnelStateEvaluation { get; set; }
 
 }
-
+public class 干预实施咨询问答
+{
+    public string 问题 { get; set; }
+    public string 文字回答 { get; set; }
+    public string 录音地址 { get; set; }
+}
 /// <summary>
 /// 个人干预档案类
 /// </summary>
@@ -97,7 +102,8 @@ public class IndividualInterventionArchive : IIndividualInterventionArchive
     public string interventionDescription { get; set; }
     public string ScoreSituation { get; set; }
     public string createDate { get; set; }
-    public List<string> 录音地址 { get; set; }
+   
+    public List<干预实施咨询问答> 干预实施咨询问答列表 { get; set; }
 }
 
 public interface IGroupInterventionArchive : IArchivesBase

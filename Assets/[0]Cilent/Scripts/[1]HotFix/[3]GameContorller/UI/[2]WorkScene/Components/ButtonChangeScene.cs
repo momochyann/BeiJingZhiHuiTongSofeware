@@ -39,7 +39,7 @@ public class ButtonChangeScene : MonoBehaviour, IController
 
     async UniTaskVoid 加载面板()
     {
-        Debug.Log("加载面板");
+       // Debug.Log("加载面板");
         if (string.IsNullOrEmpty(面板名称))
         {
             // 如果面板名称为空，直接删除指定的面板

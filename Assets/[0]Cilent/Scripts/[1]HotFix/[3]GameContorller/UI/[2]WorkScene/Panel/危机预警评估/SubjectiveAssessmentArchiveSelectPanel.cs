@@ -5,12 +5,13 @@ using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
+using TMPro;
 public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
 {
     // Start is called before the first frame update
     [SerializeField] Button 开始评估按钮;
-    [SerializeField] Text 已选择人员;
-    [SerializeField] Text 主干预老师;
+    [SerializeField] TMP_Text 已选择人员;
+    [SerializeField] TMP_Text 主干预老师;
     PersonalPersonnelCrisisEventMessage 当前人员;
     EntryDisPanelNew entryDisPanel;
     private IEntry[] currentEntries;
@@ -19,7 +20,7 @@ public class SubjectiveAssessmentArchiveSelectPanel : MonoBehaviour, IController
     {
         开始评估按钮.onClick.AddListener(开始评估按钮监听);
         
-        主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者;
+        主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者==""? "未选择干预者": this.GetSystem<WorkSceneSystem>().干预者;
         
         // // 延迟初始化Toggle监听
         DelayedInit().Forget();

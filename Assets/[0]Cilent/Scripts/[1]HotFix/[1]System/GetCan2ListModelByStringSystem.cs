@@ -38,17 +38,17 @@ public class GetCan2ListModelByStringSystem : AbstractSystem
             canListDict = new Dictionary<string, IModel>();
         }
         canListDict.Add(model.GetType().Name, model);
-        Debug.Log("注册了" + model.GetType().Name);
+      //  Debug.Log("注册了" + model.GetType().Name);
     }
      public T GetModel<T>(string modelName) where T : class, IModel
     {
         if (canListDict.TryGetValue(modelName, out var model))
         {
-            Debug.Log("找到了" + model.GetType().Name);
+           // Debug.Log("找到了" + model.GetType().Name);
             return model as T;
         }
         
-        Debug.LogWarning($"找不到Model: {modelName}");
+     //   Debug.LogWarning($"找不到Model: {modelName}");
         return null;
     }
 

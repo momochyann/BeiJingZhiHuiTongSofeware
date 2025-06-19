@@ -133,7 +133,7 @@ public class WorkScenePanelSelect : MonoBehaviour, IController
         {
 
             var 子物体 = 父节点.transform.GetChild(i).gameObject;
-            Debug.Log("销毁的子物体:" + 子物体.name);
+        //    Debug.Log("销毁的子物体:" + 子物体.name);
             foreach (var 栏目 in 栏目列表)
             {
                 if (!string.IsNullOrEmpty(栏目.panelName) && 子物体.name.Contains(栏目.panelName))

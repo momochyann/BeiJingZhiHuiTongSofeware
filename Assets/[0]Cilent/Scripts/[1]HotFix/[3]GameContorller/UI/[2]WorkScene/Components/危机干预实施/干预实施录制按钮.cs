@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 public class 干预实施录制按钮 : MonoBehaviour, IController
 {
-
+    [HideInInspector] public string 录音地址 = "";
     Button 录制按钮;
     Image 图标;
     bool 是否录制 = false;
@@ -20,30 +20,7 @@ public class 干预实施录制按钮 : MonoBehaviour, IController
         图标 = GetComponent<Image>();
         录制按钮.onClick.AddListener(录制按钮点击);
         audioRecorderUtility = this.GetUtility<AudioRecorderUtility>();
-        this.GetSystem<InterventionSystem>().是否开始干预 = true;
-        开始监听是否处于干预状态().Forget();
-    }
-    async UniTaskVoid 开始监听是否处于干预状态()
-    {
-        await UniTask.WaitUntil(() => !this.GetSystem<InterventionSystem>().是否开始干预);
-        Debug.Log("是否录制" + 是否录制);
-        if (是否录制)
-        {
-            WorkSceneManager.Instance.加载确认提示("是否停止并保存录制？", "", () =>
-            {
-                if (this.GetSystem<InterventionSystem>().是否开始干预)
-                {
-                    string 地址 = audioRecorderUtility.StopRecordingAndSave();
-                    this.GetSystem<InterventionSystem>().当前干预档案.录音地址.Add(地址);
-                }
-                else
-                {
-                    audioRecorderUtility.StopRecordingAndSave();
-                }
-                audioRecorderUtility.CancelRecording();
-                Destroy(gameObject);
-            }).Forget();
-        }
+
 
     }
     private void 录制按钮点击()
@@ -60,19 +37,18 @@ public class 干预实施录制按钮 : MonoBehaviour, IController
         {
             WorkSceneManager.Instance.加载确认提示("是否停止并保存录制？", "", () =>
              {
-                 if (this.GetSystem<InterventionSystem>().是否开始干预)
-                 {
-                     string 地址 = audioRecorderUtility.StopRecordingAndSave();
-                     this.GetSystem<InterventionSystem>().当前干预档案.录音地址.Add(地址);
-                 }
-                 else
-                 {
-                     audioRecorderUtility.StopRecordingAndSave();
-                 }
+                 录音地址 = audioRecorderUtility.StopRecordingAndSave();
+                 Debug.Log("录音地址: " + 录音地址);
+                 //  this.GetSystem<InterventionSystem>().当前干预档案.录音地址.Add(地址);
+
              }).Forget(); ;
         }
     }
-
+    void OnDestroy()
+    {
+        if (是否录制)
+            audioRecorderUtility.StopRecordingAndSave();
+    }
     // Update is called once per frame
     public IArchitecture GetArchitecture()
     {

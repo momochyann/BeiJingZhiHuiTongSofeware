@@ -73,7 +73,7 @@ public class LoadYooAssetsTool
         foreach (var assetInfo in assetInfos)
         {
             uiAssetNames.Add(assetInfo.Address);
-            Debug.Log("assetInfo.Address: " + assetInfo.Address);
+           // Debug.Log("assetInfo.Address: " + assetInfo.Address);
         }
         return uiAssetNames;
     }
@@ -82,12 +82,12 @@ public class LoadYooAssetsTool
         var assetInfo = package.GetAssetInfo(assetName);
         if(!string.IsNullOrEmpty(assetInfo.AssetPath))
         {
-            Debug.Log("assetName: " + assetName + " 存在");
+           // Debug.Log("assetName: " + assetName + " 存在");
             return true;
         }
         else
         {
-            Debug.Log("assetName: " + assetName + " 不存在");
+         //   Debug.Log("assetName: " + assetName + " 不存在");
             return false;
         }
     }

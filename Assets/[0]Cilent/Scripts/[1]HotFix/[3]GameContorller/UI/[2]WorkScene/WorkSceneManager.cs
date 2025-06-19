@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
-
+using System;
 public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
 {
     // Start is called before the first frame update
@@ -13,23 +13,78 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
     public string 干预者;
     public GameObject 界面生成节点;
     [SerializeField] string[] 界面名称;
+    [HideInInspector] public Stack<I干预实施咨询接口> 干预实施咨询面板队列;
     void Start()
     {
         界面生成节点 = GameObject.Find("界面生成节点");
+        干预实施咨询面板队列 = new Stack<I干预实施咨询接口>();
         LoadPanel().Forget();
-        var 当前干预人员名称 = PlayerPrefs.GetString("当前干预人员")        ;
+        var 当前干预人员名称 = PlayerPrefs.GetString("当前干预人员");
         if (!string.IsNullOrEmpty(当前干预人员名称))
         {
             干预者 = 当前干预人员名称;
         }
-        Debug.Log("WorkSceneManager Start");
-    }
 
+    }
+    public void 清除干预面板()
+    {
+
+    }
+    async public UniTaskVoid 添加干预是实施数据(string 干预名称)
+    {
+        await UniTask.Yield();
+        IndividualInterventionArchive newInterventionArchive = new IndividualInterventionArchive();
+        var 当前人员 = FindObjectOfType<IndividualInterventionSelectPanel>().当前人员;
+        newInterventionArchive.name = 当前人员.name;
+        newInterventionArchive.gender = 当前人员.gender;
+        newInterventionArchive.category = 当前人员.category;
+        newInterventionArchive.Interveners = 干预者;
+        newInterventionArchive.FangAnName = 干预名称;
+        newInterventionArchive.startDate = FindObjectOfType<IndividualInterventionSelectPanel>().实施开始时间;
+        // 设置干预结束时间为当前时间
+        newInterventionArchive.endDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        // 设置档案创建时间为当前时间
+        newInterventionArchive.createDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        List<干预实施咨询问答> 干预实施咨询问答列表 = new List<干预实施咨询问答>();
+        int 干预实施咨询组件列表长度 = 干预实施咨询面板队列.Count;
+        for (int i = 0; i < 干预实施咨询组件列表长度; i++)
+        {
+            var 干预实施咨询组件 = 干预实施咨询面板队列.Pop();
+
+            foreach (var item in 干预实施咨询组件.干预实施咨询组件列表)
+            {
+                干预实施咨询问答 干预实施咨询问答 = new 干预实施咨询问答();
+                Debug.Log("item.问题文本框.text: " + item.问题文本框.text);
+                干预实施咨询问答.问题 = item.问题文本框.text;
+                干预实施咨询问答.文字回答 = item.回答输入框.text;
+                干预实施咨询问答.录音地址 = item.录音按钮.录音地址;
+                干预实施咨询问答列表.Add(干预实施咨询问答);
+            }
+            Debug.Log("干预实施咨询组件.干预实施实例.gameObject: " + 干预实施咨询组件.干预实施实例.gameObject.name);
+            Destroy(干预实施咨询组件.干预实施实例.gameObject);
+        }
+        //newInterventionArchive.
+        newInterventionArchive.干预实施咨询问答列表 = 干预实施咨询问答列表;
+        foreach (var item in   newInterventionArchive.干预实施咨询问答列表)
+        {
+            Debug.Log("干预实施咨询问答.问题: " + item.问题);
+            Debug.Log("干预实施咨询问答.文字回答: " + item.文字回答);
+            Debug.Log("干预实施咨询问答.录音地址: " + item.录音地址);
+        }
+        // 发送添加条目命令，将当前干预档案保存到个人干预档案模型中
+        this.SendCommand(new AddEntryCommand(newInterventionArchive, "IndividualInterventionArchiveModel"));
+        加载情绪放松选择界面().Forget();
+    }
+    async UniTaskVoid 加载情绪放松选择界面()
+    {
+        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("情绪放松");
+        Instantiate(pfb, 界面生成节点.transform);
+    }
     // Update is called once per frame
     async UniTaskVoid LoadPanel()
     {
         var index = this.GetSystem<WorkSceneSystem>().WorkSceneIndex;
-        Debug.Log("index: " + index);
+
         if (index <= 0)
             index = 1;
         加载界面(界面名称[index - 1]).Forget();
@@ -74,25 +129,25 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
                 Debug.LogError("通知预制体加载失败");
                 return;
             }
-            Debug.Log("通知预制体加载成功");
-            
+            //  Debug.Log("通知预制体加载成功");
+
             var canvas = FindObjectOfType<Canvas>();
             if (canvas == null)
             {
                 Debug.LogError("未找到Canvas");
                 return;
             }
-            
+
             var 通知 = Instantiate(pfb, canvas.transform).GetComponent<通知控制>();
             if (通知 == null)
             {
                 Debug.LogError("未找到通知控制组件");
                 return;
             }
-            
+
             await UniTask.Delay(10);
             通知.播送通知("操作提示", 提示文本内容);
-            Debug.Log($"提示已显示: {提示文本内容}");
+            //  Debug.Log($"提示已显示: {提示文本内容}");
         }
         catch (System.Exception e)
         {

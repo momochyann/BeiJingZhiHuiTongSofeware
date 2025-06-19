@@ -7,21 +7,21 @@ using Cysharp.Threading.Tasks;
 public class PanelBase : MonoBehaviour, IController
 {
     // Start is called before the first frame update
-    [SerializeField] Button 返回按钮;
+    [SerializeField] Button 返回或上一步按钮;
     [SerializeField] Button 下一步按钮;
     [SerializeField] Button 取消按钮;
     [SerializeField] Button 保存按钮;
     [SerializeField] string 上个面板名称;
     [SerializeField] string 下个面板名称;
     [SerializeField] string 取消跳转界面名称;
-    GameObject 上个面板pfb;
-    GameObject 下个面板pfb;
-    GameObject 取消跳转界面pfb;
+    protected GameObject 上个面板pfb;
+    protected GameObject 下个面板pfb;
+    protected GameObject 取消跳转界面pfb;
     protected virtual void Start()
     {
-        if (返回按钮 != null)
+        if (返回或上一步按钮 != null)
         {
-            返回按钮.onClick.AddListener(返回按钮监听);
+            返回或上一步按钮.onClick.AddListener(返回按钮监听);
         }
         if (下一步按钮 != null)
         {

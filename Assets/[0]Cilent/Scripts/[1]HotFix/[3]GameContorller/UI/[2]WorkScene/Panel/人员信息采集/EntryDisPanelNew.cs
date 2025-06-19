@@ -174,7 +174,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
             }
         }
         
-        Debug.Log($"更新后的展示条目序号列表数量: {展示条目序号列表.Count}");
+      //  Debug.Log($"更新后的展示条目序号列表数量: {展示条目序号列表.Count}");
         return 展示条目序号列表;
     }
 
@@ -184,7 +184,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
         {
             Destroy(entryBox.transform.GetChild(i).gameObject);
         }
-        Debug.Log("展示对应页面数据"+entryCount);
+       // Debug.Log("展示对应页面数据"+entryCount);
         for (int i = (页面索引 - 1) * pageSize; i < 页面索引 * pageSize; i++)
         {
             if (i >= entryCount)
@@ -204,7 +204,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
     }
     private void OnModelChange(Can2ListModelChangeEvent _event)
     {
-        Debug.Log("修改数据并显示");
+       // Debug.Log("修改数据并显示");
         当前展示条目序号列表 = 更新展示条目序号列表(false);
         UpdatePagePromptBox(RefreshTiming.other);
         展示对应页面数据(currentPageIndex);
@@ -212,7 +212,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
 
     private void OnNextPageButtonClick()
     {
-        Debug.Log("OnNextPageButtonClick");
+      //  Debug.Log("OnNextPageButtonClick");
         if (currentPageIndex < pageCount)
         {
             OnPageIndexButtonClick(currentPageIndex + 1);
@@ -221,7 +221,7 @@ public class EntryDisPanelNew : MonoBehaviour, IController
 
     private void OnBeforePageButtonClick()
     {
-        Debug.Log("OnBeforePageButtonClick");
+     //   Debug.Log("OnBeforePageButtonClick");
         if (currentPageIndex > 1)
             OnPageIndexButtonClick(currentPageIndex - 1);
     }

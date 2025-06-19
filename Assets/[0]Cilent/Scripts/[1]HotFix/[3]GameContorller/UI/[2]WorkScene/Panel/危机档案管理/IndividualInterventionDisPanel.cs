@@ -4,6 +4,8 @@ using UnityEngine;
 using QFramework;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using Michsky.MUIP;
+using System;
 public class IndividualInterventionDisPanel : MonoBehaviour, IController
 {
 
@@ -24,11 +26,9 @@ public class IndividualInterventionDisPanel : MonoBehaviour, IController
     [SerializeField]
     Text 干预结束时间;
     [SerializeField]
-    InputField 干预记录;
-
+    CustomDropdown 干预实施详情选择框;
     [SerializeField]
-    InputField 得分图表;
-
+    ButtonManager 干预实施详情查看按钮;
     IndividualInterventionArchive EntryRawValue;
     void Start()
     {
@@ -37,9 +37,9 @@ public class IndividualInterventionDisPanel : MonoBehaviour, IController
     public void OpenPanel(IndividualInterventionArchive EntryRawValue)
     {
         this.EntryRawValue = EntryRawValue;
-        填入数据().Forget();
+        填入数据();
     }
-    async UniTaskVoid 填入数据()
+    void 填入数据()
     {
         if (EntryRawValue != null)
         {
@@ -79,21 +79,34 @@ public class IndividualInterventionDisPanel : MonoBehaviour, IController
             {
                 干预人员文本框.text = EntryRawValue.Interveners;
             }
-            if (干预记录 != null)
+            if (干预实施详情选择框 != null)
             {
-                启用自动换行(干预记录);
-                干预记录.text = EntryRawValue.interventionDescription;
+                添加咨询详情选项();
             }
-            if (得分图表 != null)
+            if (干预实施详情查看按钮 != null)
             {
-                启用自动换行(this.得分图表);
-
-                得分图表.text = EntryRawValue.ScoreSituation;
+                干预实施详情查看按钮.onClick.AddListener(查看干预实施详情);
             }
-
         }
     }
 
+    async private void 查看干预实施详情()
+    {
+        var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("干预实施查看面板");
+        var 干预实施详情面板 = Instantiate(pfb, transform.parent);
+        干预实施详情面板.GetComponent<干预实施查看面板>().设置干预实施问题(EntryRawValue, 干预实施详情选择框.selectedItemIndex);
+    }
+
+    void 添加咨询详情选项()
+    {
+        // 清空现有选项
+        干预实施详情选择框.items.Clear();
+        foreach (var 咨询详情 in EntryRawValue.干预实施咨询问答列表)
+        {
+            干预实施详情选择框.CreateNewItem(咨询详情.问题.Substring(咨询详情.问题.IndexOf("*") + 1));
+        }
+        干预实施详情选择框.SetupDropdown();
+    }
 
     // Update is called once per frame
     public IArchitecture GetArchitecture()

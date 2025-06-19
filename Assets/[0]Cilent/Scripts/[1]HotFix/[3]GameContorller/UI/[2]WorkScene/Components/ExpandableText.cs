@@ -69,11 +69,11 @@ public class ExpandableText : MonoBehaviour
         bool isTextTruncated = textComponent.isTextTruncated;
         bool heightDifference = expandedHeight > collapsedHeight + 5f; // 5f 的容差
         
-        Debug.Log($"Text: {fullText.Substring(0, Mathf.Min(20, fullText.Length))}...");
-        Debug.Log($"Is Truncated: {isTextTruncated}");
-        Debug.Log($"Expanded Height: {expandedHeight}");
-        Debug.Log($"Collapsed Height: {collapsedHeight}");
-        Debug.Log($"Height Difference: {heightDifference}");
+        // Debug.Log($"Text: {fullText.Substring(0, Mathf.Min(20, fullText.Length))}...");
+        // Debug.Log($"Is Truncated: {isTextTruncated}");
+        // Debug.Log($"Expanded Height: {expandedHeight}");
+        // Debug.Log($"Collapsed Height: {collapsedHeight}");
+        // Debug.Log($"Height Difference: {heightDifference}");
         
         bool needsExpansion = isTextTruncated || heightDifference;
         expandButton.gameObject.SetActive(needsExpansion);
@@ -134,11 +134,11 @@ public class ExpandableText : MonoBehaviour
     {
         if (textComponent != null)
         {
-            Debug.Log($"Text: {textComponent.text}");
-            Debug.Log($"Max Visible Lines: {textComponent.maxVisibleLines}");
-            Debug.Log($"Is Text Truncated: {textComponent.isTextTruncated}");
-            Debug.Log($"Preferred Height: {textComponent.preferredHeight}");
-            Debug.Log($"Rect Height: {textComponent.rectTransform.rect.height}");
+            // Debug.Log($"Text: {textComponent.text}");
+            // Debug.Log($"Max Visible Lines: {textComponent.maxVisibleLines}");
+            // Debug.Log($"Is Text Truncated: {textComponent.isTextTruncated}");
+            // Debug.Log($"Preferred Height: {textComponent.preferredHeight}");
+            // Debug.Log($"Rect Height: {textComponent.rectTransform.rect.height}");
         }
     }
 }
