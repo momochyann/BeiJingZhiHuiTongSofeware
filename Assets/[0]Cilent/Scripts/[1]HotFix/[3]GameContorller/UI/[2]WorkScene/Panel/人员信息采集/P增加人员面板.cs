@@ -41,7 +41,7 @@ public class P增加人员面板 : PopPanelBase
         
         // 按级别分组
         var 分组后部门列表 = 部门数据
-            .GroupBy(部门 => 部门.部门级别 ?? "未分类")
+            .GroupBy(部门 => 部门.单位名称 ?? "未分类")
             .OrderBy(组 => 组.Key)
             .ToList();
             
@@ -54,7 +54,7 @@ public class P增加人员面板 : PopPanelBase
             // 添加该组的所有部门
             foreach (var 部门 in 组.OrderBy(p => p.部门名称))
             {
-                部门选择下拉框.CreateNewItem(部门.部门级别 +"-"+ 部门.部门名称);
+                部门选择下拉框.CreateNewItem(部门.单位名称 +"-"+ 部门.部门名称);
             }
         }
         

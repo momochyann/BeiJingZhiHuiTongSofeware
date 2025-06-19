@@ -8,23 +8,81 @@ using System.Linq;
 using TMPro;
 using Michsky.MUIP;
 
-public class P添加部门界面 : PopPanelBase
+public class P添加部门界面2 : PopPanelBase
 {
     [必填InputField("部门名称不能为空")]
     TMP_InputField 部门名称输入框;
-    [必填InputField("部门级别不能为空")]
-    TMP_InputField 部门级别输入框;
     TMP_InputField 部门描述输入框;
     
     ICan2List 旧数据;
-    
+    private string 单位名称;
+
+    public void 设置单位名称(string 名称)
+    {
+        单位名称 = 名称;
+    }
+
     protected override void Awake()
     {
         base.Awake();
-        部门名称输入框 = 弹出页面.transform.Find("部门名称栏/输入框").GetComponent<TMP_InputField>();
-        部门级别输入框 = 弹出页面.transform.Find("部门级别栏/输入框").GetComponent<TMP_InputField>();
-        部门描述输入框 = 弹出页面.transform.Find("部门描述栏/输入框").GetComponent<TMP_InputField>();
-        弹出页面.transform.Find("保存按钮").GetComponent<Button>().onClick.AddListener(保存数据按钮监听);
+        
+        // 确保弹出页面存在
+        if (弹出页面 == null)
+        {
+            Debug.LogError("弹出页面未找到");
+            return;
+        }
+
+        try
+        {
+            // 获取并验证所有组件
+            var 部门名称栏 = 弹出页面.transform.Find("部门名称栏");
+            if (部门名称栏 == null)
+            {
+                Debug.LogError("找不到部门名称栏");
+                return;
+            }
+
+            var 部门描述栏 = 弹出页面.transform.Find("部门描述栏");
+            if (部门描述栏 == null)
+            {
+                Debug.LogError("找不到部门描述栏");
+                return;
+            }
+
+            部门名称输入框 = 部门名称栏.Find("输入框")?.GetComponent<TMP_InputField>();
+            部门描述输入框 = 部门描述栏.Find("输入框")?.GetComponent<TMP_InputField>();
+            var 保存按钮 = 弹出页面.transform.Find("保存按钮")?.GetComponent<Button>();
+
+            if (部门名称输入框 == null)
+            {
+                Debug.LogError("找不到部门名称输入框");
+                return;
+            }
+            if (部门描述输入框 == null)
+            {
+                Debug.LogError("找不到部门描述输入框");
+                return;
+            }
+            if (保存按钮 == null)
+            {
+                Debug.LogError("找不到保存按钮");
+                return;
+            }
+
+            // 设置输入框光标颜色为黑色
+            部门名称输入框.caretColor = Color.black;
+            部门描述输入框.caretColor = Color.black;
+
+            // 添加按钮监听
+            保存按钮.onClick.AddListener(保存数据按钮监听);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"初始化组件时发生错误: {e.Message}");
+            return;
+        }
+
         OpenPanel();
     }
 
@@ -37,8 +95,8 @@ public class P添加部门界面 : PopPanelBase
         
         部门 新部门 = new 部门();
         新部门.部门名称 = 部门名称输入框.text;
-        新部门.部门级别 = 部门级别输入框.text;
         新部门.部门描述 = 部门描述输入框.text;
+        新部门.单位名称 = 单位名称;  // 使用正确的属性名
         
         if (旧数据 != null)
         {
@@ -89,7 +147,6 @@ public class P添加部门界面 : PopPanelBase
         Debug.Log("编辑部门条目: " + 部门信息.部门名称);
         
         部门名称输入框.text = 部门信息.部门名称;
-        部门级别输入框.text = 部门信息.部门级别;
         部门描述输入框.text = 部门信息.部门描述;
         
         旧数据 = ICan2List;

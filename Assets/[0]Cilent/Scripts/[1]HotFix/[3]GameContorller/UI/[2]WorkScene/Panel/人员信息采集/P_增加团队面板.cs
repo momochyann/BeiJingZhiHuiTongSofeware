@@ -19,7 +19,7 @@ public class P_增加团队面板 : PopPanelBase
     public TMP_Text 人员数量;
     [SerializeField] TMP_Text 人员备注;
     干预实施团队 干预实施团队数据;
-    PersonalPersonnelCrisisEventMessageModel 人员数据;
+    IntervenersModel 人员数据;
     List<GroupPersonnelCrisisEventMessage> 选择人员列表 = new List<GroupPersonnelCrisisEventMessage>();
     GameObject 选择界面;
     void Start()
@@ -49,7 +49,7 @@ public class P_增加团队面板 : PopPanelBase
         人员数量 = 弹出页面.transform.Find("人员数量栏/输入框").GetComponent<TMP_Text>();
         人员备注 = 弹出页面.transform.Find("备注栏/输入框/Text Area/Text").GetComponent<TMP_Text>();
         弹出页面.transform.Find("保存按钮").GetComponent<Button>().onClick.AddListener(保存数据按钮监听);
-        人员数据 = this.GetModel<PersonalPersonnelCrisisEventMessageModel>();
+        人员数据 = this.GetModel<IntervenersModel>();
         填充人员下拉框();
         选择人员按钮.onClick.AddListener(选择人员按钮监听);
         OpenPanel();
@@ -61,7 +61,6 @@ public class P_增加团队面板 : PopPanelBase
         应激事件消息.组别名称 = 组别名称.text;
         应激事件消息.主干预人员 = 主干预人员.items[主干预人员.selectedItemIndex].itemName;
         应激事件消息.助理人员 = 助理人员.text;
-        //应激事件消息.人员列表 = this.GetModel<PersonalPersonnelCrisisEventMessageModel>().personalPersonnelCrisisEventMessages;
         应激事件消息.备注 = 人员备注.text;
 
         this.SendCommand(new AddEntryCommand(应激事件消息 as ICan2List, "干预实施Model"));
@@ -69,10 +68,10 @@ public class P_增加团队面板 : PopPanelBase
     }
     void 填充人员下拉框()
     {
-        if (人员数据.personalPersonnelCrisisEventMessages.Count <= 0)
+        if (人员数据.intervenerList.Count <= 0)
             return;
         主干预人员.items.Clear();
-        foreach (var 人员 in 人员数据.personalPersonnelCrisisEventMessages)
+        foreach (var 人员 in 人员数据.intervenerList)
         {
             主干预人员.CreateNewItem(人员.name);
         }
@@ -87,6 +86,22 @@ public class P_增加团队面板 : PopPanelBase
             return;
         }
         Instantiate(选择界面, 弹出页面.transform);
-        
+    }
+    void 人员详情显示(GroupPersonnelCrisisEventMessage 人员)
+    {
+        人员详情.text = 人员.name;
+    }
+
+    public void 更新选中人员(List<string> 选中人员列表)
+    {
+        if (选中人员列表 == null || 选中人员列表.Count == 0)
+        {
+            人员详情.text = "未选择人员";
+            return;
+        }
+
+        // 将选中的名字用逗号连接显示
+        人员详情.text = string.Join("、", 选中人员列表);
+        人员数量.text = 选中人员列表.Count.ToString();
     }
 }

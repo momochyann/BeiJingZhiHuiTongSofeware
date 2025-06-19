@@ -10,9 +10,9 @@ public class 部门条目 : MonoBehaviour, IController, IEntry
     [SerializeField]
     TMP_Text 部门名称Text;
     [SerializeField]
-    TMP_Text 部门编号Text;
+    TMP_Text 单位名称Text;
     [SerializeField]
-    TMP_Text 部门级别Text;
+    TMP_Text 部门编号Text;
     [SerializeField]
     ExpandableText 部门详情ExpandableText;
     [SerializeField]
@@ -34,12 +34,12 @@ public class 部门条目 : MonoBehaviour, IController, IEntry
         if (部门名称Text != null)
             部门名称Text.text = 部门信息.部门名称 ?? "";
             
-        if (部门级别Text != null)
-            部门级别Text.text = 部门信息.部门级别 ?? "";
-            
         if (部门编号Text != null)
             部门编号Text.text = 部门信息.部门编号 ?? "";
-    
+
+        if (单位名称Text != null)
+            单位名称Text.text = 部门信息.单位名称 ?? "";
+            
         if (部门详情ExpandableText != null)
         {
             if (!string.IsNullOrEmpty(部门信息.部门描述))

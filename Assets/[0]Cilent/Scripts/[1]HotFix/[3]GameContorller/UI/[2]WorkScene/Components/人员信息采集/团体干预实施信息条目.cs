@@ -26,6 +26,29 @@ public class 团体干预实施信息条目 : MonoBehaviour, IController, IEntry
     void Start()
     {
         InitAsync().Forget();
+        选择.onValueChanged.AddListener((bool isOn) => {
+            if (isOn && IsChoose)
+            {
+                // 获取所有条目
+                EntryDisPanelNew entryDisPanel = FindObjectOfType<EntryDisPanelNew>();
+                if (entryDisPanel != null)
+                {
+                    IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
+                    foreach (IEntry entry in entries)
+                    {
+                        if (!Object.ReferenceEquals(entry, this) && entry.IsChoose)
+                        {
+                            entry.IsChoose = false;
+                        }
+                    }
+                }
+                WorkSceneManager.Instance.加载提示("组别选择成功").Forget();
+            }
+            else
+            {
+                WorkSceneManager.Instance.加载提示("组别去除成功").Forget();
+            }
+        });
     }
     async UniTask InitAsync()
     {
@@ -43,30 +66,6 @@ public class 团体干预实施信息条目 : MonoBehaviour, IController, IEntry
         EntryRawValue = message;
         _can2List = message;
         Debug.Log("message: " + message);
-        // if (message == null)
-        // {
-        //     Debug.LogError("message is null in DisEntry");
-        //     return;
-        // }
-
-        // if (message.人员列表 == null || message.人员列表.Count == 0)
-        // {
-        //     Debug.LogWarning("人员列表为空");
-        //     return;
-        // }
-
-        // if (index < 0 || index >= message.人员列表.Count)
-        // {
-        //     Debug.LogError($"索引 {index} 超出范围 [0, {message.人员列表.Count - 1}]");
-        //     return;
-        // }
-
-        // var item = message.人员列表[index];
-        // if (item == null)
-        // {
-        //     Debug.LogError($"索引 {index} 处的人员信息为null");
-        //     return;
-        // }
         组别名称.text = message.组别名称;
         主干预人员.text = message.主干预人员;
         助理人员.text = message.助理人员;
