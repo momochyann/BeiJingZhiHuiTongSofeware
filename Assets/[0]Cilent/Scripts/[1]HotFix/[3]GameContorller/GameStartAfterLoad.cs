@@ -25,8 +25,8 @@ public class GameStartAfterLoad : MonoBehaviour, IController
         // 如果需要，生成清单文件
         excelReader.GenerateExcelManifest();
         this.GetModel<PersonalPersonnelCrisisEventMessageModel>();
-        await 加载UI下所有预制体();
-        await UniTask.Delay(1000);
+       // await 加载UI下所有预制体();
+        await UniTask.Delay(100);
       
 
         // var HotUI = await LoadYooAssetsTool.LoadAsset<GameObject>("LoadNewGameVesion");

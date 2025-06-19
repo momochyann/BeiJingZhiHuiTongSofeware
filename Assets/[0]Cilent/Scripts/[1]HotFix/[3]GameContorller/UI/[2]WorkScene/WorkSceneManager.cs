@@ -28,8 +28,14 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
     }
     public void 清除干预面板()
     {
-
+        int 干预实施咨询组件列表长度 = 干预实施咨询面板队列.Count;
+        for (int i = 0; i < 干预实施咨询组件列表长度; i++)
+        {
+            var 干预实施咨询组件 = 干预实施咨询面板队列.Pop();
+            Destroy(干预实施咨询组件.干预实施实例.gameObject);
+        }
     }
+    
     async public UniTaskVoid 添加干预是实施数据(string 干预名称)
     {
         await UniTask.Yield();
@@ -65,7 +71,7 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
         }
         //newInterventionArchive.
         newInterventionArchive.干预实施咨询问答列表 = 干预实施咨询问答列表;
-        foreach (var item in   newInterventionArchive.干预实施咨询问答列表)
+        foreach (var item in newInterventionArchive.干预实施咨询问答列表)
         {
             Debug.Log("干预实施咨询问答.问题: " + item.问题);
             Debug.Log("干预实施咨询问答.文字回答: " + item.文字回答);
@@ -113,7 +119,8 @@ public class WorkSceneManager : MonoSingleton<WorkSceneManager>, IController
     async public UniTaskVoid 加载通知(string 标题, string 内容)
     {
         var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("通知");
-        var 通知 = Instantiate(pfb, FindObjectOfType<Canvas>().transform).GetComponent<通知控制>();
+        var canvas = GameObject.Find("Canvas");
+        var 通知 = Instantiate(pfb, canvas.transform).GetComponent<通知控制>();
         await UniTask.Delay(10);
         通知.播送通知(标题, 内容);
     }

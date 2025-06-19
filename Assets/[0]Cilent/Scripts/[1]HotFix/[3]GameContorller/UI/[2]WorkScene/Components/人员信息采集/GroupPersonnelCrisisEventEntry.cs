@@ -19,8 +19,6 @@ public class GroupPersonnelCrisisEventEntry : MonoBehaviour, IController, IEntry
     [SerializeField]
     TMP_Text categoryText;
     [SerializeField]
-    TMP_Text dateOfBirthText;
-    [SerializeField]
     TMP_Text crisisEventNameText;
     [SerializeField]
     TMP_Text crisisEventDescriptionText;
@@ -47,7 +45,7 @@ public class GroupPersonnelCrisisEventEntry : MonoBehaviour, IController, IEntry
         nameText.text = message.name;
         genderText.text = message.gender;
         categoryText.text = message.category;
-        dateOfBirthText.text = message.dateOfBirth;
+     //   dateOfBirthText.text = message.dateOfBirth;
         crisisEventDescriptionText.text = message.Description;
         crisisEventTimeText.text = message.EventContactTime;
         affectedLevelText.text = 级别名称[message.affectedLevelIndex];
