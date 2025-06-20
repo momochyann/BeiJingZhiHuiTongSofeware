@@ -16,6 +16,7 @@ public class Can2ListModelFramework
 {
 
 }
+
 public interface ICan2List
 {
 

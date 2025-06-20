@@ -18,17 +18,9 @@ public class GameStartAfterLoad : MonoBehaviour, IController
         Debug.Log("GameHotedInit4");
         await WaitLoadAnimation(this.GetCancellationTokenOnDestroy());
         Debug.Log("加载数据完成22");
-        // 初始化ExcelReader
-        ExcelReader excelReader = this.GetUtility<ExcelReader>();
-        excelReader.Init();
-        excelReader.EnsureExcelDirectoryExists();
-        // 如果需要，生成清单文件
-        excelReader.GenerateExcelManifest();
         this.GetModel<PersonalPersonnelCrisisEventMessageModel>();
        // await 加载UI下所有预制体();
         await UniTask.Delay(100);
-      
-
         // var HotUI = await LoadYooAssetsTool.LoadAsset<GameObject>("LoadNewGameVesion");
         // Instantiate(HotUI, FindObjectOfType<Canvas>().transform);
         LoadYooAssetsTool.LoadSceneAsync("StartLoginScene").Forget();

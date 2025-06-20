@@ -66,7 +66,7 @@ public class GroupCrisisIncidentModel : CrisisIncidentBaseModel<GroupCrisisIncid
     public List<GroupCrisisIncident> groupCrisisIncidents => dataList;
     protected override string GetStorageKey()
     {
-        return "groupCrisisIncidents";
+        return "GroupCrisisIncidentsModel";
     }
     protected override void OnInit()
     {

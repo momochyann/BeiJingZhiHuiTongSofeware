@@ -27,8 +27,8 @@ public class HotFixTemplateArchitecture : Architecture<HotFixTemplateArchitectur
         RegisterModel(new 干预实施Model());
 
         RegisterUtility(new Storage());
-        RegisterUtility(new ExcelReader());
-        this.GetUtility<ExcelReader>().Init();
+        // RegisterUtility(new ExcelReader());
+        // this.GetUtility<ExcelReader>().Init();
         RegisterUtility(new AudioRecorderUtility());
         this.GetUtility<AudioRecorderUtility>().Init();
         RegisterUtility(new ImagePickerUtility());
