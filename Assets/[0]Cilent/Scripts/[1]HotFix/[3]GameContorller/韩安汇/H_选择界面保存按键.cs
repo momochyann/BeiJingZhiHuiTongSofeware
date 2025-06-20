@@ -31,15 +31,15 @@ public class H_选择界面保存按键 : MonoBehaviour, IController
                 .Where(entry => entry.IsChoose && entry.can2ListValue is GroupPersonnelCrisisEventMessage)
                 .Select(entry => entry.can2ListValue as GroupPersonnelCrisisEventMessage)
                 .Where(person => person != null)
-                .Select(person => person.name)
                 .ToList();
-            
-            Debug.Log($"选中的姓名: {string.Join(", ", selectedEntries)}");
+            var name = selectedEntries.Select(p => p.name).ToList();
+            Debug.Log($"选中的姓名: {string.Join(", ", name)}");
             
             // 将选中的名字通过事件发送给增加团队面板
             var 增加团队面板 = FindObjectOfType<P_增加团队面板>();
             if (增加团队面板 != null)
             {
+                Debug.Log("selectedEntries[0].name是" + selectedEntries[0].name);
                 增加团队面板.更新选中人员(selectedEntries);
             }
         }

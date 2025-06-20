@@ -67,7 +67,6 @@ public class H_显示备注 : MonoBehaviour
                 continue;
             }
             备注文本.text += $"姓名：{item.name}\n";
-            备注文本.text += "------------------------\n";
         }
     }
 }
