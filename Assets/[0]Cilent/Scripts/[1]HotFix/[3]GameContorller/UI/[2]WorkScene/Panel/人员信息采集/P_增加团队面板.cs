@@ -62,7 +62,7 @@ public class P_增加团队面板 : PopPanelBase
         应激事件消息.主干预人员 = 主干预人员.items[主干预人员.selectedItemIndex].itemName;
         应激事件消息.助理人员 = 助理人员.text;
         应激事件消息.备注 = 人员备注.text;
-
+        应激事件消息.人员列表 = 选择人员列表;
         this.SendCommand(new AddEntryCommand(应激事件消息 as ICan2List, "干预实施Model"));
         ClosePanel();
     }
@@ -87,21 +87,37 @@ public class P_增加团队面板 : PopPanelBase
         }
         Instantiate(选择界面, 弹出页面.transform);
     }
-    void 人员详情显示(GroupPersonnelCrisisEventMessage 人员)
-    {
-        人员详情.text = 人员.name;
-    }
 
-    public void 更新选中人员(List<string> 选中人员列表)
+    public void 更新选中人员(List<GroupPersonnelCrisisEventMessage> 选中人员列表)
     {
-        if (选中人员列表 == null || 选中人员列表.Count == 0)
+        选择人员列表 = 选中人员列表 ?? new List<GroupPersonnelCrisisEventMessage>();
+        
+        if (选择人员列表.Count == 0)
         {
-            人员详情.text = "未选择人员";
+            if (人员详情 != null)
+                人员详情.text = "未选择人员";
+            if (人员数量 != null)
+                人员数量.text = "0";
             return;
         }
-
+        
+        Debug.Log("选中人员列表[0].name是" + 选中人员列表[0].name);
+        
         // 将选中的名字用逗号连接显示
-        人员详情.text = string.Join(",", 选中人员列表);
-        人员数量.text = 选中人员列表.Count.ToString();
+        var 人员姓名列表 = 选择人员列表.Select(p => p.name).ToList();
+        Debug.Log($"选中的姓名: {string.Join(", ", 人员姓名列表)}");
+        
+        if (人员详情 != null)
+        {
+            人员详情.text = string.Join(",", 人员姓名列表);
+            Debug.Log("人员详情是" + 人员详情.text);
+        }
+        else
+        {
+            Debug.LogError("人员详情组件为null！");
+        }
+        
+        if (人员数量 != null)
+            人员数量.text = 选择人员列表.Count.ToString();
     }
 }

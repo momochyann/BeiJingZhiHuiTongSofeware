@@ -23,6 +23,8 @@ public class 团体干预实施信息条目 : MonoBehaviour, IController, IEntry
     干预实施团队 EntryRawValue;
     GameObject 备注;
     GameObject 人员;
+
+    List <string> 人员详情列表;
     void Start()
     {
         InitAsync().Forget();
@@ -75,6 +77,7 @@ public class 团体干预实施信息条目 : MonoBehaviour, IController, IEntry
         {
             var 人员详情实例 = Instantiate(人员, FindObjectOfType<Canvas>().transform);
             人员详情实例.GetComponent<H_显示备注>().显示人员(message.人员列表);
+            
             WorkSceneManager.Instance.加载提示("人员详情").Forget();
         });
 
@@ -90,6 +93,6 @@ public class 团体干预实施信息条目 : MonoBehaviour, IController, IEntry
     {
         return HotFixTemplateArchitecture.Interface;
     }
-
+    
     // Update is called once per frame
 }
