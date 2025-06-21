@@ -40,24 +40,87 @@ public class EntryEditorButton : MonoBehaviour, IController
         switch (buttonType)
         {
             case EntryEditorButtonType.删除按钮:
-                确认面板("是否要删除该条目？", () =>
-                {
-                    删除条目(entryModelName);
-                }).Forget();
+                删除按钮处理();
                 break;
             case EntryEditorButtonType.编辑按钮:
-                编辑条目(添加条目界面名称).Forget();
+                编辑按钮处理();
                 break;
             case EntryEditorButtonType.添加按钮:
                 添加条目按钮监听(添加条目界面名称).Forget();
                 break;
         }
     }
+    
+    /// <summary>
+    /// 删除按钮处理逻辑
+    /// </summary>
+    void 删除按钮处理()
+    {
+        // 检查是否有选中的条目
+        if (!检查是否有选中条目())
+        {
+            WorkSceneManager.Instance.加载提示("请先选择要删除的条目").Forget();
+            return;
+        }
+        
+        确认面板("是否要删除该条目？", () =>
+        {
+            删除条目(entryModelName);
+        }).Forget();
+    }
+    
+    /// <summary>
+    /// 编辑按钮处理逻辑
+    /// </summary>
+    void 编辑按钮处理()
+    {
+        // 检查是否有选中的条目
+        if (!检查是否有选中条目())
+        {
+            WorkSceneManager.Instance.加载提示("请先选择要编辑的条目").Forget();
+            return;
+        }
+        
+        编辑条目(添加条目界面名称).Forget();
+    }
+    
+    /// <summary>
+    /// 检查是否有选中的条目
+    /// </summary>
+    /// <returns>如果有选中的条目返回true，否则返回false</returns>
+    bool 检查是否有选中条目()
+    {
+        EntryDisPanelNew entryDisPanel = FindObjectOfType<EntryDisPanelNew>();
+        if (entryDisPanel == null)
+        {
+            Debug.LogWarning("未找到EntryDisPanelNew组件");
+            return false;
+        }
+        
+        IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
+        if (entries == null || entries.Length == 0)
+        {
+            Debug.LogWarning("未找到任何条目");
+            return false;
+        }
+        
+        foreach (IEntry entry in entries)
+        {
+            if (entry.IsChoose)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     async UniTaskVoid 添加条目按钮监听(string 添加条目界面名称)
     {
         var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb(添加条目界面名称);
         Instantiate(pfb, FindObjectOfType<Canvas>().transform);
     }
+    
     void 删除条目(string entryModelName)
     {
         EntryDisPanelNew entryDisPanel = FindObjectOfType<EntryDisPanelNew>();
@@ -70,6 +133,7 @@ public class EntryEditorButton : MonoBehaviour, IController
             }
         }
     }
+    
     async UniTaskVoid 编辑条目(string 添加条目界面名称)
     {
         EntryDisPanelNew entryDisPanel = FindObjectOfType<EntryDisPanelNew>();
