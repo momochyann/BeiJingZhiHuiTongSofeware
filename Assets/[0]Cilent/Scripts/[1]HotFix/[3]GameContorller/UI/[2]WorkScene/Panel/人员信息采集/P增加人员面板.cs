@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 using System.Linq;
 using TMPro;
 using Michsky.MUIP;
+using System;
 
 
 public class P增加人员面板 : PopPanelBase
@@ -14,8 +15,10 @@ public class P增加人员面板 : PopPanelBase
     // Start is called before the first frame update
     [必填InputField("姓名不能为空")]
     TMP_InputField 姓名输入框;
-    [必填InputField("请选择出生日期"), SerializeField]
-    TMP_InputField 出生日期输入框;
+    [必填InputField("请选择出生日期")]
+    TMP_Text 出生日期输入框;
+    Button 出生日期选择按钮;
+    滚轮万年历管理器 _calendarInstance;
     ToggleColumn 性别选择;
     ToggleColumn 状态选择;
     CustomDropdown 应激事件属性下拉框;
@@ -26,7 +29,21 @@ public class P增加人员面板 : PopPanelBase
         base.Awake();
         姓名输入框 = 弹出页面.transform.Find("姓名栏/输入框").GetComponent<TMP_InputField>();
         部门选择下拉框 = 弹出页面.transform.Find("部门栏/下拉选择框").GetComponent<CustomDropdown>();
-        //  出生日期输入框 = 弹出页面.transform.Find("出生日期栏/输入框").GetComponent<TMP_InputField>();
+        出生日期输入框 = 弹出页面.transform.Find("出生日期栏/背景/日期输入框").GetComponent<TMP_Text>();
+        
+        // --- 调试步骤 1: 检查按钮是否被找到 ---
+        出生日期选择按钮 = 弹出页面.transform.Find("出生日期栏/背景/选择日期按钮").GetComponent<Button>();
+        if (出生日期选择按钮 == null)
+        {
+            Debug.LogError("[调试] 错误：未能找到 '选择日期按钮'！请检查预制体中的路径 '出生日期栏/背景/选择日期按钮' 是否正确。");
+        }
+        else
+        {
+            Debug.Log("[调试] 成功找到 '选择日期按钮'，正在为其添加监听器...");
+            出生日期选择按钮.onClick.AddListener(On选择日期按钮点击);
+        }
+        // --- 调试结束 ---
+
         性别选择 = 弹出页面.transform.Find("性别栏").GetComponent<ToggleColumn>();
         状态选择 = 弹出页面.transform.Find("状态栏").GetComponent<ToggleColumn>();
         应激事件属性下拉框 = 弹出页面.transform.Find("应激事件属性栏/下拉选择框").GetComponent<CustomDropdown>();
@@ -172,8 +189,68 @@ public class P增加人员面板 : PopPanelBase
         //   应激事件属性下拉框.value = 应激事件属性下拉框.options.FindIndex(选项 => 选项.text == 应激事件消息.personalCrisisEventProperty.eventDescription);
         旧数据 = ICan2List;
     }
-    void Update()
+    async void On选择日期按钮点击()
     {
+        // --- 调试步骤 2: 检查监听器是否被触发 ---
+        Debug.Log("[调试] 成功进入 On选择日期按钮点击() 方法！现在开始加载万年历...");
+        // --- 调试结束 ---
+        
+        if (_calendarInstance == null)
+        {
+            Debug.Log("[调试] _calendarInstance 为空，开始加载预制体 '万年历'...");
+            var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("万年历");
+            if (pfb == null)
+            {
+                Debug.LogError("[调试] 错误：万年历预制体加载失败！请检查资源包和名称是否正确。");
+                return;
+            }
+            Debug.Log("[调试] 预制体加载成功，开始实例化...");
 
+            var go = Instantiate(pfb, 弹出页面.transform.parent);
+            if (go == null)
+            {
+                Debug.LogError("[调试] 错误：实例化预制体失败！");
+                return;
+            }
+            Debug.Log("[调试] 预制体实例化成功，开始获取 滚轮万年历管理器 组件...");
+            
+            _calendarInstance = go.GetComponent<滚轮万年历管理器>();
+
+            if (_calendarInstance == null)
+            {
+                Debug.LogError("[调试] 错误：在实例化的预制体上找不到 滚轮万年历管理器 组件！");
+                return;
+            }
+            Debug.Log("[调试] 成功获取 滚轮万年历管理器 组件。");
+
+            // --- 核心修复：精确等待到UI布局计算完成 ---
+            // 目的：默认的 UniTask.Yield() 只等到Update。但UI布局在LateUpdate才完成。
+            // 我们必须等待到 LateUpdate 之后，以确保所有UI尺寸（如rect.height）都已计算完毕，避免后续计算出错。
+            await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
+        }
+
+        // --- 核心修复：先激活UI，再进行数据操作 ---
+        // 确保万年历对象在设置数据前是激活的，这样它上面的脚本才能正常启动协程。
+        _calendarInstance.显示万年历();
+
+        Debug.Log("[调试] 开始设置万年历初始日期...");
+        // 尝试从输入框解析当前日期，如果无效则使用今天
+        if (DateTime.TryParse(出生日期输入框.text, out DateTime currentDate))
+        {
+            _calendarInstance.设置选择日期(currentDate);
+        }
+        else
+        {
+            _calendarInstance.设置选择日期(DateTime.Now);
+        }
+        Debug.Log("[调试] 日期设置完毕，开始订阅 On日期确认 事件...");
+
+        _calendarInstance.On日期确认 = null; 
+        _calendarInstance.On日期确认 += (selectedDate) =>
+        {
+            出生日期输入框.text = selectedDate.ToString("yyyy-MM-dd");
+            _calendarInstance.隐藏万年历();
+        };
+        Debug.Log("[调试] 事件订阅完毕。");
     }
 }
