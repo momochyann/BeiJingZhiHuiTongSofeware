@@ -24,14 +24,41 @@ public class SubjectiveAssessmentArchiveStartPanel3 : PanelBase
 
     protected override void 下一步按钮监听Virtual()
     {
+        // 显示确认提示弹窗
+        显示确认提示弹窗().Forget();
+    }
+
+    /// <summary>
+    /// 异步显示确认提示弹窗
+    /// </summary>
+    async UniTaskVoid 显示确认提示弹窗()
+    {
+        // 异步加载确认提示弹窗预制体
+        var 提示面板pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("确认提示弹窗");
+
+        // 在Canvas下实例化提示面板
+        var P_TipPanel = Instantiate(提示面板pfb, FindObjectOfType<Canvas>().transform);
+
+        // 设置提示面板显示的文本内容
+        P_TipPanel.GetComponent<P_TipPanel>().显示面板("确认保存主观评估数据？");
+
+        // 为提示面板的确认按钮添加回调方法
+        P_TipPanel.GetComponent<P_TipPanel>().确认回调 += 确认保存评估数据;
+        
+    }
+
+    /// <summary>
+    /// 确认保存评估数据的回调方法
+    /// </summary>
+    void 确认保存评估数据()
+    {
         收集评估数据();
         base.下一步按钮监听Virtual();
     }
 
-
     void 收集评估数据()
     {
-
+        
         // 获取ObjectiveSelectSystem
         var 评估系统 = this.GetSystem<ObjectiveSelectSystem>();
 

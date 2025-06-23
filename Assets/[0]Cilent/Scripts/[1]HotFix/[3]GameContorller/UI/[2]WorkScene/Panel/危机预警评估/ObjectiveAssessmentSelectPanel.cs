@@ -16,16 +16,15 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
     [SerializeField]
     Text 主干预老师;
     [SerializeField]
-    Button 量表确定按钮;
     ObjectiveAssessment 当前量表;
     EntryDisPanelNew[] entryDisPanels;
     PersonalPersonnelCrisisEventMessage 当前人员;
     private IEntry[] currentEntries;
+    private IEntry[] currentScaleEntries; // 新增：用于监控量表条目
     private bool isWatching = false;
     void Start()
     {
         开始评估按钮.onClick.AddListener(开始评估按钮监听);
-        量表确定按钮.onClick.AddListener(量表确定按钮监听);
 
         已选择人员.text = "未选择";
         已选择量表.text = "未选择";
@@ -40,7 +39,6 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
         entryDisPanels = FindObjectsOfType<EntryDisPanelNew>();
         Debug.Log("entryDisPanel.count: " + entryDisPanels.Length);
         主干预老师.text = this.GetSystem<WorkSceneSystem>().干预者;
-        
         // 延迟初始化Toggle监听
         await UniTask.Delay(500,cancellationToken: this.GetCancellationTokenOnDestroy());
         选择人员();
@@ -55,9 +53,9 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
         {
             await UniTask.Delay(200, cancellationToken: cancellationToken); // 每0.2秒检测一次
             
+            // 检查人员条目
             if (currentEntries != null)
             {
-                // 检测当前entries是否被销毁
                 bool entriesDestroyed = false;
                 foreach (IEntry entry in currentEntries)
                 {
@@ -70,8 +68,29 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
                 
                 if (entriesDestroyed)
                 {
-                    Debug.Log("检测到entries被销毁，重新获取并绑定");
-                    await UniTask.Delay(500, cancellationToken: cancellationToken); // 等待新entries生成
+                    Debug.Log("检测到人员entries被销毁，重新获取并绑定");
+                    await UniTask.Delay(500, cancellationToken: cancellationToken);
+                    选择人员();
+                }
+            }
+            
+            // 检查量表条目
+            if (currentScaleEntries != null)
+            {
+                bool scaleEntriesDestroyed = false;
+                foreach (IEntry entry in currentScaleEntries)
+                {
+                    if (entry == null || (entry is MonoBehaviour mono && mono == null))
+                    {
+                        scaleEntriesDestroyed = true;
+                        break;
+                    }
+                }
+                
+                if (scaleEntriesDestroyed)
+                {
+                    Debug.Log("检测到量表entries被销毁，重新获取并绑定");
+                    await UniTask.Delay(500, cancellationToken: cancellationToken);
                     选择人员();
                 }
             }
@@ -101,82 +120,141 @@ public class ObjectiveAssessmentSelectPanel : MonoBehaviour, IController
     }
     void 选择人员()
     {
+        Debug.Log("开始选择人员方法，entryDisPanels数量: " + entryDisPanels.Length);
+        
         foreach (EntryDisPanelNew entryDisPanel in entryDisPanels)
         {
-            Debug.Log("entryDisPanel.gameObject.name: " + entryDisPanel.gameObject.name);
-
-            if (entryDisPanel.gameObject.name != "危机评估选择面板")
+            if (entryDisPanel == null)
             {
+                Debug.LogWarning("发现null的entryDisPanel，跳过");
                 continue;
             }
             
-            IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
-            currentEntries = entries; // 保存当前entries引用用于监控
+            Debug.Log("检查面板: " + entryDisPanel.gameObject.name);
             
-            foreach (IEntry entry in entries)
+            if (entryDisPanel.gameObject.name == "危机评估选择面板")
             {
-                if (entry is MonoBehaviour entryMono)
-                {
-                    Toggle toggle = entryMono.GetComponentInChildren<Toggle>();
-                    if (toggle != null)
+                Debug.Log("找到危机评估选择面板，调用客观评估选择人员监听");
+                客观评估选择人员监听(entryDisPanel);
+                continue;
+            }
+            else if (entryDisPanel.gameObject.name == "评估量表选择面板")
+            {
+                Debug.Log("找到评估量表选择面板，调用评估量表选择监听");
+                评估量表选择监听(entryDisPanel);
+                continue;
+            }
+            else
+            {
+                Debug.Log("面板名称不匹配: " + entryDisPanel.gameObject.name);
+            }
+        }
+    }
+    void 客观评估选择人员监听(EntryDisPanelNew entryDisPanel)
+    {
+        IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
+        currentEntries = entries; // 保存当前entries引用用于监控
+        foreach (IEntry entry in entries)
+        {
+            if (entry is MonoBehaviour entryMono)
+            {
+                Toggle toggle = entryMono.GetComponentInChildren<Toggle>();
+                if (toggle != null)
                 {
                         // 清除旧的监听器，避免重复绑定
-                        toggle.onValueChanged.RemoveAllListeners();
-                        
-                        toggle.onValueChanged.AddListener((bool isOn) => {
-                    PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
-                            
-                            if (isOn && entry.IsChoose)
+                    toggle.onValueChanged.RemoveAllListeners();
+                    
+                    toggle.onValueChanged.AddListener((bool isOn) => {
+                        PersonalPersonnelCrisisEventMessage personalPersonnelCrisisEventMessage = entry.can2ListValue as PersonalPersonnelCrisisEventMessage;
+                        if (isOn && entry.IsChoose)
+                        {
+                            // 单选逻辑：清除其他选择
+                            foreach (IEntry otherEntry in currentEntries)
                             {
-                                // 单选逻辑：清除其他选择
-                                foreach (IEntry otherEntry in currentEntries)
+                                if (otherEntry != entry && otherEntry.IsChoose)
                                 {
-                                    if (otherEntry != entry && otherEntry.IsChoose)
-                                    {
-                                        otherEntry.IsChoose = false;
-                                    }
+                                    otherEntry.IsChoose = false;
                                 }
-                                
-                    已选择人员.text = personalPersonnelCrisisEventMessage.name;
-                    当前人员 = personalPersonnelCrisisEventMessage;
-                    WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
                             }
-                            else if (!isOn)
-                            {
-                                已选择人员.text = "未选择";
-                                当前人员 = null;
-                                WorkSceneManager.Instance.加载提示("人员去除成功").Forget();
-                            }
-                        });
+                            已选择人员.text = personalPersonnelCrisisEventMessage.name;
+                            当前人员 = personalPersonnelCrisisEventMessage;
+                            WorkSceneManager.Instance.加载提示("人员选择成功").Forget();
+                        }
+                        else if (!isOn)
+                        {
+                            已选择人员.text = "未选择";
+                            当前人员 = null;
+                            WorkSceneManager.Instance.加载提示("人员去除成功").Forget();
+                        }
+                    });
                 }
             }
-            }
-            break; // 找到目标面板后退出循环
         }
     }
-    void 量表确定按钮监听()
+    void 评估量表选择监听(EntryDisPanelNew entryDisPanel)
     {
-        foreach (EntryDisPanelNew entryDisPanel in entryDisPanels)
+        Debug.Log("进入评估量表选择监听方法");
+        
+        IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
+        Debug.Log("找到量表条目数量: " + entries.Length);
+        
+        currentScaleEntries = entries;
+        
+        foreach (IEntry entry in entries)
         {
-            if (entryDisPanel.gameObject.name != "个人信息管理面板")
+            if (entry is MonoBehaviour entryMono)
             {
-                continue;
-            }
-            IEntry[] entries = entryDisPanel.transform.GetComponentsInChildren<IEntry>();
-            foreach (IEntry entry in entries)
-            {
-                if (entry.IsChoose)
+                Toggle toggle = entryMono.GetComponentInChildren<Toggle>();
+                if (toggle != null)
                 {
-                    ObjectiveAssessment objectiveAssessment = entry.can2ListValue as ObjectiveAssessment;
-                    已选择量表.text = objectiveAssessment.量表名称;
-                    当前量表 = objectiveAssessment;
-                    WorkSceneManager.Instance.加载提示("量表选择成功").Forget();
-                    return;
+                    Debug.Log("为量表条目绑定Toggle监听器");
+                    
+                    // 清除旧的监听器，避免重复绑定
+                    toggle.onValueChanged.RemoveAllListeners();
+                    
+                    toggle.onValueChanged.AddListener((bool isOn) => {
+                        Debug.Log("量表Toggle状态改变: " + isOn);
+                        
+                        ObjectiveAssessment objectiveAssessment = entry.can2ListValue as ObjectiveAssessment;
+                        if (objectiveAssessment == null)
+                        {
+                            Debug.LogError("无法获取ObjectiveAssessment对象");
+                            return;
+                        }
+                        
+                        if (isOn && entry.IsChoose)
+                        {
+                            Debug.Log("量表被选中: " + objectiveAssessment.量表名称);
+                            
+                            // 单选逻辑：清除其他选择
+                            foreach (IEntry otherEntry in entries)
+                            {
+                                if (otherEntry != entry && otherEntry.IsChoose)
+                                {
+                                    otherEntry.IsChoose = false;
+                                }
+                            }
+                            
+                            已选择量表.text = objectiveAssessment.量表名称;
+                            当前量表 = objectiveAssessment;
+                            WorkSceneManager.Instance.加载提示("量表选择成功").Forget();
+                        }
+                        else if (!isOn)
+                        {
+                            Debug.Log("量表被取消选中");
+                            已选择量表.text = "未选择";
+                            当前量表 = null;
+                            WorkSceneManager.Instance.加载提示("量表去除成功").Forget();
+                        }
+                    });
+                }
+                else
+                {
+                    Debug.LogWarning("量表条目没有找到Toggle组件");
                 }
             }
         }
     }
-
     void OnDestroy()
     {
         isWatching = false;

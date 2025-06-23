@@ -13,8 +13,11 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     // Start is called before the first frame update
     [必填InputField("事件名称不能为空")]
     TMP_InputField 事件名称框;
-    [必填InputField("发生时间不能为空"), SerializeField]
-    TMP_InputField 发生时间框;
+    [SerializeField]
+    TMP_Text 发生时间框;
+    Button 发生时间选择按钮;
+    滚轮万年历管理器 _calendarInstance;
+
     // [必填InputField("发生地点不能为空")]
     TMP_InputField 发生地点框;
     // [必填InputField("事件描述不能为空")]
@@ -30,7 +33,10 @@ public class P_AddGroupCrisisIncident : PopPanelBase
     {
         base.Awake();
         事件名称框 = 弹出页面.transform.Find("事件名称栏/输入框").GetComponent<TMP_InputField>();
-        // 发生时间框 = 弹出页面.transform.Find("发生时间栏/输入框").GetComponent<TMP_InputField>();
+        发生时间框 = 弹出页面.transform.Find("发生时间栏/背景/日期输入框").GetComponent<TMP_Text>();
+        发生时间选择按钮 = 弹出页面.transform.Find("发生时间栏/背景/选择日期按钮").GetComponent<Button>();
+        发生时间选择按钮.onClick.AddListener(On选择日期按钮点击);
+
         发生地点框 = 弹出页面.transform.Find("发生地点栏/输入框").GetComponent<TMP_InputField>();
         事件描述框 = 弹出页面.transform.Find("事件描述栏/输入框").GetComponent<TMP_InputField>();
         //    相关素材图片 = 弹出页面.transform.Find("相关素材栏").GetComponent<Image>();
@@ -78,8 +84,49 @@ public class P_AddGroupCrisisIncident : PopPanelBase
         {
             return false;
         }
+        if (string.IsNullOrEmpty(发生时间框.text))
+        {
+            WorkSceneManager.Instance.加载提示("发生时间不能为空").Forget();
+            return false;
+        }
         return true;
     }
+    
+    async void On选择日期按钮点击()
+    {
+        if (_calendarInstance == null)
+        {
+            var pfb = await this.GetModel<YooAssetPfbModel>().LoadPfb("万年历");
+            if (pfb == null)
+            {
+                Debug.LogError("万年历预制体加载失败！");
+                return;
+            }
+            var go = Instantiate(pfb, 弹出页面.transform.parent);
+            _calendarInstance = go.GetComponent<滚轮万年历管理器>();
+            
+            await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
+        }
+
+        _calendarInstance.显示万年历();
+
+        if (DateTime.TryParse(发生时间框.text, out DateTime currentDate))
+        {
+            _calendarInstance.设置选择日期(currentDate);
+        }
+        else
+        {
+            _calendarInstance.设置选择日期(DateTime.Now);
+        }
+
+        _calendarInstance.On日期确认 = null; 
+        _calendarInstance.On日期确认 += (selectedDate) =>
+        {
+            发生时间框.text = selectedDate.ToString("yyyy-MM-dd");
+            _calendarInstance.隐藏万年历();
+        };
+    }
+
     void Start()
     {
 
