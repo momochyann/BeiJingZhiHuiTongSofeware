@@ -53,10 +53,7 @@ public static class YooAssetsEditorInitializer
             if (SceneManager.GetActiveScene().path != _originalScenePath)
             {
                 PlayerPrefs.SetString("OriginalScenePath", null);
-                if (!string.IsNullOrEmpty(_originalScenePath))
-                {
-                    EditorSceneManager.OpenScene(_originalScenePath);
-                }
+                EditorSceneManager.OpenScene(_originalScenePath);
             }
         }
 
