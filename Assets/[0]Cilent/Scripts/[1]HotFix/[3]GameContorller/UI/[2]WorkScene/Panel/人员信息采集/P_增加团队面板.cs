@@ -11,13 +11,13 @@ using System.Linq;
 public class P_增加团队面板 : PopPanelBase
 {
     // Start is called before the first frame update
-    [SerializeField] TMP_Text 组别名称;
+    [SerializeField] TMP_InputField 组别名称;
     [SerializeField] CustomDropdown 主干预人员;
-    [SerializeField] TMP_Text 助理人员;
+    [SerializeField] TMP_InputField 助理人员;
     public TMP_Text 人员详情;
     [SerializeField] Button 选择人员按钮;
     public TMP_Text 人员数量;
-    [SerializeField] TMP_Text 人员备注;
+    [SerializeField] TMP_InputField 人员备注;
     干预实施团队 干预实施团队数据;
     IntervenersModel 人员数据;
     List<GroupPersonnelCrisisEventMessage> 选择人员列表 = new List<GroupPersonnelCrisisEventMessage>();
@@ -41,18 +41,194 @@ public class P_增加团队面板 : PopPanelBase
     {
         base.Awake();
         
-        组别名称 = 弹出页面.transform.Find("组别栏/输入框/Text Area/Text").GetComponent<TMP_Text>();
-        主干预人员 = 弹出页面.transform.Find("主干预人员栏/下拉选择框").GetComponent<CustomDropdown>();
-        助理人员 = 弹出页面.transform.Find("助理人员栏/输入框/Text Area/Text").GetComponent<TMP_Text>();
-        人员详情 = 弹出页面.transform.Find("人员详情栏/显示文本").GetComponent<TMP_Text>();
-        选择人员按钮 = 弹出页面.transform.Find("人员详情栏/选择按键").GetComponent<Button>();
-        人员数量 = 弹出页面.transform.Find("人员数量栏/输入框").GetComponent<TMP_Text>();
-        人员备注 = 弹出页面.transform.Find("备注栏/输入框/Text Area/Text").GetComponent<TMP_Text>();
-        弹出页面.transform.Find("保存按钮").GetComponent<Button>().onClick.AddListener(保存数据按钮监听);
+        Debug.Log("[调试] 开始获取UI组件...");
+        
+        // 检查弹出页面是否存在
+        if (弹出页面 == null)
+        {
+            Debug.LogError("[调试] 错误：弹出页面为null！");
+            return;
+        }
+        Debug.Log("[调试] 弹出页面获取成功");
+        
+        // 获取组别名称组件
+        var 组别名称Transform = 弹出页面.transform.Find("组别栏/输入框");
+        if (组别名称Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '组别栏/输入框'");
+        }
+        else
+        {
+            组别名称 = 组别名称Transform.GetComponent<TMP_InputField>();
+            if (组别名称 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '组别栏/输入框' 上未找到TMP_InputField组件");
+            }
+            else
+            {
+                Debug.Log("[调试] 组别名称组件获取成功");
+            }
+        }
+        
+        // 获取主干预人员组件
+        var 主干预人员Transform = 弹出页面.transform.Find("主干预人员栏/下拉选择框");
+        if (主干预人员Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '主干预人员栏/下拉选择框'");
+        }
+        else
+        {
+            主干预人员 = 主干预人员Transform.GetComponent<CustomDropdown>();
+            if (主干预人员 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '主干预人员栏/下拉选择框' 上未找到CustomDropdown组件");
+            }
+            else
+            {
+                Debug.Log("[调试] 主干预人员组件获取成功");
+            }
+        }
+        
+        // 获取助理人员组件
+        var 助理人员Transform = 弹出页面.transform.Find("助理人员栏/输入框");
+        if (助理人员Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '助理人员栏/输入框'");
+        }
+        else
+        {
+            助理人员 = 助理人员Transform.GetComponent<TMP_InputField>();
+            if (助理人员 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '助理人员栏/输入框' 上未找到TMP_InputField组件");
+            }
+            else
+            {
+                Debug.Log("[调试] 助理人员组件获取成功");
+            }
+        }
+        
+        // 获取人员详情组件
+        var 人员详情Transform = 弹出页面.transform.Find("人员详情栏/显示文本");
+        if (人员详情Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '人员详情栏/显示文本'");
+        }
+        else
+        {
+            人员详情 = 人员详情Transform.GetComponent<TMP_Text>();
+            if (人员详情 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '人员详情栏/显示文本' 上未找到TMP_Text组件");
+            }
+            else
+            {
+                Debug.Log("[调试] 人员详情组件获取成功");
+            }
+        }
+        
+        // 获取选择人员按钮组件
+        var 选择人员按钮Transform = 弹出页面.transform.Find("人员详情栏/选择按键");
+        if (选择人员按钮Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '人员详情栏/选择按键'");
+        }
+        else
+        {
+            选择人员按钮 = 选择人员按钮Transform.GetComponent<Button>();
+            if (选择人员按钮 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '人员详情栏/选择按键' 上未找到Button组件");
+            }
+            else
+            {
+                Debug.Log("[调试] 选择人员按钮组件获取成功");
+            }
+        }
+        
+        // 获取人员数量组件
+        var 人员数量Transform = 弹出页面.transform.Find("人员数量栏/输入框");
+        if (人员数量Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '人员数量栏/输入框'");
+        }
+        else
+        {
+            人员数量 = 人员数量Transform.GetComponent<TMP_Text>();
+            if (人员数量 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '人员数量栏/输入框' 上未找到TMP_Text组件");
+            }
+            else
+            {
+                Debug.Log("[调试] 人员数量组件获取成功");
+            }
+        }
+        
+        // 获取人员备注组件
+        var 人员备注Transform = 弹出页面.transform.Find("备注栏/输入框");
+        if (人员备注Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '备注栏/输入框'");
+        }
+        else
+        {
+            人员备注 = 人员备注Transform.GetComponent<TMP_InputField>();
+            if (人员备注 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '备注栏/输入框' 上未找到TMP_InputField组件");
+            }
+            else
+            {
+                Debug.Log("[调试] 人员备注组件获取成功");
+            }
+        }
+        
+        // 添加空值检查，确保组件获取成功后再设置属性
+        if (组别名称 != null) 
+        {
+            组别名称.caretColor = Color.black;
+            Debug.Log("[调试] 组别名称光标颜色设置成功");
+        }
+        if (助理人员 != null) 
+        {
+            助理人员.caretColor = Color.black;
+            Debug.Log("[调试] 助理人员光标颜色设置成功");
+        }
+        if (人员备注 != null) 
+        {
+            人员备注.caretColor = Color.black;
+            Debug.Log("[调试] 人员备注光标颜色设置成功");
+        }
+        
+        // 获取保存按钮
+        var 保存按钮Transform = 弹出页面.transform.Find("保存按钮");
+        if (保存按钮Transform == null)
+        {
+            Debug.LogError("[调试] 错误：未找到路径 '保存按钮'");
+        }
+        else
+        {
+            var 保存按钮 = 保存按钮Transform.GetComponent<Button>();
+            if (保存按钮 == null)
+            {
+                Debug.LogError("[调试] 错误：在 '保存按钮' 上未找到Button组件");
+            }
+            else
+            {
+                保存按钮.onClick.AddListener(保存数据按钮监听);
+                Debug.Log("[调试] 保存按钮监听器添加成功");
+            }
+        }
+        
         人员数据 = this.GetModel<IntervenersModel>();
+        Debug.Log("[调试] 人员数据模型获取成功");
+        
         填充人员下拉框();
         选择人员按钮.onClick.AddListener(选择人员按钮监听);
         OpenPanel();
+        
+        Debug.Log("[调试] Awake方法执行完成");
     }
     void 保存数据按钮监听()
     {

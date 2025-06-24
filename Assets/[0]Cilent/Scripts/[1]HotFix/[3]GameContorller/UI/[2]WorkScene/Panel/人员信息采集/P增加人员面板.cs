@@ -28,6 +28,8 @@ public class P增加人员面板 : PopPanelBase
     {
         base.Awake();
         姓名输入框 = 弹出页面.transform.Find("姓名栏/输入框").GetComponent<TMP_InputField>();
+        // 设置姓名输入框的黑色光标样式
+        姓名输入框.caretColor = Color.black;
         部门选择下拉框 = 弹出页面.transform.Find("部门栏/下拉选择框").GetComponent<CustomDropdown>();
         出生日期输入框 = 弹出页面.transform.Find("出生日期栏/背景/日期输入框").GetComponent<TMP_Text>();
         

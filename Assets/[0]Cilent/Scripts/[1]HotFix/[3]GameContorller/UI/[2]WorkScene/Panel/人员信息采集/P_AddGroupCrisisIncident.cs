@@ -39,6 +39,10 @@ public class P_AddGroupCrisisIncident : PopPanelBase
 
         发生地点框 = 弹出页面.transform.Find("发生地点栏/输入框").GetComponent<TMP_InputField>();
         事件描述框 = 弹出页面.transform.Find("事件描述栏/输入框").GetComponent<TMP_InputField>();
+        事件名称框.caretColor = Color.black;
+        发生地点框.caretColor = Color.black;
+        事件描述框.caretColor = Color.black;
+        
         //    相关素材图片 = 弹出页面.transform.Find("相关素材栏").GetComponent<Image>();
         弹出页面.transform.Find("下一步按钮").GetComponent<Button>().onClick.AddListener(下一步按钮监听);
         弹出页面.transform.Find("取消按钮").GetComponent<Button>().onClick.AddListener(取消按钮监听);

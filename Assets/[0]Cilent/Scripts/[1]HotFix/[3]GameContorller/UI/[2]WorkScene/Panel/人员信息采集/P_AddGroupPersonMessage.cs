@@ -41,6 +41,10 @@ public class P_AddGroupPersonMessage : PopPanelBase
         弹出页面.transform.Find("保存按钮").GetComponent<Button>().onClick.AddListener(保存数据按钮监听);
         团体事件数据 = this.GetModel<GroupCrisisIncidentModel>();
         团体事件选择下拉框.onValueChanged.AddListener(团体事件选择下拉框值改变);
+        姓名输入框.caretColor = Color.black;
+        接触时间框.caretColor = Color.black;
+        备注输入框.caretColor = Color.black;
+        事件描述输入框.caretColor = Color.black;
         填充下拉框();
         添加部门选项();
         OpenPanel();
@@ -104,6 +108,15 @@ public class P_AddGroupPersonMessage : PopPanelBase
         {
             return;
         }
+        
+        // 检查是否选择了团体事件
+        if (groupCrisisIncident == null)
+        {
+            H_弹出界面提示 弹出界面提示 = this.GetComponentInChildren<H_弹出界面提示>();
+            弹出界面提示.显示提示("请选择团体事件");
+            return;
+        }
+        
         var message = new GroupPersonnelCrisisEventMessage();
         message.groupCrisisIncident = groupCrisisIncident;
         message.name = 姓名输入框.text;
@@ -153,12 +166,27 @@ public class P_AddGroupPersonMessage : PopPanelBase
         {
             return false;
         }
-
+        H_弹出界面提示 弹出界面提示 = this.GetComponentInChildren<H_弹出界面提示>();
         if (性别选择.currentIndex == -1)
         {
-            Debug.LogError("性别或状态选择不能为空");
+            弹出界面提示.显示提示("性别选择不能为空");
             return false;
         }
+        
+        // 检查是否选择了团体事件
+        if (groupCrisisIncident == null)
+        {
+            弹出界面提示.显示提示("请选择团体事件");
+            return false;
+        }
+        
+        // 检查是否选择了受影响人员级别
+        if (受影响人员级别选择下拉框.selectedItemIndex == -1)
+        {
+            弹出界面提示.显示提示("请选择受影响人员级别");
+            return false;
+        }
+        
         // if (!System.DateTime.TryParseExact(
         //     接触时间框.text,
         //     "yyyy-MM-dd",
