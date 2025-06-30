@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
 using System;
-public class ModelCreateEvent
-{
-    public IModel model;
-}
+
 // public class ICanListModel : AbstractModel
 // {
 //     public Dictionary<string, ICan2List> canListDict;
@@ -27,8 +24,7 @@ public class GetCan2ListModelByStringSystem : AbstractSystem
     public Dictionary<string, IModel> canListDict;
     protected override void OnInit()
     {
-       // canListDict = new Dictionary<string, IModel>();
-        
+         
     }
 
     public void Register2System(IModel model)
@@ -47,8 +43,6 @@ public class GetCan2ListModelByStringSystem : AbstractSystem
            // Debug.Log("找到了" + model.GetType().Name);
             return model as T;
         }
-        
-     //   Debug.LogWarning($"找不到Model: {modelName}");
         return null;
     }
 

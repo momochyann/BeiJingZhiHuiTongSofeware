@@ -3,7 +3,7 @@ using QFramework;
 using Cysharp.Threading.Tasks;
 using System;
 using System.IO;
-using NativeGalleryNamespace;
+
 
 public interface IImagePickerUtility : IUtility
 {

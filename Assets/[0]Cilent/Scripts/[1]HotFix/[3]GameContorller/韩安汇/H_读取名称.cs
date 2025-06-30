@@ -42,11 +42,12 @@ public class H_读取名称 : MonoBehaviour, IController
 
         // 保留替换按钮功能
         this.transform.Find("替换按钮").GetComponent<Button>().onClick.AddListener(() =>{
+
             // PlayerPrefs.SetString("单位名称", 单位名称输入框1.text);
             // PlayerPrefs.SetString("软件名称", 单位名称输入框2.text);
             // Debug.Log(单位名称输入框1.text);
             // Debug.Log(单位名称输入框2.text);
-            // WorkSceneManager.Instance.加载通知("操作提示", "替换成功").Forget();
+             WorkSceneManager.Instance.加载通知("操作提示", "替换成功").Forget();
             // FindObjectOfType<H_显示名称>().setname();
         });
     }

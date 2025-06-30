@@ -34,7 +34,8 @@ public class LoginPanel : MonoBehaviour, IController
 
     }
 
-    private void InitializeUI()    {
+    private void InitializeUI()
+    {
         loginButton.onClick.AddListener(OnLoginButtonClick);
         forgetPasswordButton.onClick.AddListener(OnForgetPasswordButtonClick);
 
@@ -112,7 +113,7 @@ public class LoginPanel : MonoBehaviour, IController
             accountInputField.text = PlayerPrefs.GetString(ACCOUNT_PREFS_KEY, "");
             passwordInputField.text = PlayerPrefs.GetString(PASSWORD_PREFS_KEY, "");
             passwordInputField.ActivateInputField();
-              passwordInputField.ForceLabelUpdate();
+            passwordInputField.ForceLabelUpdate();
         }
     }
 
@@ -204,12 +205,10 @@ public class LoginPanel : MonoBehaviour, IController
                 }
             }
         }
-        else
-        {
-            // 如果没有数据，使用默认账号密码
-            if (account == "admin" && password == "123456")
-                return true;
-        }
+    // 如果没有数据，使用默认账号密码
+        if (account == "admin" && password == "123456")
+            return true;
+
 
         return false;
     }
